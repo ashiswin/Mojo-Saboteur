@@ -8,6 +8,7 @@ module renderer_6 (
     input clk,
     input [224:0] placed,
     input [71:0] tiles,
+    input [10:0] treg,
     output reg red,
     output reg green,
     output reg blue,
@@ -30,32 +31,44 @@ module renderer_6 (
     if (M_pixel_q < 10'h320 && M_line_q < 10'h258) begin
       gridSqX = M_pixel_q / 5'h10;
       gridSqY = M_line_q / 5'h10;
-      if (gridSqX < 5'h1b && gridSqY < 4'hf && placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+1+2-:3] != 1'h0) begin
-        if (placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+0+1-:2] == 1'h0) begin
-          red = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
-          green = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
-          blue = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+      if (gridSqX / 2'h3 == treg[7+3-:4] && gridSqY / 2'h3 == treg[4+2-:3] && treg[0+2-:3] != 1'h0) begin
+        if (treg[3+0-:1] == 1'h0) begin
+          red = tiles[(treg[0+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+          green = 1'h0;
+          blue = 1'h0;
         end else begin
-          if (placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+0+1-:2] == 1'h1) begin
-            red = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
-            green = 1'h0;
-            blue = 1'h0;
-          end else begin
-            if (placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+0+1-:2] == 2'h3) begin
-              red = 1'h0;
-              green = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
-              blue = 1'h0;
-            end else begin
-              red = 1'h1;
-              green = 1'h1;
-              blue = 1'h0;
-            end
-          end
+          red = 1'h0;
+          green = tiles[(treg[0+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+          blue = 1'h0;
         end
       end else begin
-        red = 1'h0;
-        green = 1'h0;
-        blue = 1'h0;
+        if (gridSqX < 5'h1b && gridSqY < 4'hf && placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+1+2-:3] != 1'h0) begin
+          if (placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+0+1-:2] == 1'h0) begin
+            red = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+            green = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+            blue = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+          end else begin
+            if (placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+0+1-:2] == 1'h1) begin
+              red = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+              green = 1'h0;
+              blue = 1'h0;
+            end else begin
+              if (placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+0+1-:2] == 2'h3) begin
+                red = 1'h0;
+                green = tiles[(placed[(gridSqY / 2'h3)*45+(gridSqX / 2'h3)*5+2+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+                blue = 1'h0;
+              end else begin
+                red = 1'h1;
+                green = 1'h1;
+                blue = 1'h0;
+              end
+            end
+          end
+        end else begin
+          red = 1'h0;
+          green = 1'h0;
+          blue = 1'h0;
+        end
       end
     end else begin
       red = 1'h0;

@@ -2,6 +2,7 @@ module renderer (
     input clk,
     input placed[5][9][5],
     input tiles[8][3][3],
+    input treg[11],
     output red,
     output green,
     output blue,
@@ -19,7 +20,19 @@ module renderer (
     if(pixel.q < 800 && line.q < 600) {
       gridSqX = pixel.q / 16;
       gridSqY = line.q / 16;
-      if(gridSqX < 27 && gridSqY < 15 && placed[gridSqY / 3][gridSqX / 3][3:1] != 0) {
+      if(gridSqX / 3 == treg[10:7] && gridSqY / 3 == treg[6:4] && treg[2:0] != 0) {
+        if(treg[3] == 0) {
+          red = tiles[treg[2:0]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          green = 0;
+          blue = 0;
+        }
+        else {
+          red = 0;
+          green = tiles[treg[2:0]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          blue = 0;
+        }
+      }
+      else if(gridSqX < 27 && gridSqY < 15 && placed[gridSqY / 3][gridSqX / 3][3:1] != 0) {
         if(placed[gridSqY / 3][gridSqX / 3][1:0] == 0) {
           red = tiles[placed[gridSqY / 3][gridSqX / 3][4:2]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
           green = tiles[placed[gridSqY / 3][gridSqX / 3][4:2]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];

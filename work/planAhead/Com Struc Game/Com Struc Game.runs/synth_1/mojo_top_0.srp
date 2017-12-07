@@ -4,7 +4,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.04 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
 Reading design: mojo_top_0.prj
@@ -87,7 +87,7 @@ Elaborating module <edge_detector_3>.
 Elaborating module <game_4>.
 
 Elaborating module <renderer_6>.
-WARNING:HDLCompiler:1127 - "/home/arroyo/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.srcs/sources_1/imports/verilog/game_4.v" Line 119: Assignment to M_oneSecond_q ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/arroyo/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.srcs/sources_1/imports/verilog/game_4.v" Line 118: Assignment to M_oneSecond_q ignored, since the identifier is never used
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -143,7 +143,7 @@ Unit <edge_detector_3> synthesized.
 
 Synthesizing Unit <game_4>.
     Related source file is "/home/arroyo/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.srcs/sources_1/imports/verilog/game_4.v".
-WARNING:Xst:647 - Input <buttons<2:2>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <buttons<1:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Register <M_tiles_q_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy> equivalent to <M_tiles_q> has been removed
     Register <M_tiles_q_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy_dummy> equivalent to <M_tiles_q> has been removed
@@ -167,11 +167,10 @@ WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and lef
     Register <M_tiles_q_dummy_dummy_dummy> equivalent to <M_tiles_q> has been removed
     Register <M_tiles_q_dummy_dummy> equivalent to <M_tiles_q> has been removed
     Register <M_tiles_q_dummy> equivalent to <M_tiles_q> has been removed
-    Found 3-bit register for signal <M_tileY_q>.
     Found 28-bit register for signal <M_blink_q>.
     Found 225-bit register for signal <M_placed_q>.
     Found 2-bit register for signal <M_state_q>.
-    Found 4-bit register for signal <M_tileX_q>.
+    Found 11-bit register for signal <M_treg_q>.
     Found 1-bit register for signal <M_tiles_q>.
     Found finite state machine <FSM_0> for signal <M_state_q>.
     -----------------------------------------------------------------------
@@ -187,19 +186,11 @@ WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and lef
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit subtractor for signal <M_tileY_q[2]_GND_6_o_sub_243_OUT> created at line 96.
-    Found 4-bit subtractor for signal <M_tileX_q[3]_GND_6_o_sub_245_OUT> created at line 102.
-    Found 11-bit adder for signal <n1240> created at line 73.
-    Found 11-bit adder for signal <n0759> created at line 73.
-    Found 10-bit adder for signal <n1245> created at line 74.
-    Found 10-bit adder for signal <n0991> created at line 74.
-    Found 28-bit adder for signal <M_blink_d> created at line 76.
-    Found 3-bit adder for signal <M_tileY_q[2]_GND_6_o_add_243_OUT> created at line 99.
-    Found 4-bit adder for signal <M_tileX_q[3]_GND_6_o_add_245_OUT> created at line 105.
-    Found 4x6-bit multiplier for signal <M_tileX_q[3]_PWR_6_o_MuLt_0_OUT> created at line 73.
-    Found 3x3-bit multiplier for signal <M_tileY_q[2]_PWR_6_o_MuLt_1_OUT> created at line 73.
-    Found 3x6-bit multiplier for signal <M_tileY_q[2]_PWR_6_o_MuLt_232_OUT> created at line 74.
-    Found 4x3-bit multiplier for signal <M_tileX_q[3]_PWR_6_o_MuLt_233_OUT> created at line 74.
+    Found 3-bit subtractor for signal <M_treg_q[6]_GND_6_o_sub_2_OUT> created at line 95.
+    Found 4-bit subtractor for signal <M_treg_q[10]_GND_6_o_sub_4_OUT> created at line 101.
+    Found 28-bit adder for signal <M_blink_d> created at line 74.
+    Found 3-bit adder for signal <M_treg_q[6]_GND_6_o_add_2_OUT> created at line 98.
+    Found 4-bit adder for signal <M_treg_q[10]_GND_6_o_add_4_OUT> created at line 104.
     WARNING:Xst:2404 -  FFs/Latches <M_tiles_q<71:68>> (without init value) have a constant value of 0 in block <game_4>.
     WARNING:Xst:2404 -  FFs/Latches <M_tiles_q<65:65>> (without init value) have a constant value of 0 in block <game_4>.
     WARNING:Xst:2404 -  FFs/Latches <M_tiles_q<64:61>> (without init value) have a constant value of 0 in block <game_4>.
@@ -217,10 +208,9 @@ WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and lef
     WARNING:Xst:2404 -  FFs/Latches <M_tiles_q<14:14>> (without init value) have a constant value of 0 in block <game_4>.
     WARNING:Xst:2404 -  FFs/Latches <M_tiles_q<13:4>> (without init value) have a constant value of 0 in block <game_4>.
     Summary:
-	inferred   4 Multiplier(s).
-	inferred   7 Adder/Subtractor(s).
-	inferred 261 D-type flip-flop(s).
-	inferred 717 Multiplexer(s).
+	inferred   5 Adder/Subtractor(s).
+	inferred 265 D-type flip-flop(s).
+	inferred  49 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <game_4> synthesized.
 
@@ -228,41 +218,47 @@ Synthesizing Unit <renderer_6>.
     Related source file is "/home/arroyo/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.srcs/sources_1/imports/verilog/renderer_6.v".
     Found 11-bit register for signal <M_line_q>.
     Found 11-bit register for signal <M_pixel_q>.
-    Found 10-bit subtractor for signal <GND_7_o_GND_7_o_sub_98_OUT> created at line 40.
-    Found 10-bit subtractor for signal <GND_7_o_GND_7_o_sub_103_OUT> created at line 40.
-    Found 15-bit adder for signal <n0070> created at line 33.
-    Found 32-bit adder for signal <n0120> created at line 40.
-    Found 32-bit adder for signal <n0082> created at line 40.
-    Found 14-bit adder for signal <n0125[13:0]> created at line 44.
-    Found 15-bit adder for signal <n0111> created at line 44.
-    Found 11-bit adder for signal <M_line_q[10]_GND_7_o_add_138_OUT> created at line 79.
-    Found 11-bit adder for signal <M_pixel_q[10]_GND_7_o_add_140_OUT> created at line 83.
-    Found 15-bit adder for signal <n0073> created at line 40.
-    Found 449-bit shifter logical right for signal <n0071> created at line 33
-    Found 449-bit shifter logical right for signal <n0074> created at line 40
-    Found 3x4-bit multiplier for signal <placed[224]_PWR_7_o_MuLt_94_OUT> created at line 40.
-    Found 7x2-bit multiplier for signal <M_line_q[10]_PWR_7_o_MuLt_96_OUT> created at line 40.
-    Found 32x2-bit multiplier for signal <n0078> created at line 40.
-    Found 7x2-bit multiplier for signal <M_pixel_q[10]_PWR_7_o_MuLt_101_OUT> created at line 40.
-    Found 143-bit shifter logical right for signal <n0083> created at line 40
-    Found 7x6-bit multiplier for signal <M_line_q[10]_PWR_7_o_MuLt_106_OUT> created at line 44.
-    Found 7x3-bit multiplier for signal <M_pixel_q[10]_PWR_7_o_MuLt_108_OUT> created at line 44.
-    Found 449-bit shifter logical right for signal <n0089> created at line 44
-    Found 11-bit comparator greater for signal <M_pixel_q[10]_GND_7_o_LessThan_1_o> created at line 30
-    Found 11-bit comparator greater for signal <M_line_q[10]_GND_7_o_LessThan_2_o> created at line 30
-    Found 7-bit comparator greater for signal <M_pixel_q[10]_GND_7_o_LessThan_3_o> created at line 33
-    Found 7-bit comparator greater for signal <M_line_q[10]_GND_7_o_LessThan_4_o> created at line 33
-    Found 11-bit comparator lessequal for signal <n0044> created at line 65
-    Found 11-bit comparator lessequal for signal <n0046> created at line 65
-    Found 11-bit comparator lessequal for signal <n0049> created at line 70
-    Found 11-bit comparator lessequal for signal <n0051> created at line 70
+    Found 10-bit subtractor for signal <GND_7_o_GND_7_o_sub_126_OUT> created at line 52.
+    Found 10-bit subtractor for signal <GND_7_o_GND_7_o_sub_131_OUT> created at line 52.
+    Found 32-bit adder for signal <n0142> created at line 36.
+    Found 32-bit adder for signal <n0088> created at line 36.
+    Found 15-bit adder for signal <n0091> created at line 45.
+    Found 32-bit adder for signal <n0154> created at line 52.
+    Found 32-bit adder for signal <n0103> created at line 52.
+    Found 14-bit adder for signal <n0159[13:0]> created at line 56.
+    Found 15-bit adder for signal <n0145> created at line 56.
+    Found 11-bit adder for signal <M_line_q[10]_GND_7_o_add_166_OUT> created at line 92.
+    Found 11-bit adder for signal <M_pixel_q[10]_GND_7_o_add_168_OUT> created at line 96.
+    Found 15-bit adder for signal <n0094> created at line 52.
+    Found 3x4-bit multiplier for signal <treg[2]_PWR_7_o_MuLt_8_OUT> created at line 36.
+    Found 143-bit shifter logical right for signal <n0089> created at line 36
+    Found 449-bit shifter logical right for signal <n0092> created at line 45
+    Found 449-bit shifter logical right for signal <n0095> created at line 52
+    Found 3x4-bit multiplier for signal <placed[224]_PWR_7_o_MuLt_122_OUT> created at line 52.
+    Found 7x2-bit multiplier for signal <M_line_q[10]_PWR_7_o_MuLt_124_OUT> created at line 52.
+    Found 32x2-bit multiplier for signal <n0099> created at line 52.
+    Found 7x2-bit multiplier for signal <M_pixel_q[10]_PWR_7_o_MuLt_129_OUT> created at line 52.
+    Found 143-bit shifter logical right for signal <n0104> created at line 52
+    Found 7x6-bit multiplier for signal <M_line_q[10]_PWR_7_o_MuLt_134_OUT> created at line 56.
+    Found 7x3-bit multiplier for signal <M_pixel_q[10]_PWR_7_o_MuLt_136_OUT> created at line 56.
+    Found 449-bit shifter logical right for signal <n0110> created at line 56
+    Found 11-bit comparator greater for signal <M_pixel_q[10]_GND_7_o_LessThan_1_o> created at line 31
+    Found 11-bit comparator greater for signal <M_line_q[10]_GND_7_o_LessThan_2_o> created at line 31
+    Found 7-bit comparator greater for signal <M_pixel_q[10]_GND_7_o_LessThan_31_o> created at line 45
+    Found 7-bit comparator greater for signal <M_line_q[10]_GND_7_o_LessThan_32_o> created at line 45
+    Found 11-bit comparator lessequal for signal <n0060> created at line 78
+    Found 11-bit comparator lessequal for signal <n0062> created at line 78
+    Found 11-bit comparator lessequal for signal <n0065> created at line 83
+    Found 11-bit comparator lessequal for signal <n0067> created at line 83
+    Found 7-bit comparator equal for signal <GND_7_o_GND_7_o_equal_6_o> created at line 34
+    Found 7-bit comparator equal for signal <GND_7_o_GND_7_o_equal_4_o> created at line 34
     Summary:
-	inferred   6 Multiplier(s).
-	inferred  10 Adder/Subtractor(s).
+	inferred   7 Multiplier(s).
+	inferred  12 Adder/Subtractor(s).
 	inferred  22 D-type flip-flop(s).
-	inferred   8 Comparator(s).
-	inferred   7 Multiplexer(s).
-	inferred   4 Combinational logic shifter(s).
+	inferred  10 Comparator(s).
+	inferred  12 Multiplexer(s).
+	inferred   5 Combinational logic shifter(s).
 Unit <renderer_6> synthesized.
 
 Synthesizing Unit <div_7u_2u>.
@@ -299,54 +295,48 @@ Unit <div_7u_2u> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# Multipliers                                          : 10
+# Multipliers                                          : 7
  32x2-bit multiplier                                   : 1
- 3x3-bit multiplier                                    : 1
  4x3-bit multiplier                                    : 2
- 6x3-bit multiplier                                    : 1
- 6x4-bit multiplier                                    : 1
  7x2-bit multiplier                                    : 2
  7x3-bit multiplier                                    : 1
  7x6-bit multiplier                                    : 1
 # Adders/Subtractors                                   : 50
- 10-bit adder                                          : 2
  10-bit subtractor                                     : 2
- 11-bit adder                                          : 4
+ 11-bit adder                                          : 2
  14-bit adder                                          : 1
  15-bit adder                                          : 3
  20-bit adder                                          : 5
  28-bit adder                                          : 1
- 3-bit addsub                                          : 1
- 32-bit adder                                          : 2
- 4-bit addsub                                          : 1
+ 3-bit adder                                           : 1
+ 3-bit subtractor                                      : 1
+ 32-bit adder                                          : 4
+ 4-bit adder                                           : 1
+ 4-bit subtractor                                      : 1
  7-bit adder                                           : 20
  8-bit adder                                           : 4
  9-bit adder                                           : 4
-# Registers                                            : 23
+# Registers                                            : 22
  1-bit register                                        : 6
- 11-bit register                                       : 2
+ 11-bit register                                       : 3
  2-bit register                                        : 5
  20-bit register                                       : 5
  225-bit register                                      : 1
  28-bit register                                       : 1
- 3-bit register                                        : 1
- 4-bit register                                        : 2
-# Comparators                                          : 24
+ 4-bit register                                        : 1
+# Comparators                                          : 26
  11-bit comparator greater                             : 2
  11-bit comparator lessequal                           : 4
+ 7-bit comparator equal                                : 2
  7-bit comparator greater                              : 2
  7-bit comparator lessequal                            : 12
  8-bit comparator lessequal                            : 2
  9-bit comparator lessequal                            : 2
-# Multiplexers                                         : 786
- 1-bit 2-to-1 multiplexer                              : 559
- 2-bit 2-to-1 multiplexer                              : 1
- 3-bit 2-to-1 multiplexer                              : 1
- 4-bit 2-to-1 multiplexer                              : 1
- 5-bit 2-to-1 multiplexer                              : 218
+# Multiplexers                                         : 123
+ 1-bit 2-to-1 multiplexer                              : 117
  7-bit 2-to-1 multiplexer                              : 6
-# Logic shifters                                       : 4
- 143-bit shifter logical right                         : 1
+# Logic shifters                                       : 5
+ 143-bit shifter logical right                         : 2
  449-bit shifter logical right                         : 3
 # Tristates                                            : 6
  1-bit tristate buffer                                 : 6
@@ -364,67 +354,58 @@ The following registers are absorbed into counter <M_ctr_q>: 1 register on signa
 Unit <button_conditioner_2> synthesized (advanced).
 
 Synthesizing (advanced) Unit <game_4>.
-The following registers are absorbed into counter <M_tileX_q>: 1 register on signal <M_tileX_q>.
-The following registers are absorbed into counter <M_tileY_q>: 1 register on signal <M_tileY_q>.
 The following registers are absorbed into counter <M_blink_q>: 1 register on signal <M_blink_q>.
-	Multiplier <Mmult_M_tileX_q[3]_PWR_6_o_MuLt_0_OUT> in block <game_4> and adder/subtractor <Madd_n1240_Madd> in block <game_4> are combined into a MAC<Maddsub_M_tileX_q[3]_PWR_6_o_MuLt_0_OUT>.
-	Multiplier <Mmult_M_tileY_q[2]_PWR_6_o_MuLt_232_OUT> in block <game_4> and adder/subtractor <Madd_n1245_Madd> in block <game_4> are combined into a MAC<Maddsub_M_tileY_q[2]_PWR_6_o_MuLt_232_OUT>.
 Unit <game_4> synthesized (advanced).
 
 Synthesizing (advanced) Unit <renderer_6>.
 The following registers are absorbed into counter <M_pixel_q>: 1 register on signal <M_pixel_q>.
 The following registers are absorbed into counter <M_line_q>: 1 register on signal <M_line_q>.
-	The following adders/subtractors are grouped into adder tree <Madd_n0082_Madd1> :
- 	<Madd_n0120_Madd> in block <renderer_6>, 	<Msub_GND_7_o_GND_7_o_sub_103_OUT_Madd> in block <renderer_6>.
-	Multiplier <Mmult_M_pixel_q[10]_PWR_7_o_MuLt_101_OUT> in block <renderer_6> and adder/subtractor <ADDER_FOR_MULTADD_Madd2> in block <renderer_6> are combined into a MAC<Maddsub_M_pixel_q[10]_PWR_7_o_MuLt_101_OUT>.
-	Multiplier <Mmult_placed[224]_PWR_7_o_MuLt_94_OUT> in block <renderer_6> and adder/subtractor <ADDER_FOR_MULTADD_Madd> in block <renderer_6> are combined into a MAC<Maddsub_placed[224]_PWR_7_o_MuLt_94_OUT>.
-	Multiplier <Mmult_M_line_q[10]_PWR_7_o_MuLt_96_OUT> in block <renderer_6> and adder/subtractor <Msub_GND_7_o_GND_7_o_sub_98_OUT> in block <renderer_6> are combined into a MAC<Maddsub_M_line_q[10]_PWR_7_o_MuLt_96_OUT>.
-	Multiplier <Mmult_M_line_q[10]_PWR_7_o_MuLt_106_OUT> in block <renderer_6> and adder/subtractor <Madd_n0125[13:0]_Madd> in block <renderer_6> are combined into a MAC<Maddsub_M_line_q[10]_PWR_7_o_MuLt_106_OUT>.
+	Multiplier <Mmult_placed[224]_PWR_7_o_MuLt_122_OUT> in block <renderer_6> and adder/subtractor <Madd_n0154_Madd> in block <renderer_6> are combined into a MAC<Maddsub_placed[224]_PWR_7_o_MuLt_122_OUT>.
+	Multiplier <Mmult_treg[2]_PWR_7_o_MuLt_8_OUT> in block <renderer_6> and adder/subtractor <Madd_n0142_Madd> in block <renderer_6> are combined into a MAC<Maddsub_treg[2]_PWR_7_o_MuLt_8_OUT>.
+	Multiplier <Mmult_M_line_q[10]_PWR_7_o_MuLt_124_OUT> in block <renderer_6> and adder/subtractor <Msub_GND_7_o_GND_7_o_sub_126_OUT> in block <renderer_6> are combined into a MAC<Maddsub_M_line_q[10]_PWR_7_o_MuLt_124_OUT>.
+	Multiplier <Mmult_M_pixel_q[10]_PWR_7_o_MuLt_129_OUT> in block <renderer_6> and adder/subtractor <Msub_GND_7_o_GND_7_o_sub_131_OUT_Madd> in block <renderer_6> are combined into a MAC<Maddsub_M_pixel_q[10]_PWR_7_o_MuLt_129_OUT>.
+	Multiplier <Mmult_M_line_q[10]_PWR_7_o_MuLt_134_OUT> in block <renderer_6> and adder/subtractor <Madd_n0159[13:0]_Madd> in block <renderer_6> are combined into a MAC<Maddsub_M_line_q[10]_PWR_7_o_MuLt_134_OUT>.
 Unit <renderer_6> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# MACs                                                 : 6
- 4x3-to-7-bit MAC                                      : 1
- 6x3-to-8-bit MAC                                      : 1
- 6x4-to-8-bit MAC                                      : 1
+# MACs                                                 : 5
+ 4x3-to-7-bit MAC                                      : 2
  7x2-to-10-bit MAC                                     : 1
  7x2-to-7-bit MAC                                      : 1
  7x6-to-8-bit MAC                                      : 1
-# Multipliers                                          : 4
+# Multipliers                                          : 2
  32x2-bit multiplier                                   : 1
- 3x3-bit multiplier                                    : 1
- 4x3-bit multiplier                                    : 1
  7x3-bit multiplier                                    : 1
-# Adders/Subtractors                                   : 20
- 7-bit adder                                           : 1
+# Adders/Subtractors                                   : 23
+ 3-bit adder                                           : 1
+ 3-bit subtractor                                      : 1
+ 4-bit adder                                           : 1
+ 4-bit subtractor                                      : 1
+ 7-bit adder                                           : 2
  7-bit adder carry in                                  : 14
- 8-bit adder                                           : 5
-# Counters                                             : 10
+ 8-bit adder                                           : 3
+# Counters                                             : 8
  11-bit up counter                                     : 2
  20-bit up counter                                     : 5
  28-bit up counter                                     : 1
- 3-bit updown counter                                  : 1
- 4-bit updown counter                                  : 1
-# Registers                                            : 245
- Flip-Flops                                            : 245
-# Comparators                                          : 24
+# Registers                                            : 256
+ Flip-Flops                                            : 256
+# Comparators                                          : 26
  11-bit comparator greater                             : 2
  11-bit comparator lessequal                           : 4
+ 7-bit comparator equal                                : 2
  7-bit comparator greater                              : 2
  7-bit comparator lessequal                            : 12
  8-bit comparator lessequal                            : 2
  9-bit comparator lessequal                            : 2
-# Multiplexers                                         : 787
- 1-bit 2-to-1 multiplexer                              : 561
- 3-bit 2-to-1 multiplexer                              : 1
- 4-bit 2-to-1 multiplexer                              : 1
- 5-bit 2-to-1 multiplexer                              : 218
+# Multiplexers                                         : 123
+ 1-bit 2-to-1 multiplexer                              : 117
  7-bit 2-to-1 multiplexer                              : 6
-# Logic shifters                                       : 4
- 143-bit shifter logical right                         : 1
+# Logic shifters                                       : 5
+ 143-bit shifter logical right                         : 2
  449-bit shifter logical right                         : 3
 # FSMs                                                 : 1
 
@@ -435,6 +416,214 @@ Macro Statistics
 =========================================================================
 WARNING:Xst:1426 - The value init of the FF/Latch M_tiles_q hinder the constant cleaning in the block game_4.
    You should achieve better results by setting this init to 1.
+WARNING:Xst:1293 - FF/Latch <M_placed_q_145> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_146> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_147> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_148> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_149> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_150> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_151> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_152> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_153> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_154> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_155> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_156> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_157> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_158> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_159> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_160> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_161> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_162> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_163> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_164> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_165> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_166> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_167> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_168> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_169> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_170> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_114> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_115> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_116> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_117> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_118> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_119> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_120> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_121> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_122> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_123> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_124> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_125> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_126> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_127> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_128> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_129> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_135> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_136> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_137> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_138> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_139> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_140> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_141> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_142> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_143> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_144> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_197> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_198> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_199> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_200> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_201> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_202> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_203> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_204> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_205> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_206> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_207> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_208> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_209> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_210> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_211> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_212> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_213> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_214> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_215> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_216> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_217> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_218> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_219> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_treg_q_0> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_treg_q_2> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_treg_q_3> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_171> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_172> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_173> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_174> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_175> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_176> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_177> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_178> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_179> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_180> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_181> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_182> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_183> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_184> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_185> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_186> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_187> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_188> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_189> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_190> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_191> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_192> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_193> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_194> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_195> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_196> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_26> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_27> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_28> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_29> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_30> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_31> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_32> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_33> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_34> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_35> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_36> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_37> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_38> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_39> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_45> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_46> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_47> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_48> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_49> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_50> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_51> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_52> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_53> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_54> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_55> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_56> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_0> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_1> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_2> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_3> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_4> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_5> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_6> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_7> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_8> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_9> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_10> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_11> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_12> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_13> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_14> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_15> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_16> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_17> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_18> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_19> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_20> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_21> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_22> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_23> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_24> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_25> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_83> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_84> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_85> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_86> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_87> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_88> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_89> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_95> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_96> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_97> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_98> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_99> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_100> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_101> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_102> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_103> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_104> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_105> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_106> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_107> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_108> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_109> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_110> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_111> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_112> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_113> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_57> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_58> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_59> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_60> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_61> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_62> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_63> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_64> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_65> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_66> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_67> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_68> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_69> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_70> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_71> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_72> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_73> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_74> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_75> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_76> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_77> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_78> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_79> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_80> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_81> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_82> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
 Analyzing FSM <MFsm> for best encoding.
 Optimizing FSM <game/FSM_0> on signal <M_state_q[1:2]> with user encoding.
 -------------------
@@ -444,8 +633,22 @@ Optimizing FSM <game/FSM_0> on signal <M_state_q[1:2]> with user encoding.
  01    | 01
  10    | 10
 -------------------
+WARNING:Xst:2677 - Node <Mmult_n00991> of sequential type is unconnected in block <renderer_6>.
 WARNING:Xst:1426 - The value init of the FF/Latch M_state_q_FSM_FFd2 hinder the constant cleaning in the block game_4.
    You should achieve better results by setting this init to 1.
+WARNING:Xst:1293 - FF/Latch <M_placed_q_40> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_43> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_44> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_90> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_91> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_93> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_94> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_130> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_133> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_134> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_220> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_223> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <M_placed_q_224> has a constant value of 0 in block <game_4>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:2677 - Node <M_blink_q_26> of sequential type is unconnected in block <game_4>.
 WARNING:Xst:2677 - Node <M_blink_q_27> of sequential type is unconnected in block <game_4>.
 
@@ -460,46 +663,46 @@ WARNING:Xst:2677 - Node <reset_cond/M_stage_q_3> of sequential type is unconnect
 WARNING:Xst:2677 - Node <reset_cond/M_stage_q_2> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <reset_cond/M_stage_q_1> of sequential type is unconnected in block <mojo_top_0>.
 WARNING:Xst:2677 - Node <reset_cond/M_stage_q_0> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/sync/M_pipe_q_1> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/sync/M_pipe_q_0> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <edge_detector_gen_0[2].edge_detector/M_last_q> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_0> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_1> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_2> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_3> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_4> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_5> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_6> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_7> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_8> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_9> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_10> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_11> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_12> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_13> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_14> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_15> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_16> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_17> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_18> of sequential type is unconnected in block <mojo_top_0>.
-WARNING:Xst:2677 - Node <button_cond_gen_0[2].button_cond/M_ctr_q_19> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/sync/M_pipe_q_1> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/sync/M_pipe_q_0> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <edge_detector_gen_0[1].edge_detector/M_last_q> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_0> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_1> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_2> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_3> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_4> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_5> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_6> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_7> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_8> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_9> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_10> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_11> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_12> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_13> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_14> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_15> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_16> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_17> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_18> of sequential type is unconnected in block <mojo_top_0>.
+WARNING:Xst:2677 - Node <button_cond_gen_0[1].button_cond/M_ctr_q_19> of sequential type is unconnected in block <mojo_top_0>.
 INFO:Xst:2261 - The FF/Latch <game/M_blink_q_0> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/renderer/M_pixel_q_0> 
 INFO:Xst:2261 - The FF/Latch <game/M_blink_q_1> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/renderer/M_pixel_q_1> 
 INFO:Xst:2261 - The FF/Latch <game/M_blink_q_2> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/renderer/M_pixel_q_2> 
 INFO:Xst:2261 - The FF/Latch <game/M_blink_q_3> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/renderer/M_pixel_q_3> 
-INFO:Xst:2261 - The FF/Latch <game/M_state_q_FSM_FFd2> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <game/M_tiles_q> 
+INFO:Xst:2261 - The FF/Latch <game/M_state_q_FSM_FFd2> in Unit <mojo_top_0> is equivalent to the following 8 FFs/Latches, which will be removed : <game/M_placed_q_222> <game/M_placed_q_221> <game/M_placed_q_132> <game/M_placed_q_131> <game/M_placed_q_92> <game/M_placed_q_42> <game/M_placed_q_41> <game/M_tiles_q> 
 
 Mapping all equations...
 Building and optimizing final netlist ...
 WARNING:Xst:1426 - The value init of the FF/Latch game/M_state_q_FSM_FFd2 hinder the constant cleaning in the block mojo_top_0.
    You should achieve better results by setting this init to 1.
-Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 35.
+Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 6.
 
 Final Macro Processing ...
 
 Processing Unit <mojo_top_0> :
 	Found 2-bit shift register for signal <button_cond_gen_0[0].button_cond/sync/M_pipe_q_1>.
-	Found 2-bit shift register for signal <button_cond_gen_0[1].button_cond/sync/M_pipe_q_1>.
+	Found 2-bit shift register for signal <button_cond_gen_0[2].button_cond/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_cond_gen_0[3].button_cond/sync/M_pipe_q_1>.
 	Found 2-bit shift register for signal <button_cond_gen_0[4].button_cond/sync/M_pipe_q_1>.
 Unit <mojo_top_0> processed.
@@ -508,8 +711,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 361
- Flip-Flops                                            : 361
+# Registers                                            : 137
+ Flip-Flops                                            : 137
 # Shift Registers                                      : 4
  2-bit shift register                                  : 4
 
@@ -534,24 +737,24 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 2065
+# BELS                             : 626
 #      GND                         : 11
-#      INV                         : 13
+#      INV                         : 12
 #      LUT1                        : 121
-#      LUT2                        : 25
-#      LUT3                        : 134
-#      LUT4                        : 183
-#      LUT5                        : 431
-#      LUT6                        : 833
-#      MUXCY                       : 137
-#      MUXF7                       : 23
+#      LUT2                        : 23
+#      LUT3                        : 11
+#      LUT4                        : 22
+#      LUT5                        : 43
+#      LUT6                        : 68
+#      MUXCY                       : 147
+#      MUXF7                       : 3
 #      VCC                         : 11
-#      XORCY                       : 143
-# FlipFlops/Latches                : 365
-#      FD                          : 256
-#      FDE                         : 11
+#      XORCY                       : 154
+# FlipFlops/Latches                : 141
+#      FD                          : 50
+#      FDE                         : 4
 #      FDR                         : 7
-#      FDRE                        : 91
+#      FDRE                        : 80
 # Shift Registers                  : 4
 #      SRLC16E                     : 4
 # Clock Buffers                    : 1
@@ -560,8 +763,8 @@ Primitive and Black Box Usage:
 #      IBUF                        : 4
 #      OBUF                        : 13
 #      OBUFT                       : 6
-# DSPs                             : 10
-#      DSP48A1                     : 10
+# DSPs                             : 9
+#      DSP48A1                     : 9
 
 Device utilization summary:
 ---------------------------
@@ -570,18 +773,18 @@ Selected Device : 6slx9tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:             365  out of  11440     3%  
- Number of Slice LUTs:                 1744  out of   5720    30%  
-    Number used as Logic:              1740  out of   5720    30%  
+ Number of Slice Registers:             141  out of  11440     1%  
+ Number of Slice LUTs:                  304  out of   5720     5%  
+    Number used as Logic:               300  out of   5720     5%  
     Number used as Memory:                4  out of   1440     0%  
        Number used as SRL:                4
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   1756
-   Number with an unused Flip Flop:    1391  out of   1756    79%  
-   Number with an unused LUT:            12  out of   1756     0%  
-   Number of fully used LUT-FF pairs:   353  out of   1756    20%  
-   Number of unique control sets:        17
+ Number of LUT Flip Flop pairs used:    310
+   Number with an unused Flip Flop:     169  out of    310    54%  
+   Number with an unused LUT:             6  out of    310     1%  
+   Number of fully used LUT-FF pairs:   135  out of    310    43%  
+   Number of unique control sets:        15
 
 IO Utilization: 
  Number of IOs:                          32
@@ -589,7 +792,7 @@ IO Utilization:
 
 Specific Feature Utilization:
  Number of BUFG/BUFGCTRLs:                1  out of     16     6%  
- Number of DSP48A1s:                     10  out of     16    62%  
+ Number of DSP48A1s:                      9  out of     16    56%  
 
 ---------------------------
 Partition Resource Summary:
@@ -609,13 +812,12 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
---------------------------------------------------+---------------------------------------------+-------+
-Clock Signal                                      | Clock buffer(FF name)                       | Load  |
---------------------------------------------------+---------------------------------------------+-------+
-clk                                               | BUFGP                                       | 372   |
-game/led_0_OBUF                                   | NONE(game/Madd_n0991_Madd1)                 | 2     |
-game/renderer/M_pixel_q[10]_PWR_7_o_div_107_OUT<6>| NONE(game/renderer/ADDER_FOR_MULTADD_Madd11)| 2     |
---------------------------------------------------+---------------------------------------------+-------+
+-----------------------------------+-------------------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)               | Load  |
+-----------------------------------+-------------------------------------+-------+
+clk                                | BUFGP                               | 146   |
+game/renderer/_n0177<0>            | NONE(game/renderer/Madd_n0088_Madd1)| 4     |
+-----------------------------------+-------------------------------------+-------+
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
 Asynchronous Control Signals Information:
@@ -626,9 +828,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 16.489ns (Maximum Frequency: 60.646MHz)
+   Minimum period: 5.615ns (Maximum Frequency: 178.094MHz)
    Minimum input arrival time before clock: 2.009ns
-   Maximum output required time after clock: 41.960ns
+   Maximum output required time after clock: 34.902ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -637,46 +839,49 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 16.489ns (frequency: 60.646MHz)
-  Total number of paths / destination ports: 9387046 / 577
+  Clock period: 5.615ns (frequency: 178.094MHz)
+  Total number of paths / destination ports: 4115 / 308
 -------------------------------------------------------------------------
-Delay:               16.489ns (Levels of Logic = 5)
-  Source:            game/Maddsub_M_tileX_q[3]_PWR_6_o_MuLt_0_OUT (DSP)
-  Destination:       game/M_placed_q_5 (FF)
+Delay:               5.615ns (Levels of Logic = 6)
+  Source:            button_cond_gen_0[2].button_cond/M_ctr_q_9 (FF)
+  Destination:       game/M_treg_q_9 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: game/Maddsub_M_tileX_q[3]_PWR_6_o_MuLt_0_OUT to game/M_placed_q_5
+  Data Path: button_cond_gen_0[2].button_cond/M_ctr_q_9 to game/M_treg_q_9
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     DSP48A1:CLK->PCOUT47    1   5.873   0.000  Maddsub_M_tileX_q[3]_PWR_6_o_MuLt_0_OUT (Maddsub_M_tileX_q[3]_PWR_6_o_MuLt_0_OUT_PCOUT_to_Madd_n0759_Madd1_PCIN_47)
-     DSP48A1:PCIN47->P3  230   2.645   2.855  Madd_n0759_Madd1 (n0759<3>)
-     LUT5:I0->O           11   0.254   1.039  _n3452<7>11 (_n3452<7>1)
-     LUT6:I5->O            1   0.254   0.681  Mmux_M_placed_d<5>21 (Mmux_M_placed_d<5>2)
-     MUXF7:S->O            1   0.185   0.682  Mmux_M_placed_d<5>22 (Mmux_M_placed_d<5>21)
-     LUT6:I5->O            1   0.254   0.000  Mmux_M_placed_d<5>23 (M_placed_d<5>)
-     FD:D                      0.074          M_placed_q_5
+     FDRE:C->Q             2   0.525   1.181  M_ctr_q_9 (M_ctr_q_9)
+     LUT6:I0->O            3   0.254   0.994  out3 (out2)
+     end scope: 'button_cond_gen_0[2].button_cond:out2'
+     begin scope: 'edge_detector_gen_0[2].edge_detector:out2'
+     LUT6:I3->O            7   0.235   1.018  out1 (out)
+     end scope: 'edge_detector_gen_0[2].edge_detector:out'
+     begin scope: 'game:buttons<2>'
+     LUT5:I3->O            2   0.250   0.834  M_treg_d<8>21 (M_treg_d<8>_bdd1)
+     LUT6:I4->O            1   0.250   0.000  M_treg_d<9>1 (M_treg_d<9>)
+     FD:D                      0.074          M_treg_q_9
     ----------------------------------------
-    Total                     16.489ns (11.232ns logic, 5.257ns route)
-                                       (68.1% logic, 31.9% route)
+    Total                      5.615ns (1.588ns logic, 4.027ns route)
+                                       (28.3% logic, 71.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
   Total number of paths / destination ports: 4 / 4
 -------------------------------------------------------------------------
 Offset:              2.009ns (Levels of Logic = 2)
-  Source:            io_button<0> (PAD)
-  Destination:       button_cond_gen_0[0].button_cond/sync/Mshreg_M_pipe_q_1 (FF)
+  Source:            io_button<2> (PAD)
+  Destination:       button_cond_gen_0[2].button_cond/sync/Mshreg_M_pipe_q_1 (FF)
   Destination Clock: clk rising
 
-  Data Path: io_button<0> to button_cond_gen_0[0].button_cond/sync/Mshreg_M_pipe_q_1
+  Data Path: io_button<2> to button_cond_gen_0[2].button_cond/sync/Mshreg_M_pipe_q_1
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             1   1.328   0.681  io_button_0_IBUF (io_button_0_IBUF)
-     begin scope: 'button_cond_gen_0[0].button_cond:in'
-     begin scope: 'button_cond_gen_0[0].button_cond/sync:in'
+     IBUF:I->O             1   1.328   0.681  io_button_2_IBUF (io_button_2_IBUF)
+     begin scope: 'button_cond_gen_0[2].button_cond:in'
+     begin scope: 'button_cond_gen_0[2].button_cond/sync:in'
      SRLC16E:D                -0.060          Mshreg_M_pipe_q_1
     ----------------------------------------
     Total                      2.009ns (1.328ns logic, 0.681ns route)
@@ -684,9 +889,9 @@ Offset:              2.009ns (Levels of Logic = 2)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 8279030244302 / 5
+  Total number of paths / destination ports: 616909800 / 5
 -------------------------------------------------------------------------
-Offset:              41.960ns (Levels of Logic = 20)
+Offset:              34.902ns (Levels of Logic = 16)
   Source:            game/renderer/M_pixel_q_10 (FF)
   Destination:       blue (PAD)
   Source Clock:      clk rising
@@ -695,32 +900,28 @@ Offset:              41.960ns (Levels of Logic = 20)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q             15   0.525   1.383  M_pixel_q_10 (M_pixel_q_10)
-     begin scope: 'game/renderer/M_pixel_q[10]_PWR_7_o_div_107:a<6>'
+     FDR:C->Q             22   0.525   1.562  M_pixel_q_10 (M_pixel_q_10)
+     begin scope: 'game/renderer/M_pixel_q[10]_PWR_7_o_div_135:a<6>'
      LUT4:I1->O            2   0.235   1.181  o<0>4 (o<0>3)
      LUT6:I0->O            1   0.254   0.790  o<0>5 (o<0>4)
-     LUT6:I4->O            2   0.250   0.725  o<0>8 (M_pixel_q[10]_PWR_7_o_div_107_OUT<0>)
-     end scope: 'game/renderer/M_pixel_q[10]_PWR_7_o_div_107:o<0>'
-     DSP48A1:B0->PCOUT47    1   5.153   0.000  Mmult_M_pixel_q[10]_PWR_7_o_MuLt_108_OUT (Mmult_M_pixel_q[10]_PWR_7_o_MuLt_108_OUT_PCOUT_to_Maddsub_M_line_q[10]_PWR_7_o_MuLt_106_OUT_PCIN_47)
-     DSP48A1:PCIN47->PCOUT47    1   2.653   0.000  Maddsub_M_line_q[10]_PWR_7_o_MuLt_106_OUT (Maddsub_M_line_q[10]_PWR_7_o_MuLt_106_OUT_PCOUT_to_Madd_n0073_Madd1_PCIN_47)
-     DSP48A1:PCIN47->P2   87   2.645   2.563  Madd_n0073_Madd1 (n0073<2>1)
-     LUT6:I0->O            2   0.254   0.954  Sh3365171 (Sh3365_bdd28)
-     LUT5:I2->O            1   0.235   0.682  Sh3365111 (Sh3365110)
-     LUT6:I5->O            1   0.254   1.112  Sh3365112 (Sh3365111)
-     LUT6:I1->O            1   0.254   0.682  Sh3365120 (Sh3365119)
-     LUT4:I3->O            1   0.254   0.681  Sh3365129 (Sh3365)
-     DSP48A1:A0->PCOUT47    1   5.228   0.000  Maddsub_placed[224]_PWR_7_o_MuLt_94_OUT (Maddsub_placed[224]_PWR_7_o_MuLt_94_OUT_PCOUT_to_ADDER_FOR_MULTADD_Madd11_PCIN_47)
-     DSP48A1:PCIN47->PCOUT47    1   2.653   0.000  ADDER_FOR_MULTADD_Madd11 (ADDER_FOR_MULTADD_Madd11_PCOUT_to_Maddsub_M_pixel_q[10]_PWR_7_o_MuLt_101_OUT_PCIN_47)
-     DSP48A1:PCIN47->P1    2   2.645   1.181  Maddsub_M_pixel_q[10]_PWR_7_o_MuLt_101_OUT (ADDER_FOR_MULTADD_Madd_12)
-     LUT6:I0->O            1   0.254   0.958  Sh58881 (Sh58881)
-     LUT5:I1->O            3   0.254   1.221  Sh58883 (Sh5888)
-     LUT6:I0->O            1   0.254   0.681  Mmux_blue13 (blue)
+     LUT6:I4->O            4   0.250   0.803  o<0>8 (_n0177<6>)
+     end scope: 'game/renderer/M_pixel_q[10]_PWR_7_o_div_135:o<0>'
+     DSP48A1:B0->PCOUT47    1   5.153   0.000  Mmult_M_pixel_q[10]_PWR_7_o_MuLt_136_OUT (Mmult_M_pixel_q[10]_PWR_7_o_MuLt_136_OUT_PCOUT_to_Maddsub_M_line_q[10]_PWR_7_o_MuLt_134_OUT_PCIN_47)
+     DSP48A1:PCIN47->P6    9   2.645   1.084  Maddsub_M_line_q[10]_PWR_7_o_MuLt_134_OUT (Madd_n0094_Madd_lut<6>)
+     LUT2:I0->O            1   0.250   1.112  Sh336614_SW0 (N19)
+     LUT6:I1->O            1   0.254   1.112  Sh336614 (Sh336613)
+     LUT6:I1->O            1   0.254   0.681  Sh336615 (Sh3366)
+     DSP48A1:A1->P6        1   5.220   0.681  Maddsub_placed[224]_PWR_7_o_MuLt_122_OUT (n0154<6>)
+     DSP48A1:C6->P1        2   3.141   1.181  Madd_n0103_Madd1 (n0103<1>1)
+     LUT6:I0->O            1   0.254   0.958  Sh64601 (Sh64601)
+     LUT5:I1->O            3   0.254   1.221  Sh64603 (Sh6460)
+     LUT6:I0->O            1   0.254   0.681  Mmux_blue11 (blue)
      end scope: 'game/renderer:blue'
      end scope: 'game:blue'
      OBUF:I->O                 2.912          blue_OBUF (blue)
     ----------------------------------------
-    Total                     41.960ns (27.166ns logic, 14.794ns route)
-                                       (64.7% logic, 35.3% route)
+    Total                     34.902ns (21.855ns logic, 13.047ns route)
+                                       (62.6% logic, 37.4% route)
 
 =========================================================================
 
@@ -732,37 +933,29 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |   16.489|         |         |         |
+clk            |    5.615|         |         |         |
 ---------------+---------+---------+---------+---------+
 
-Clock to Setup on destination clock game/led_0_OBUF
+Clock to Setup on destination clock game/renderer/_n0177<0>
 ---------------+---------+---------+---------+---------+
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    7.566|         |         |         |
----------------+---------+---------+---------+---------+
-
-Clock to Setup on destination clock game/renderer/M_pixel_q[10]_PWR_7_o_div_107_OUT<6>
----------------+---------+---------+---------+---------+
-               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
-Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
----------------+---------+---------+---------+---------+
-clk            |   30.640|         |         |         |
+clk            |   26.396|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 40.00 secs
-Total CPU time to Xst completion: 39.12 secs
+Total REAL time to Xst completion: 12.00 secs
+Total CPU time to Xst completion: 12.36 secs
  
 --> 
 
 
-Total memory usage is 492508 kilobytes
+Total memory usage is 416552 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   57 (   0 filtered)
+Number of warnings :  279 (   0 filtered)
 Number of infos    :    6 (   0 filtered)
 

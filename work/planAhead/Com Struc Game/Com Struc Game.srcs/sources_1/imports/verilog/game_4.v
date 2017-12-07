@@ -17,8 +17,7 @@ module game_4 (
   
   
   
-  reg [3:0] M_tileX_d, M_tileX_q = 1'h0;
-  reg [2:0] M_tileY_d, M_tileY_q = 1'h0;
+  reg [10:0] M_treg_d, M_treg_q = 1'h0;
   reg [27:0] M_blink_d, M_blink_q = 1'h0;
   reg [27:0] M_oneSecond_d, M_oneSecond_q = 1'h0;
   reg [224:0] M_placed_d, M_placed_q = 1'h0;
@@ -30,10 +29,12 @@ module game_4 (
   wire [1-1:0] M_renderer_vsync;
   reg [225-1:0] M_renderer_placed;
   reg [72-1:0] M_renderer_tiles;
+  reg [11-1:0] M_renderer_treg;
   renderer_6 renderer (
     .clk(clk),
     .placed(M_renderer_placed),
     .tiles(M_renderer_tiles),
+    .treg(M_renderer_treg),
     .red(M_renderer_red),
     .green(M_renderer_green),
     .blue(M_renderer_blue),
@@ -57,10 +58,9 @@ module game_4 (
     M_state_d = M_state_q;
     M_tiles_d = M_tiles_q;
     M_placed_d = M_placed_q;
+    M_treg_d = M_treg_q;
     M_moves_d = M_moves_q;
     M_blink_d = M_blink_q;
-    M_tileX_d = M_tileX_q;
-    M_tileY_d = M_tileY_q;
     
     M_tiles_d[0+8-:9] = 9'h000;
     M_tiles_d[9+8-:9] = 9'h0ba;
@@ -70,12 +70,11 @@ module game_4 (
     M_tiles_d[45+8-:9] = 9'h0b0;
     M_tiles_d[54+8-:9] = 9'h032;
     M_tiles_d[63+8-:9] = 9'h01a;
-    M_placed_d[(M_tileX_q)*45+(M_tileY_q)*5+4-:5] = 5'h01;
-    M_placed_d[(M_tileY_q)*45+(M_tileX_q)*5+3+0-:1] = M_blink_q[25+0-:1];
-    M_placed_d[(M_tileY_q)*45+(M_tileX_q)*5+0+0-:1] = 1'h1;
+    M_treg_d[1+0-:1] = M_blink_q[25+0-:1];
     M_blink_d = M_blink_q + 1'h1;
     M_renderer_placed = M_placed_q;
     M_renderer_tiles = M_tiles_q;
+    M_renderer_treg = M_treg_q;
     red = M_renderer_red;
     green = M_renderer_green;
     blue = M_renderer_blue;
@@ -93,16 +92,16 @@ module game_4 (
       end
       INPUT_state: begin
         if (buttons[0+0-:1]) begin
-          M_tileY_d = M_tileY_q - 1'h1;
+          M_treg_d[4+2-:3] = M_treg_q[4+2-:3] - 1'h1;
         end else begin
-          if (buttons[1+0-:1]) begin
-            M_tileY_d = M_tileY_q + 1'h1;
+          if (buttons[2+0-:1]) begin
+            M_treg_d[4+2-:3] = M_treg_q[4+2-:3] + 1'h1;
           end else begin
             if (buttons[3+0-:1]) begin
-              M_tileX_d = M_tileX_q - 1'h1;
+              M_treg_d[7+3-:4] = M_treg_q[7+3-:4] - 1'h1;
             end else begin
               if (buttons[4+0-:1]) begin
-                M_tileX_d = M_tileX_q + 1'h1;
+                M_treg_d[7+3-:4] = M_treg_q[7+3-:4] + 1'h1;
               end else begin
                 M_state_d = INPUT_state;
               end
@@ -117,8 +116,7 @@ module game_4 (
   end
   
   always @(posedge clk) begin
-    M_tileX_q <= M_tileX_d;
-    M_tileY_q <= M_tileY_d;
+    M_treg_q <= M_treg_d;
     M_blink_q <= M_blink_d;
     M_oneSecond_q <= M_oneSecond_d;
     M_placed_q <= M_placed_d;
