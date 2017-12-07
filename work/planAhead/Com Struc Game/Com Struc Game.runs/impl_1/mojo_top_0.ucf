@@ -26,6 +26,39 @@ NET "io_button[4]" IOSTANDARD = LVTTL;
 NET "io_button[4]" PULLDOWN;
 
 ####################################################################################
+# Constraints from file : 'controller.ucf'
+####################################################################################
+
+# PULLDOWN is needed to prevent floating inputs
+NET "ct_button[0]" LOC = P57;
+NET "ct_button[0]" IOSTANDARD = LVTTL;
+NET "ct_button[0]" PULLDOWN;
+NET "ct_button[1]" LOC = P66;
+NET "ct_button[1]" IOSTANDARD = LVTTL;
+NET "ct_button[1]" PULLDOWN;
+NET "ct_button[2]" LOC = P78;
+NET "ct_button[2]" IOSTANDARD = LVTTL;
+NET "ct_button[2]" PULLDOWN;
+NET "ct_button[3]" LOC = P74;
+NET "ct_button[3]" IOSTANDARD = LVTTL;
+NET "ct_button[3]" PULLDOWN;
+
+NET "ct_led[0]" LOC = P80;
+NET "ct_led[0]" IOSTANDARD = LVTTL;
+NET "ct_led[1]" LOC = P82;
+NET "ct_led[1]" IOSTANDARD = LVTTL;
+NET "ct_led[2]" LOC = P84;
+NET "ct_led[2]" IOSTANDARD = LVTTL;
+NET "ct_led[3]" LOC = P87;
+NET "ct_led[3]" IOSTANDARD = LVTTL;
+NET "ct_led[4]" LOC = P92;
+NET "ct_led[4]" IOSTANDARD = LVTTL;
+NET "ct_led[5]" LOC = P126;
+NET "ct_led[5]" IOSTANDARD = LVTTL;
+NET "ct_led[6]" LOC = P124;
+NET "ct_led[6]" IOSTANDARD = LVTTL;
+
+####################################################################################
 # Constraints from file : 'vga.ucf'
 ####################################################################################
 
@@ -67,9 +100,7 @@ NET "led[3]" LOC = P131;
 NET "led[3]" IOSTANDARD = LVTTL;
 NET "led[4]" LOC = P127;
 NET "led[4]" IOSTANDARD = LVTTL;
-NET "led[5]" LOC = P126;
 NET "led[5]" IOSTANDARD = LVTTL;
-NET "led[6]" LOC = P124;
 NET "led[6]" IOSTANDARD = LVTTL;
 NET "led[7]" LOC = P123;
 NET "led[7]" IOSTANDARD = LVTTL;

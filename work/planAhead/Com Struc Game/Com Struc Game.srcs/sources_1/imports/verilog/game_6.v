@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module game_4 (
+module game_6 (
     input clk,
     input rst,
     output reg red,
@@ -12,16 +12,17 @@ module game_4 (
     output reg blue,
     output reg hsync,
     output reg vsync,
-    input [4:0] buttons
+    input [4:0] buttons,
+    output reg [6:0] ct_led
   );
   
   
   
   reg [10:0] M_treg_d, M_treg_q = 1'h0;
   reg [27:0] M_blink_d, M_blink_q = 1'h0;
-  reg [27:0] M_oneSecond_d, M_oneSecond_q = 1'h0;
   reg [224:0] M_placed_d, M_placed_q = 1'h0;
   reg [71:0] M_tiles_d, M_tiles_q = 1'h0;
+  reg [31:0] M_tileValidity_d, M_tileValidity_q = 1'h0;
   wire [1-1:0] M_renderer_red;
   wire [1-1:0] M_renderer_green;
   wire [1-1:0] M_renderer_blue;
@@ -30,11 +31,13 @@ module game_4 (
   reg [225-1:0] M_renderer_placed;
   reg [72-1:0] M_renderer_tiles;
   reg [11-1:0] M_renderer_treg;
-  renderer_6 renderer (
+  reg [1-1:0] M_renderer_blink;
+  renderer_9 renderer (
     .clk(clk),
     .placed(M_renderer_placed),
     .tiles(M_renderer_tiles),
     .treg(M_renderer_treg),
+    .blink(M_renderer_blink),
     .red(M_renderer_red),
     .green(M_renderer_green),
     .blue(M_renderer_blue),
@@ -42,11 +45,16 @@ module game_4 (
     .vsync(M_renderer_vsync)
   );
   reg [4:0] M_moves_d, M_moves_q = 1'h0;
-  localparam GAME_START_state = 2'd0;
-  localparam INPUT_state = 2'd1;
-  localparam HALT_state = 2'd2;
+  localparam GAME_START_state = 3'd0;
+  localparam PLAYER_1_state = 3'd1;
+  localparam PLAYER_2_state = 3'd2;
+  localparam PLAYER_3_state = 3'd3;
+  localparam PLAYER_4_state = 3'd4;
+  localparam INPUT_state = 3'd5;
+  localparam CHECK_VALID_state = 3'd6;
+  localparam HALT_state = 3'd7;
   
-  reg [1:0] M_state_d, M_state_q = GAME_START_state;
+  reg [2:0] M_state_d, M_state_q = GAME_START_state;
   
   reg [3:0] player;
   
@@ -60,6 +68,7 @@ module game_4 (
     M_placed_d = M_placed_q;
     M_treg_d = M_treg_q;
     M_moves_d = M_moves_q;
+    M_tileValidity_d = M_tileValidity_q;
     M_blink_d = M_blink_q;
     
     M_tiles_d[0+8-:9] = 9'h000;
@@ -70,16 +79,31 @@ module game_4 (
     M_tiles_d[45+8-:9] = 9'h0b0;
     M_tiles_d[54+8-:9] = 9'h032;
     M_tiles_d[63+8-:9] = 9'h01a;
-    M_treg_d[1+0-:1] = M_blink_q[25+0-:1];
+    M_tileValidity_d[0+3-:4] = 4'h0;
+    M_tileValidity_d[4+3-:4] = 4'hf;
+    M_tileValidity_d[8+3-:4] = 4'ha;
+    M_tileValidity_d[12+3-:4] = 4'h5;
+    M_tileValidity_d[16+3-:4] = 4'h6;
+    M_tileValidity_d[20+3-:4] = 4'hc;
+    M_tileValidity_d[24+3-:4] = 4'h9;
+    M_tileValidity_d[28+3-:4] = 4'h3;
+    M_treg_d[1+0-:1] = 1'h1;
     M_blink_d = M_blink_q + 1'h1;
     M_renderer_placed = M_placed_q;
     M_renderer_tiles = M_tiles_q;
     M_renderer_treg = M_treg_q;
+    M_renderer_blink = M_blink_q[25+0-:1];
     red = M_renderer_red;
     green = M_renderer_green;
     blue = M_renderer_blue;
     hsync = M_renderer_hsync;
     vsync = M_renderer_vsync;
+    ct_led = 7'h00;
+    ct_led[0+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+0+1+0-:1];
+    ct_led[1+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+3+0+0-:1];
+    ct_led[2+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+3+1+0-:1];
+    ct_led[3+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+3+2+0-:1];
+    ct_led[4+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+6+1+0-:1];
     
     case (M_state_q)
       GAME_START_state: begin
@@ -93,21 +117,37 @@ module game_4 (
       INPUT_state: begin
         if (buttons[0+0-:1]) begin
           M_treg_d[4+2-:3] = M_treg_q[4+2-:3] - 1'h1;
+          M_state_d = CHECK_VALID_state;
         end else begin
           if (buttons[2+0-:1]) begin
             M_treg_d[4+2-:3] = M_treg_q[4+2-:3] + 1'h1;
+            M_state_d = CHECK_VALID_state;
           end else begin
             if (buttons[3+0-:1]) begin
               M_treg_d[7+3-:4] = M_treg_q[7+3-:4] - 1'h1;
+              M_state_d = CHECK_VALID_state;
             end else begin
               if (buttons[4+0-:1]) begin
                 M_treg_d[7+3-:4] = M_treg_q[7+3-:4] + 1'h1;
+                M_state_d = CHECK_VALID_state;
               end else begin
                 M_state_d = INPUT_state;
               end
             end
           end
         end
+      end
+      CHECK_VALID_state: begin
+        if (M_placed_q[(M_treg_q[4+2-:3])*45+(M_treg_q[7+3-:4])*5+2+2-:3] != 1'h0 || M_placed_q[(M_treg_q[4+2-:3])*45+(M_treg_q[7+3-:4])*5+0+1-:2] == 2'h2) begin
+          M_treg_d[3+0-:1] = 1'h0;
+        end else begin
+          if (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3] - 1'h1)*45+(M_treg_q[7+3-:4])*5+2+2-:3])*4+3+0-:1] == 1'h1 && M_tileValidity_q[(M_treg_q[0+2-:3])*4+1+0-:1] == 1'h1) begin
+            M_treg_d[3+0-:1] = 1'h1;
+          end else begin
+            M_treg_d[3+0-:1] = 1'h0;
+          end
+        end
+        M_state_d = INPUT_state;
       end
       HALT_state: begin
         M_state_d = HALT_state;
@@ -118,9 +158,9 @@ module game_4 (
   always @(posedge clk) begin
     M_treg_q <= M_treg_d;
     M_blink_q <= M_blink_d;
-    M_oneSecond_q <= M_oneSecond_d;
     M_placed_q <= M_placed_d;
     M_tiles_q <= M_tiles_d;
+    M_tileValidity_q <= M_tileValidity_d;
     M_moves_q <= M_moves_d;
     M_state_q <= M_state_d;
   end

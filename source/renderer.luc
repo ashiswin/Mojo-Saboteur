@@ -3,6 +3,7 @@ module renderer (
     input placed[5][9][5],
     input tiles[8][3][3],
     input treg[11],
+    input blink,
     output red,
     output green,
     output blue,
@@ -22,13 +23,13 @@ module renderer (
       gridSqY = line.q / 16;
       if(gridSqX / 3 == treg[10:7] && gridSqY / 3 == treg[6:4] && treg[2:0] != 0) {
         if(treg[3] == 0) {
-          red = tiles[treg[2:0]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          red = tiles[treg[2:0]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)] & blink;
           green = 0;
           blue = 0;
         }
         else {
           red = 0;
-          green = tiles[treg[2:0]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          green = tiles[treg[2:0]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)] & blink;
           blue = 0;
         }
       }

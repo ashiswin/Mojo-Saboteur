@@ -4,11 +4,12 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module renderer_6 (
+module renderer_9 (
     input clk,
     input [224:0] placed,
     input [71:0] tiles,
     input [10:0] treg,
+    input blink,
     output reg red,
     output reg green,
     output reg blue,
@@ -33,12 +34,12 @@ module renderer_6 (
       gridSqY = M_line_q / 5'h10;
       if (gridSqX / 2'h3 == treg[7+3-:4] && gridSqY / 2'h3 == treg[4+2-:3] && treg[0+2-:3] != 1'h0) begin
         if (treg[3+0-:1] == 1'h0) begin
-          red = tiles[(treg[0+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+          red = tiles[(treg[0+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1] & blink;
           green = 1'h0;
           blue = 1'h0;
         end else begin
           red = 1'h0;
-          green = tiles[(treg[0+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1];
+          green = tiles[(treg[0+2-:3])*9+(gridSqY - ((gridSqY / 2'h3) * 2'h3))*3+(gridSqX - ((gridSqX / 2'h3) * 2'h3))*1+0-:1] & blink;
           blue = 1'h0;
         end
       end else begin

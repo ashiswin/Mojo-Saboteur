@@ -22,7 +22,9 @@ module mojo_top_0 (
     output reg blue,
     output reg hsync,
     output reg vsync,
-    input [4:0] io_button
+    input [4:0] io_button,
+    input [3:0] ct_button,
+    output reg [6:0] ct_led
   );
   
   
@@ -62,13 +64,40 @@ module mojo_top_0 (
     );
   end
   endgenerate
+  wire [(3'h4+0)-1:0] M_controller_cond_out;
+  reg [(3'h4+0)-1:0] M_controller_cond_in;
+  
+  genvar GEN_controller_cond0;
+  generate
+  for (GEN_controller_cond0=0;GEN_controller_cond0<3'h4;GEN_controller_cond0=GEN_controller_cond0+1) begin: controller_cond_gen_0
+    button_conditioner_2 controller_cond (
+      .clk(clk),
+      .in(M_controller_cond_in[GEN_controller_cond0*(1)+(1)-1-:(1)]),
+      .out(M_controller_cond_out[GEN_controller_cond0*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
+  wire [(3'h4+0)-1:0] M_ct_edge_out;
+  reg [(3'h4+0)-1:0] M_ct_edge_in;
+  
+  genvar GEN_ct_edge0;
+  generate
+  for (GEN_ct_edge0=0;GEN_ct_edge0<3'h4;GEN_ct_edge0=GEN_ct_edge0+1) begin: ct_edge_gen_0
+    edge_detector_3 ct_edge (
+      .clk(clk),
+      .in(M_ct_edge_in[GEN_ct_edge0*(1)+(1)-1-:(1)]),
+      .out(M_ct_edge_out[GEN_ct_edge0*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
   wire [1-1:0] M_game_red;
   wire [1-1:0] M_game_green;
   wire [1-1:0] M_game_blue;
   wire [1-1:0] M_game_hsync;
   wire [1-1:0] M_game_vsync;
+  wire [7-1:0] M_game_ct_led;
   reg [5-1:0] M_game_buttons;
-  game_4 game (
+  game_6 game (
     .clk(clk),
     .rst(rst),
     .buttons(M_game_buttons),
@@ -76,7 +105,8 @@ module mojo_top_0 (
     .green(M_game_green),
     .blue(M_game_blue),
     .hsync(M_game_hsync),
-    .vsync(M_game_vsync)
+    .vsync(M_game_vsync),
+    .ct_led(M_game_ct_led)
   );
   
   always @* begin
@@ -88,11 +118,14 @@ module mojo_top_0 (
     avr_rx = 1'bz;
     M_button_cond_in = io_button;
     M_edge_detector_in = M_button_cond_out;
+    M_controller_cond_in = ct_button;
+    M_ct_edge_in = M_controller_cond_out;
     M_game_buttons = M_edge_detector_out;
     red = M_game_red;
     green = M_game_green;
     blue = M_game_blue;
     hsync = M_game_hsync;
     vsync = M_game_vsync;
+    ct_led = M_game_ct_led;
   end
 endmodule

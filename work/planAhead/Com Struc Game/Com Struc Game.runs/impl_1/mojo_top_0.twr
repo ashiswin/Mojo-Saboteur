@@ -28,16 +28,16 @@ INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on
 Timing constraint: TS_clk = PERIOD TIMEGRP "clk" 50 MHz HIGH 50%;
 For more information, see Period Analysis in the Timing Closure User Guide (UG612).
 
- 4111 paths analyzed, 655 endpoints analyzed, 0 failing endpoints
+ 82017 paths analyzed, 671 endpoints analyzed, 0 failing endpoints
  0 timing errors detected. (0 setup errors, 0 hold errors, 0 component switching limit errors)
- Minimum period is   6.961ns.
+ Minimum period is  16.103ns.
 --------------------------------------------------------------------------------
-Slack:                  13.039ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_7 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  3.897ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.910ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      16.040ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -48,36 +48,55 @@ Slack:                  13.039ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_7 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.DQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_7
-    SLICE_X9Y39.A1       net (fanout=2)        1.175   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.910ns (1.675ns logic, 5.235ns route)
-                                                       (24.2% logic, 75.8% route)
+    Total                                     16.040ns (6.979ns logic, 9.061ns route)
+                                                       (43.5% logic, 56.5% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.178ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_7 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  3.910ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.771ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      16.027ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -88,36 +107,55 @@ Slack:                  13.178ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_7 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.DQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_7
-    SLICE_X9Y39.A1       net (fanout=2)        1.175   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.771ns (1.675ns logic, 5.096ns route)
-                                                       (24.7% logic, 75.3% route)
+    Total                                     16.027ns (6.979ns logic, 9.048ns route)
+                                                       (43.5% logic, 56.5% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.357ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_13 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  3.967ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.609ns (Levels of Logic = 4)
-  Clock Path Skew:      0.001ns (0.714 - 0.713)
+  Data Path Delay:      15.970ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -128,36 +166,57 @@ Slack:                  13.357ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_13 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y43.BQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_13
-    SLICE_X13Y40.C4      net (fanout=2)        1.204   button_cond_gen_0[0].button_cond/M_ctr_q[13]
-    SLICE_X13Y40.C       Tilo                  0.259   M_button_cond_out<0>_inv
-                                                       button_cond_gen_0[0].button_cond/out3
-    SLICE_X17Y40.C2      net (fanout=4)        1.161   out2_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X6Y39.C1       net (fanout=4)        0.559   game/n0376<7>1
+    SLICE_X6Y39.C        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15691_SW0
+    SLICE_X7Y39.A4       net (fanout=1)        0.298   game/N40
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.609ns (1.602ns logic, 5.007ns route)
-                                                       (24.2% logic, 75.8% route)
+    Total                                     15.970ns (7.003ns logic, 8.967ns route)
+                                                       (43.9% logic, 56.1% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.571ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_12 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  3.980ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.395ns (Levels of Logic = 4)
-  Clock Path Skew:      0.001ns (0.714 - 0.713)
+  Data Path Delay:      15.957ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -168,36 +227,57 @@ Slack:                  13.571ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_12 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y43.AQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_12
-    SLICE_X13Y40.C2      net (fanout=2)        0.990   button_cond_gen_0[0].button_cond/M_ctr_q[12]
-    SLICE_X13Y40.C       Tilo                  0.259   M_button_cond_out<0>_inv
-                                                       button_cond_gen_0[0].button_cond/out3
-    SLICE_X17Y40.C2      net (fanout=4)        1.161   out2_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X6Y39.C1       net (fanout=4)        0.559   game/n0376<7>1
+    SLICE_X6Y39.C        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15691_SW0
+    SLICE_X7Y39.A4       net (fanout=1)        0.298   game/N40
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.395ns (1.602ns logic, 4.793ns route)
-                                                       (25.1% logic, 74.9% route)
+    Total                                     15.957ns (7.003ns logic, 8.954ns route)
+                                                       (43.9% logic, 56.1% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.615ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_10 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  4.004ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.354ns (Levels of Logic = 4)
-  Clock Path Skew:      0.004ns (0.714 - 0.710)
+  Data Path Delay:      15.933ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -208,36 +288,55 @@ Slack:                  13.615ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_10 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y42.CQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[11]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_10
-    SLICE_X13Y40.C1      net (fanout=2)        0.949   button_cond_gen_0[0].button_cond/M_ctr_q[10]
-    SLICE_X13Y40.C       Tilo                  0.259   M_button_cond_out<0>_inv
-                                                       button_cond_gen_0[0].button_cond/out3
-    SLICE_X17Y40.C2      net (fanout=4)        1.161   out2_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.D4       net (fanout=3)        1.317   game/Sh1570
+    SLICE_X6Y29.CMUX     Topdc                 0.402   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_F
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.354ns (1.602ns logic, 4.752ns route)
-                                                       (25.2% logic, 74.8% route)
+    Total                                     15.933ns (6.978ns logic, 8.955ns route)
+                                                       (43.8% logic, 56.2% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.661ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_2 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.017ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.288ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.920ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -248,36 +347,55 @@ Slack:                  13.661ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_2 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y39.CQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[3]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_2
-    SLICE_X9Y39.A2       net (fanout=2)        0.553   button_cond_gen_0[3].button_cond/M_ctr_q[2]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.D4       net (fanout=3)        1.317   game/Sh1570
+    SLICE_X6Y29.CMUX     Topdc                 0.402   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_F
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.288ns (1.675ns logic, 4.613ns route)
-                                                       (26.6% logic, 73.4% route)
+    Total                                     15.920ns (6.978ns logic, 8.942ns route)
+                                                       (43.8% logic, 56.2% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.688ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_6 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.023ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.261ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.914ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -288,36 +406,57 @@ Slack:                  13.688ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_6 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.CQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_6
-    SLICE_X9Y39.A4       net (fanout=2)        0.526   button_cond_gen_0[3].button_cond/M_ctr_q[6]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.C2       net (fanout=5)        0.551   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.C        Tilo                  0.259   game/Sh15694
+                                                       game/Sh15694_SW0
+    SLICE_X9Y40.D5       net (fanout=5)        0.246   game/N7
+    SLICE_X9Y40.D        Tilo                  0.259   game/Sh15694
+                                                       game/Sh15694
+    SLICE_X7Y39.B6       net (fanout=1)        0.932   game/Sh15694
+    SLICE_X7Y39.B        Tilo                  0.259   game/Sh15696
+                                                       game/Sh15691_SW1
+    SLICE_X7Y39.A5       net (fanout=1)        0.230   game/N41
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.261ns (1.675ns logic, 4.586ns route)
-                                                       (26.8% logic, 73.2% route)
+    Total                                     15.914ns (7.051ns logic, 8.863ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.695ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_11 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  4.028ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.274ns (Levels of Logic = 4)
-  Clock Path Skew:      0.004ns (0.714 - 0.710)
+  Data Path Delay:      15.909ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -328,36 +467,57 @@ Slack:                  13.695ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_11 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y42.DQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[11]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_11
-    SLICE_X13Y40.C3      net (fanout=2)        0.869   button_cond_gen_0[0].button_cond/M_ctr_q[11]
-    SLICE_X13Y40.C       Tilo                  0.259   M_button_cond_out<0>_inv
-                                                       button_cond_gen_0[0].button_cond/out3
-    SLICE_X17Y40.C2      net (fanout=4)        1.161   out2_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X7Y39.B1       net (fanout=4)        0.542   game/n0376<7>1
+    SLICE_X7Y39.B        Tilo                  0.259   game/Sh15696
+                                                       game/Sh15691_SW1
+    SLICE_X7Y39.A5       net (fanout=1)        0.230   game/N41
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.274ns (1.602ns logic, 4.672ns route)
-                                                       (25.5% logic, 74.5% route)
+    Total                                     15.909ns (7.027ns logic, 8.882ns route)
+                                                       (44.2% logic, 55.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.725ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_15 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.036ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.219ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.021ns (0.313 - 0.334)
+  Data Path Delay:      15.901ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -368,36 +528,57 @@ Slack:                  13.725ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_15 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y42.DQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_15
-    SLICE_X9Y40.D2       net (fanout=2)        1.161   button_cond_gen_0[3].button_cond/M_ctr_q[15]
-    SLICE_X9Y40.D        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out2
-    SLICE_X9Y40.A3       net (fanout=3)        0.365   out1_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.C2       net (fanout=5)        0.551   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.C        Tilo                  0.259   game/Sh15694
+                                                       game/Sh15694_SW0
+    SLICE_X9Y40.D5       net (fanout=5)        0.246   game/N7
+    SLICE_X9Y40.D        Tilo                  0.259   game/Sh15694
+                                                       game/Sh15694
+    SLICE_X7Y39.B6       net (fanout=1)        0.932   game/Sh15694
+    SLICE_X7Y39.B        Tilo                  0.259   game/Sh15696
+                                                       game/Sh15691_SW1
+    SLICE_X7Y39.A5       net (fanout=1)        0.230   game/N41
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.219ns (1.675ns logic, 4.544ns route)
-                                                       (26.9% logic, 73.1% route)
+    Total                                     15.901ns (7.051ns logic, 8.850ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.756ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_5 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.041ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.193ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.896ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -408,36 +589,57 @@ Slack:                  13.756ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_5 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.BQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_5
-    SLICE_X9Y39.A5       net (fanout=2)        0.458   button_cond_gen_0[3].button_cond/M_ctr_q[5]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X7Y39.B1       net (fanout=4)        0.542   game/n0376<7>1
+    SLICE_X7Y39.B        Tilo                  0.259   game/Sh15696
+                                                       game/Sh15691_SW1
+    SLICE_X7Y39.A5       net (fanout=1)        0.230   game/N41
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.193ns (1.675ns logic, 4.518ns route)
-                                                       (27.0% logic, 73.0% route)
+    Total                                     15.896ns (7.027ns logic, 8.869ns route)
+                                                       (44.2% logic, 55.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.800ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_2 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.056ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.149ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.881ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -448,36 +650,54 @@ Slack:                  13.800ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_2 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y39.CQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[3]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_2
-    SLICE_X9Y39.A2       net (fanout=2)        0.553   button_cond_gen_0[3].button_cond/M_ctr_q[2]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.C2       net (fanout=5)        0.551   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.C        Tilo                  0.259   game/Sh15694
+                                                       game/Sh15694_SW0
+    SLICE_X6Y39.B1       net (fanout=5)        1.119   game/N7
+    SLICE_X6Y39.B        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15695
+    SLICE_X7Y39.A1       net (fanout=1)        0.539   game/Sh15695
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.149ns (1.675ns logic, 4.474ns route)
-                                                       (27.2% logic, 72.8% route)
+    Total                                     15.881ns (6.768ns logic, 9.113ns route)
+                                                       (42.6% logic, 57.4% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.827ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_6 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.066ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.122ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.871ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -488,36 +708,55 @@ Slack:                  13.827ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_6 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.CQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_6
-    SLICE_X9Y39.A4       net (fanout=2)        0.526   button_cond_gen_0[3].button_cond/M_ctr_q[6]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B3       net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.122ns (1.675ns logic, 4.447ns route)
-                                                       (27.4% logic, 72.6% route)
+    Total                                     15.871ns (6.979ns logic, 8.892ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.843ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_4 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.066ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.106ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.871ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -528,36 +767,55 @@ Slack:                  13.843ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_4 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.AQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_4
-    SLICE_X9Y39.A6       net (fanout=2)        0.371   button_cond_gen_0[3].button_cond/M_ctr_q[4]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B10      net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.106ns (1.675ns logic, 4.431ns route)
-                                                       (27.4% logic, 72.6% route)
+    Total                                     15.871ns (6.979ns logic, 8.892ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.844ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_3 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.066ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.105ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.871ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -568,36 +826,55 @@ Slack:                  13.844ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_3 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y39.DQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[3]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_3
-    SLICE_X9Y39.A3       net (fanout=2)        0.370   button_cond_gen_0[3].button_cond/M_ctr_q[3]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B4       net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.105ns (1.675ns logic, 4.430ns route)
-                                                       (27.4% logic, 72.6% route)
+    Total                                     15.871ns (6.979ns logic, 8.892ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.864ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_15 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.069ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.080ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.021ns (0.313 - 0.334)
+  Data Path Delay:      15.868ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -608,36 +885,54 @@ Slack:                  13.864ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_15 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y42.DQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_15
-    SLICE_X9Y40.D2       net (fanout=2)        1.161   button_cond_gen_0[3].button_cond/M_ctr_q[15]
-    SLICE_X9Y40.D        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out2
-    SLICE_X9Y40.A3       net (fanout=3)        0.365   out1_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.C2       net (fanout=5)        0.551   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.C        Tilo                  0.259   game/Sh15694
+                                                       game/Sh15694_SW0
+    SLICE_X6Y39.B1       net (fanout=5)        1.119   game/N7
+    SLICE_X6Y39.B        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15695
+    SLICE_X7Y39.A1       net (fanout=1)        0.539   game/Sh15695
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.080ns (1.675ns logic, 4.405ns route)
-                                                       (27.5% logic, 72.5% route)
+    Total                                     15.868ns (6.768ns logic, 9.100ns route)
+                                                       (42.7% logic, 57.3% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.895ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_5 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.076ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.054ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.861ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -648,36 +943,55 @@ Slack:                  13.895ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_5 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.BQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_5
-    SLICE_X9Y39.A5       net (fanout=2)        0.458   button_cond_gen_0[3].button_cond/M_ctr_q[5]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y39.D3       net (fanout=5)        0.629   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y39.D        Tilo                  0.259   game/Sh15703
+                                                       game/Sh15703
+    SLICE_X9Y39.C4       net (fanout=1)        0.525   game/Sh15703
+    SLICE_X9Y39.C        Tilo                  0.259   game/Sh15703
+                                                       game/Sh15695_SW0
+    SLICE_X9Y41.A4       net (fanout=1)        0.538   game/N61
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.054ns (1.675ns logic, 4.379ns route)
-                                                       (27.7% logic, 72.3% route)
+    Total                                     15.861ns (7.003ns logic, 8.858ns route)
+                                                       (44.2% logic, 55.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.916ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_7 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  4.079ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.055ns (Levels of Logic = 4)
-  Clock Path Skew:      0.006ns (0.714 - 0.708)
+  Data Path Delay:      15.858ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -688,36 +1002,55 @@ Slack:                  13.916ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_7 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y41.DQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_7
-    SLICE_X15Y40.C2      net (fanout=2)        0.980   button_cond_gen_0[0].button_cond/M_ctr_q[7]
-    SLICE_X15Y40.C       Tilo                  0.259   out1_2
-                                                       button_cond_gen_0[0].button_cond/out1
-    SLICE_X17Y40.C3      net (fanout=4)        0.831   out_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B4       net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.055ns (1.602ns logic, 4.453ns route)
-                                                       (26.5% logic, 73.5% route)
+    Total                                     15.858ns (6.979ns logic, 8.879ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.928ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[2].button_cond/M_ctr_q_19 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  4.079ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.038ns (Levels of Logic = 4)
-  Clock Path Skew:      0.001ns (0.714 - 0.713)
+  Data Path Delay:      15.858ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -728,36 +1061,55 @@ Slack:                  13.928ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[2].button_cond/M_ctr_q_19 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X16Y43.DQ      Tcko                  0.525   button_cond_gen_0[2].button_cond/M_ctr_q[19]
-                                                       button_cond_gen_0[2].button_cond/M_ctr_q_19
-    SLICE_X17Y41.D1      net (fanout=2)        1.197   button_cond_gen_0[2].button_cond/M_ctr_q[19]
-    SLICE_X17Y41.D       Tilo                  0.259   edge_detector_gen_0[2].edge_detector/M_last_q
-                                                       button_cond_gen_0[2].button_cond/out2
-    SLICE_X17Y40.B3      net (fanout=3)        0.566   out1_1
-    SLICE_X17Y40.B       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[2].edge_detector/out1
-    SLICE_X11Y38.B4      net (fanout=6)        1.341   M_edge_detector_out[2]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B3       net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.038ns (1.651ns logic, 4.387ns route)
-                                                       (27.3% logic, 72.7% route)
+    Total                                     15.858ns (6.979ns logic, 8.879ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.934ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_8 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  4.079ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      6.035ns (Levels of Logic = 4)
-  Clock Path Skew:      0.004ns (0.714 - 0.710)
+  Data Path Delay:      15.858ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -768,36 +1120,55 @@ Slack:                  13.934ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_8 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y42.AQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[11]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_8
-    SLICE_X13Y40.C5      net (fanout=2)        0.630   button_cond_gen_0[0].button_cond/M_ctr_q[8]
-    SLICE_X13Y40.C       Tilo                  0.259   M_button_cond_out<0>_inv
-                                                       button_cond_gen_0[0].button_cond/out3
-    SLICE_X17Y40.C2      net (fanout=4)        1.161   out2_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B10      net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      6.035ns (1.602ns logic, 4.433ns route)
-                                                       (26.5% logic, 73.5% route)
+    Total                                     15.858ns (6.979ns logic, 8.879ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.944ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_18 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.081ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.998ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.023ns (0.313 - 0.336)
+  Data Path Delay:      15.856ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -808,36 +1179,55 @@ Slack:                  13.944ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_18 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y43.CQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[19]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_18
-    SLICE_X9Y40.D1       net (fanout=2)        0.940   button_cond_gen_0[3].button_cond/M_ctr_q[18]
-    SLICE_X9Y40.D        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out2
-    SLICE_X9Y40.A3       net (fanout=3)        0.365   out1_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B9       net (fanout=14)       1.102   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.998ns (1.675ns logic, 4.323ns route)
-                                                       (27.9% logic, 72.1% route)
+    Total                                     15.856ns (6.979ns logic, 8.877ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.973ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_12 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.087ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.971ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.021ns (0.313 - 0.334)
+  Data Path Delay:      15.850ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -848,36 +1238,55 @@ Slack:                  13.973ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_12 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y42.AQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_12
-    SLICE_X9Y40.B1       net (fanout=2)        1.042   button_cond_gen_0[3].button_cond/M_ctr_q[12]
-    SLICE_X9Y40.B        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out3
-    SLICE_X9Y40.A5       net (fanout=3)        0.236   out2_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B12      net (fanout=14)       1.096   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.971ns (1.675ns logic, 4.296ns route)
-                                                       (28.1% logic, 71.9% route)
+    Total                                     15.850ns (6.979ns logic, 8.871ns route)
+                                                       (44.0% logic, 56.0% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.982ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_4 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.089ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.967ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.848ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -888,36 +1297,55 @@ Slack:                  13.982ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_4 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y40.AQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[7]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_4
-    SLICE_X9Y39.A6       net (fanout=2)        0.371   button_cond_gen_0[3].button_cond/M_ctr_q[4]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y39.D3       net (fanout=5)        0.629   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y39.D        Tilo                  0.259   game/Sh15703
+                                                       game/Sh15703
+    SLICE_X9Y39.C4       net (fanout=1)        0.525   game/Sh15703
+    SLICE_X9Y39.C        Tilo                  0.259   game/Sh15703
+                                                       game/Sh15695_SW0
+    SLICE_X9Y41.A4       net (fanout=1)        0.538   game/N61
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.967ns (1.675ns logic, 4.292ns route)
-                                                       (28.1% logic, 71.9% route)
+    Total                                     15.848ns (7.003ns logic, 8.845ns route)
+                                                       (44.2% logic, 55.8% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.983ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_3 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.094ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.966ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.016ns (0.313 - 0.329)
+  Data Path Delay:      15.843ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -928,36 +1356,55 @@ Slack:                  13.983ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_3 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y39.DQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[3]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_3
-    SLICE_X9Y39.A3       net (fanout=2)        0.370   button_cond_gen_0[3].button_cond/M_ctr_q[3]
-    SLICE_X9Y39.A        Tilo                  0.259   M_button_cond_out<3>_inv
-                                                       button_cond_gen_0[3].button_cond/out1
-    SLICE_X9Y40.A1       net (fanout=3)        1.042   out_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B9       net (fanout=14)       1.102   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.966ns (1.675ns logic, 4.291ns route)
-                                                       (28.1% logic, 71.9% route)
+    Total                                     15.843ns (6.979ns logic, 8.864ns route)
+                                                       (44.1% logic, 55.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  13.992ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_9 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  4.100ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.977ns (Levels of Logic = 4)
-  Clock Path Skew:      0.004ns (0.714 - 0.710)
+  Data Path Delay:      15.837ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -968,36 +1415,55 @@ Slack:                  13.992ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_9 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y42.BQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[11]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_9
-    SLICE_X13Y40.C6      net (fanout=2)        0.572   button_cond_gen_0[0].button_cond/M_ctr_q[9]
-    SLICE_X13Y40.C       Tilo                  0.259   M_button_cond_out<0>_inv
-                                                       button_cond_gen_0[0].button_cond/out3
-    SLICE_X17Y40.C2      net (fanout=4)        1.161   out2_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B12      net (fanout=14)       1.096   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X9Y41.A6       net (fanout=4)        0.689   game/n0376<7>1
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.977ns (1.602ns logic, 4.375ns route)
-                                                       (26.8% logic, 73.2% route)
+    Total                                     15.837ns (6.979ns logic, 8.858ns route)
+                                                       (44.1% logic, 55.9% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.042ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_13 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.121ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.902ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.021ns (0.313 - 0.334)
+  Data Path Delay:      15.816ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1008,36 +1474,57 @@ Slack:                  14.042ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_13 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y42.BQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_13
-    SLICE_X9Y40.B2       net (fanout=2)        0.973   button_cond_gen_0[3].button_cond/M_ctr_q[13]
-    SLICE_X9Y40.B        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out3
-    SLICE_X9Y40.A5       net (fanout=3)        0.236   out2_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X6Y39.B6       net (fanout=4)        0.164   game/n0376<7>1
+    SLICE_X6Y39.B        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15695
+    SLICE_X7Y39.A1       net (fanout=1)        0.539   game/Sh15695
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.902ns (1.675ns logic, 4.227ns route)
-                                                       (28.4% logic, 71.6% route)
+    Total                                     15.816ns (7.003ns logic, 8.813ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.057ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_19 (FF)
-  Destination:          game/M_treg_q_10 (FF)
+Slack:                  4.134ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.907ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.001ns (0.714 - 0.715)
+  Data Path Delay:      15.803ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1048,36 +1535,57 @@ Slack:                  14.057ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_19 to game/M_treg_q_10
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y44.DQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[19]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_19
-    SLICE_X15Y40.D2      net (fanout=2)        1.120   button_cond_gen_0[0].button_cond/M_ctr_q[19]
-    SLICE_X15Y40.D       Tilo                  0.259   out1_2
-                                                       button_cond_gen_0[0].button_cond/out2
-    SLICE_X17Y40.C4      net (fanout=4)        0.543   out1_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X10Y29.D2      net (fanout=4)        1.283   game/M_treg_d<10>_bdd3
-    SLICE_X10Y29.CLK     Tas                   0.349   game/M_treg_q[10]
-                                                       game/M_treg_d<10>3
-                                                       game/M_treg_q_10
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M3       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A2       net (fanout=9)        0.938   game/n0372[3]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X6Y39.B6       net (fanout=4)        0.164   game/n0376<7>1
+    SLICE_X6Y39.B        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15695
+    SLICE_X7Y39.A1       net (fanout=1)        0.539   game/Sh15695
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.907ns (1.602ns logic, 4.305ns route)
-                                                       (27.1% logic, 72.9% route)
+    Total                                     15.803ns (7.003ns logic, 8.800ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.064ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[0].button_cond/M_ctr_q_13 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.136ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.899ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.002ns (0.618 - 0.620)
+  Data Path Delay:      15.801ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1088,36 +1596,57 @@ Slack:                  14.064ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[0].button_cond/M_ctr_q_13 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X14Y43.BQ      Tcko                  0.476   button_cond_gen_0[0].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[0].button_cond/M_ctr_q_13
-    SLICE_X13Y40.C4      net (fanout=2)        1.204   button_cond_gen_0[0].button_cond/M_ctr_q[13]
-    SLICE_X13Y40.C       Tilo                  0.259   M_button_cond_out<0>_inv
-                                                       button_cond_gen_0[0].button_cond/out3
-    SLICE_X17Y40.C2      net (fanout=4)        1.161   out2_2
-    SLICE_X17Y40.C       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       edge_detector_gen_0[0].edge_detector/out1
-    SLICE_X11Y38.B3      net (fanout=5)        1.359   M_edge_detector_out[0]
-    SLICE_X11Y38.B       Tilo                  0.259   M_treg_q_9
-                                                       game/M_treg_d<10>21
-    SLICE_X11Y38.D2      net (fanout=4)        0.549   game/M_treg_d<10>_bdd3
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B10      net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X6Y39.C1       net (fanout=4)        0.559   game/n0376<7>1
+    SLICE_X6Y39.C        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15691_SW0
+    SLICE_X7Y39.A4       net (fanout=1)        0.298   game/N40
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.899ns (1.626ns logic, 4.273ns route)
-                                                       (27.6% logic, 72.4% route)
+    Total                                     15.801ns (7.003ns logic, 8.798ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.083ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_18 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.136ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.859ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.023ns (0.313 - 0.336)
+  Data Path Delay:      15.801ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1128,36 +1657,57 @@ Slack:                  14.083ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_18 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y43.CQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[19]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_18
-    SLICE_X9Y40.D1       net (fanout=2)        0.940   button_cond_gen_0[3].button_cond/M_ctr_q[18]
-    SLICE_X9Y40.D        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out2
-    SLICE_X9Y40.A3       net (fanout=3)        0.365   out1_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B4       net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X6Y39.C1       net (fanout=4)        0.559   game/n0376<7>1
+    SLICE_X6Y39.C        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15691_SW0
+    SLICE_X7Y39.A4       net (fanout=1)        0.298   game/N40
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.859ns (1.675ns logic, 4.184ns route)
-                                                       (28.6% logic, 71.4% route)
+    Total                                     15.801ns (7.003ns logic, 8.798ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.084ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_16 (FF)
-  Destination:          game/M_treg_q_8 (FF)
+Slack:                  4.136ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.858ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.023ns (0.313 - 0.336)
+  Data Path Delay:      15.801ns (Levels of Logic = 11)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1168,36 +1718,57 @@ Slack:                  14.084ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_16 to game/M_treg_q_8
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y43.AQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[19]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_16
-    SLICE_X9Y40.D3       net (fanout=2)        0.800   button_cond_gen_0[3].button_cond/M_ctr_q[16]
-    SLICE_X9Y40.D        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out2
-    SLICE_X9Y40.A3       net (fanout=3)        0.365   out1_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.C2      net (fanout=2)        1.529   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<8>1
-                                                       game/M_treg_q_8
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B3       net (fanout=14)       1.117   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.B4       net (fanout=5)        0.578   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.B        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A6       net (fanout=1)        0.628   game/Madd_n0376_Madd_xor<0>81
+    SLICE_X6Y39.A        Tilo                  0.235   game/Sh156912
+                                                       game/Madd_n0376_Madd_xor<0>8
+    SLICE_X6Y39.C1       net (fanout=4)        0.559   game/n0376<7>1
+    SLICE_X6Y39.C        Tilo                  0.235   game/Sh156912
+                                                       game/Sh15691_SW0
+    SLICE_X7Y39.A4       net (fanout=1)        0.298   game/N40
+    SLICE_X7Y39.A        Tilo                  0.259   game/Sh15696
+                                                       game/Sh156912
+    SLICE_X6Y29.CX       net (fanout=2)        1.161   game/Sh1569
+    SLICE_X6Y29.CMUX     Tcxc                  0.192   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.858ns (1.675ns logic, 4.183ns route)
-                                                       (28.6% logic, 71.4% route)
+    Total                                     15.801ns (7.003ns logic, 8.798ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
-Slack:                  14.112ns (requirement - (data path - clock path skew + uncertainty))
-  Source:               button_cond_gen_0[3].button_cond/M_ctr_q_12 (FF)
-  Destination:          game/M_treg_q_9 (FF)
+Slack:                  4.146ns (requirement - (data path - clock path skew + uncertainty))
+  Source:               game/M_treg_q_6 (FF)
+  Destination:          game/M_treg_q_3 (FF)
   Requirement:          20.000ns
-  Data Path Delay:      5.832ns (Levels of Logic = 4)
-  Clock Path Skew:      -0.021ns (0.313 - 0.334)
+  Data Path Delay:      15.791ns (Levels of Logic = 10)
+  Clock Path Skew:      -0.028ns (0.717 - 0.745)
   Source Clock:         clk_BUFGP rising at 0.000ns
   Destination Clock:    clk_BUFGP rising at 20.000ns
   Clock Uncertainty:    0.035ns
@@ -1208,28 +1779,47 @@ Slack:                  14.112ns (requirement - (data path - clock path skew + u
     Discrete Jitter (DJ):       0.000ns
     Phase Error (PE):           0.000ns
 
-  Maximum Data Path at Slow Process Corner: button_cond_gen_0[3].button_cond/M_ctr_q_12 to game/M_treg_q_9
+  Maximum Data Path at Slow Process Corner: game/M_treg_q_6 to game/M_treg_q_3
     Location             Delay type         Delay(ns)  Physical Resource
                                                        Logical Resource(s)
     -------------------------------------------------  -------------------
-    SLICE_X8Y42.AQ       Tcko                  0.525   button_cond_gen_0[3].button_cond/M_ctr_q[15]
-                                                       button_cond_gen_0[3].button_cond/M_ctr_q_12
-    SLICE_X9Y40.B1       net (fanout=2)        1.042   button_cond_gen_0[3].button_cond/M_ctr_q[12]
-    SLICE_X9Y40.B        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out3
-    SLICE_X9Y40.A5       net (fanout=3)        0.236   out2_0
-    SLICE_X9Y40.A        Tilo                  0.259   M_last_q_1
-                                                       button_cond_gen_0[3].button_cond/out4
-    SLICE_X17Y40.D3      net (fanout=2)        1.489   M_button_cond_out[3]
-    SLICE_X17Y40.D       Tilo                  0.259   game/M_treg_d<8>_bdd1
-                                                       game/M_treg_d<8>21
-    SLICE_X11Y38.D3      net (fanout=2)        1.390   game/M_treg_d<8>_bdd1
-    SLICE_X11Y38.CLK     Tas                   0.373   M_treg_q_9
-                                                       game/M_treg_d<9>1
-                                                       game/M_treg_q_9
+    SLICE_X8Y34.BQ       Tcko                  0.525   game/M_treg_q[6]
+                                                       game/M_treg_q_6
+    SLICE_X8Y34.D2       net (fanout=4)        0.981   game/M_treg_q[6]
+    SLICE_X8Y34.D        Tilo                  0.254   game/M_treg_q[6]
+                                                       game/GND_6_o_GND_6_o_sub_41_OUT<3>1
+    DSP48_X0Y10.B16      net (fanout=14)       1.286   game/GND_6_o_GND_6_o_sub_41_OUT[3]
+    DSP48_X0Y10.M2       Tdspdo_B_M            3.894   game/Mmult_n0372
+                                                       game/Mmult_n0372
+    SLICE_X7Y40.A4       net (fanout=7)        0.951   game/n0372[2]
+    SLICE_X7Y40.A        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_lut<0>31
+    SLICE_X7Y40.B2       net (fanout=2)        1.004   game/Madd_n0376_Madd_lut<0>3
+    SLICE_X7Y40.B        Tilo                  0.259   game/n0376<4>1
+                                                       game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.A1       net (fanout=7)        0.852   game/Madd_n0376_Madd_cy<0>3
+    SLICE_X9Y40.A        Tilo                  0.259   game/Sh15694
+                                                       game/Madd_n0376_Madd_cy<0>51
+    SLICE_X9Y40.C2       net (fanout=5)        0.551   game/Madd_n0376_Madd_cy<0>4
+    SLICE_X9Y40.C        Tilo                  0.259   game/Sh15694
+                                                       game/Sh15694_SW0
+    SLICE_X9Y41.C4       net (fanout=5)        0.529   game/N7
+    SLICE_X9Y41.C        Tilo                  0.259   game/N53
+                                                       game/Sh15701_SW0
+    SLICE_X9Y41.A2       net (fanout=1)        0.542   game/N43
+    SLICE_X9Y41.A        Tilo                  0.259   game/N53
+                                                       game/Sh15704
+    SLICE_X6Y29.C3       net (fanout=3)        1.423   game/Sh1570
+    SLICE_X6Y29.CMUX     Tilo                  0.403   game/Mmux_M_treg_d<3>112
+                                                       game/Mmux_M_treg_d<3>15_SW0_G
+                                                       game/Mmux_M_treg_d<3>15_SW0
+    SLICE_X9Y31.A6       net (fanout=1)        0.669   game/N47
+    SLICE_X9Y31.CLK      Tas                   0.373   game/M_treg_q[5]
+                                                       game/Mmux_M_treg_d<3>119
+                                                       game/M_treg_q_3
     -------------------------------------------------  ---------------------------
-    Total                                      5.832ns (1.675ns logic, 4.157ns route)
-                                                       (28.7% logic, 71.3% route)
+    Total                                     15.791ns (7.003ns logic, 8.788ns route)
+                                                       (44.3% logic, 55.7% route)
 
 --------------------------------------------------------------------------------
 
@@ -1243,12 +1833,36 @@ Slack: 17.334ns (period - min period limit)
   Location pin: BUFGMUX_X2Y11.I0
   Clock network: clk_BUFGP/IBUFG
 --------------------------------------------------------------------------------
+Slack: 17.751ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 2.249ns (444.642MHz) (Tockper)
+  Physical resource: M_placed_q_222_3/CLK0
+  Logical resource: game/M_placed_q_222_3/CK0
+  Location pin: OLOGIC_X12Y22.CLK0
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 17.751ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 2.249ns (444.642MHz) (Tockper)
+  Physical resource: M_placed_q_222_2/CLK0
+  Logical resource: game/M_placed_q_222_2/CK0
+  Location pin: OLOGIC_X12Y28.CLK0
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 17.751ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 2.249ns (444.642MHz) (Tockper)
+  Physical resource: M_placed_q_222_1/CLK0
+  Logical resource: game/M_placed_q_222_1/CK0
+  Location pin: OLOGIC_X12Y32.CLK0
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
 Slack: 18.601ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 1.399ns (714.796MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
   Logical resource: button_cond_gen_0[2].button_cond/sync/Mshreg_M_pipe_q_1/CLK
-  Location pin: SLICE_X8Y53.CLK
+  Location pin: SLICE_X8Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 18.601ns (period - min period limit)
@@ -1256,7 +1870,7 @@ Slack: 18.601ns (period - min period limit)
   Min period limit: 1.399ns (714.796MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
   Logical resource: button_cond_gen_0[0].button_cond/sync/Mshreg_M_pipe_q_1/CLK
-  Location pin: SLICE_X8Y53.CLK
+  Location pin: SLICE_X8Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 18.601ns (period - min period limit)
@@ -1264,7 +1878,7 @@ Slack: 18.601ns (period - min period limit)
   Min period limit: 1.399ns (714.796MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
   Logical resource: button_cond_gen_0[4].button_cond/sync/Mshreg_M_pipe_q_1/CLK
-  Location pin: SLICE_X8Y53.CLK
+  Location pin: SLICE_X8Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 18.601ns (period - min period limit)
@@ -1272,207 +1886,183 @@ Slack: 18.601ns (period - min period limit)
   Min period limit: 1.399ns (714.796MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
   Logical resource: button_cond_gen_0[3].button_cond/sync/Mshreg_M_pipe_q_1/CLK
-  Location pin: SLICE_X8Y53.CLK
+  Location pin: SLICE_X8Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 Slack: 19.520ns (period - min period limit)
   Period: 20.000ns
   Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/renderer/M_pixel_q[7]/CLK
+  Logical resource: game/renderer/M_pixel_q_4/CK
+  Location pin: SLICE_X12Y15.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/renderer/M_pixel_q[7]/CLK
+  Logical resource: game/renderer/M_pixel_q_5/CK
+  Location pin: SLICE_X12Y15.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/renderer/M_pixel_q[7]/CLK
+  Logical resource: game/renderer/M_pixel_q_6/CK
+  Location pin: SLICE_X12Y15.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/renderer/M_pixel_q[7]/CLK
+  Logical resource: game/renderer/M_pixel_q_7/CK
+  Location pin: SLICE_X12Y15.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/renderer/M_pixel_q[10]/CLK
+  Logical resource: game/renderer/M_pixel_q_8/CK
+  Location pin: SLICE_X12Y16.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/renderer/M_pixel_q[10]/CLK
+  Logical resource: game/renderer/M_pixel_q_9/CK
+  Location pin: SLICE_X12Y16.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/renderer/M_pixel_q[10]/CLK
+  Logical resource: game/renderer/M_pixel_q_10/CK
+  Location pin: SLICE_X12Y16.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/M_treg_q[6]/CLK
+  Logical resource: game/M_treg_q_7/CK
+  Location pin: SLICE_X8Y34.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/M_treg_q[6]/CLK
+  Logical resource: game/M_treg_q_6/CK
+  Location pin: SLICE_X8Y34.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
+  Logical resource: button_cond_gen_0[2].button_cond/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X8Y57.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
+  Logical resource: button_cond_gen_0[0].button_cond/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X8Y57.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
+  Logical resource: button_cond_gen_0[4].button_cond/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X8Y57.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: button_cond_gen_0[3].button_cond/M_sync_out/CLK
+  Logical resource: button_cond_gen_0[3].button_cond/sync/M_pipe_q_1/CK
+  Location pin: SLICE_X8Y57.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/M_state_q_FSM_FFd1/CLK
+  Logical resource: game/M_placed_q_222/CK
+  Location pin: SLICE_X12Y34.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/M_state_q_FSM_FFd1/CLK
+  Logical resource: edge_detector_gen_0[0].edge_detector/M_last_q/CK
+  Location pin: SLICE_X12Y34.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.520ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Physical resource: game/M_state_q_FSM_FFd1/CLK
+  Logical resource: game/M_state_q_FSM_FFd1/CK
+  Location pin: SLICE_X12Y34.CLK
+  Clock network: clk_BUFGP
+--------------------------------------------------------------------------------
+Slack: 19.525ns (period - min period limit)
+  Period: 20.000ns
+  Min period limit: 0.475ns (2105.263MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[3]/CLK
   Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_0/CK
-  Location pin: SLICE_X8Y39.CLK
+  Location pin: SLICE_X10Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
+Slack: 19.525ns (period - min period limit)
   Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Min period limit: 0.475ns (2105.263MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[3]/CLK
   Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_1/CK
-  Location pin: SLICE_X8Y39.CLK
+  Location pin: SLICE_X10Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
+Slack: 19.525ns (period - min period limit)
   Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Min period limit: 0.475ns (2105.263MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[3]/CLK
   Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_2/CK
-  Location pin: SLICE_X8Y39.CLK
+  Location pin: SLICE_X10Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
+Slack: 19.525ns (period - min period limit)
   Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Min period limit: 0.475ns (2105.263MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[3]/CLK
   Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_3/CK
-  Location pin: SLICE_X8Y39.CLK
+  Location pin: SLICE_X10Y57.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
+Slack: 19.525ns (period - min period limit)
   Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Min period limit: 0.475ns (2105.263MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[7]/CLK
   Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_4/CK
-  Location pin: SLICE_X8Y40.CLK
+  Location pin: SLICE_X10Y58.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
+Slack: 19.525ns (period - min period limit)
   Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
+  Min period limit: 0.475ns (2105.263MHz) (Tcp)
   Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[7]/CLK
   Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_5/CK
-  Location pin: SLICE_X8Y40.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[7]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_6/CK
-  Location pin: SLICE_X8Y40.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[7]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_7/CK
-  Location pin: SLICE_X8Y40.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[11]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_8/CK
-  Location pin: SLICE_X8Y41.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[11]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_9/CK
-  Location pin: SLICE_X8Y41.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[11]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_10/CK
-  Location pin: SLICE_X8Y41.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[11]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_11/CK
-  Location pin: SLICE_X8Y41.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[15]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_12/CK
-  Location pin: SLICE_X8Y42.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[15]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_13/CK
-  Location pin: SLICE_X8Y42.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[15]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_14/CK
-  Location pin: SLICE_X8Y42.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[15]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_15/CK
-  Location pin: SLICE_X8Y42.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[19]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_16/CK
-  Location pin: SLICE_X8Y43.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[19]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_17/CK
-  Location pin: SLICE_X8Y43.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[19]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_18/CK
-  Location pin: SLICE_X8Y43.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[3].button_cond/M_ctr_q[19]/CLK
-  Logical resource: button_cond_gen_0[3].button_cond/M_ctr_q_19/CK
-  Location pin: SLICE_X8Y43.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[2].button_cond/M_ctr_q[3]/CLK
-  Logical resource: button_cond_gen_0[2].button_cond/M_ctr_q_0/CK
-  Location pin: SLICE_X16Y39.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[2].button_cond/M_ctr_q[3]/CLK
-  Logical resource: button_cond_gen_0[2].button_cond/M_ctr_q_1/CK
-  Location pin: SLICE_X16Y39.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[2].button_cond/M_ctr_q[3]/CLK
-  Logical resource: button_cond_gen_0[2].button_cond/M_ctr_q_2/CK
-  Location pin: SLICE_X16Y39.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[2].button_cond/M_ctr_q[3]/CLK
-  Logical resource: button_cond_gen_0[2].button_cond/M_ctr_q_3/CK
-  Location pin: SLICE_X16Y39.CLK
-  Clock network: clk_BUFGP
---------------------------------------------------------------------------------
-Slack: 19.520ns (period - min period limit)
-  Period: 20.000ns
-  Min period limit: 0.480ns (2083.333MHz) (Tcp)
-  Physical resource: button_cond_gen_0[2].button_cond/M_ctr_q[7]/CLK
-  Logical resource: button_cond_gen_0[2].button_cond/M_ctr_q_4/CK
-  Location pin: SLICE_X16Y40.CLK
+  Location pin: SLICE_X10Y58.CLK
   Clock network: clk_BUFGP
 --------------------------------------------------------------------------------
 
@@ -1489,7 +2079,7 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    6.961|         |         |         |
+clk            |   16.103|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
@@ -1498,23 +2088,23 @@ Timing summary:
 
 Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
 
-Constraints cover 4111 paths, 0 nets, and 515 connections
+Constraints cover 82017 paths, 0 nets, and 889 connections
 
 Design statistics:
-   Minimum period:   6.961ns{1}   (Maximum frequency: 143.658MHz)
+   Minimum period:  16.103ns{1}   (Maximum frequency:  62.100MHz)
 
 
 ------------------------------------Footnotes-----------------------------------
 1)  The minimum period statistic assumes all single cycle delays.
 
-Analysis completed Thu Dec  7 14:07:01 2017 
+Analysis completed Thu Dec  7 14:58:11 2017 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 398 MB
+Peak Memory Usage: 400 MB
 
 
 

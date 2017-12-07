@@ -16,7 +16,9 @@ module mojo_top (
     output blue,
     output hsync,
     output vsync,
-    input io_button[5]
+    input io_button[5],
+    input ct_button[4],
+    output ct_led[7]
   ) {
   
   sig rst;                  // reset signal
@@ -28,6 +30,10 @@ module mojo_top (
     
     button_conditioner button_cond[5];
     edge_detector edge_detector[5](#RISE(1), #FALL(0));
+    
+    button_conditioner controller_cond[4];
+    edge_detector ct_edge[4](#RISE(1), #FALL(0));
+    
     game game(.rst(rst));
   }
   
@@ -42,11 +48,17 @@ module mojo_top (
     
     button_cond.in = io_button;
     edge_detector.in = button_cond.out;
+    
+    controller_cond.in = ct_button;
+    ct_edge.in = controller_cond.out;
+    
     game.buttons = edge_detector.out;
+    //game.buttons[3:0] = ct_edge.out;
     red = game.red;
     green = game.green;
     blue = game.blue;
     hsync = game.hsync;
     vsync = game.vsync;
+    ct_led = game.ct_led;
   }
 }
