@@ -21,7 +21,8 @@ module mojo_top_0 (
     output reg green,
     output reg blue,
     output reg hsync,
-    output reg vsync
+    output reg vsync,
+    input [4:0] io_button
   );
   
   
@@ -40,9 +41,11 @@ module mojo_top_0 (
   wire [1-1:0] M_game_blue;
   wire [1-1:0] M_game_hsync;
   wire [1-1:0] M_game_vsync;
+  reg [5-1:0] M_game_buttons;
   game_2 game (
     .clk(clk),
     .rst(rst),
+    .buttons(M_game_buttons),
     .red(M_game_red),
     .green(M_game_green),
     .blue(M_game_blue),
@@ -57,6 +60,7 @@ module mojo_top_0 (
     spi_miso = 1'bz;
     spi_channel = 4'bzzzz;
     avr_rx = 1'bz;
+    M_game_buttons = io_button;
     red = M_game_red;
     green = M_game_green;
     blue = M_game_blue;

@@ -15,7 +15,8 @@ module mojo_top (
     output green,
     output blue,
     output hsync,
-    output vsync
+    output vsync,
+    input io_button[5]
   ) {
   
   sig rst;                  // reset signal
@@ -36,6 +37,7 @@ module mojo_top (
     spi_channel = bzzzz;    // not using flags
     avr_rx = bz;            // not using serial port
     
+    game.buttons = io_button;
     red = game.red;
     green = game.green;
     blue = game.blue;

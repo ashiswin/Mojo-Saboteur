@@ -5,21 +5,31 @@ module game (
     output green,
     output blue,
     output hsync,
-    output vsync
+    output vsync,
+    input buttons[5]
   ) {
 
   .clk(clk) {
     dff tileX[4];
     dff tileY[3];
     dff blink[28];
+    dff oneSecond[28];
     dff placed[5][9][5];
     
     dff tiles[8][3][3];
     
     renderer renderer;
+    
+    dff moves[5];
+    fsm state(#INIT(GAME_START)) = {GAME_START, INPUT, UP, DOWN, HALT};
   }
   
+  sig player[4];
+  sig gold[3];
+  sig incState;
+  
   always {
+    // Initialization step
     tiles.d[0] = {3b000, 3b000, 3b000};
     tiles.d[1] = {3b010, 3b111, 3b010};
     tiles.d[2] = {3b010, 3b010, 3b010};
@@ -29,6 +39,7 @@ module game (
     tiles.d[6] = {3b000, 3b110, 3b010};
     tiles.d[7] = {3b000, 3b011, 3b010};
     
+    placed.d[tileX.q][tileY.q] = 5b00001;
     placed.d[tileY.q][tileX.q][3] = blink.q[25];
     placed.d[tileY.q][tileX.q][0] = 1;
     
@@ -42,5 +53,40 @@ module game (
     blue = renderer.blue;
     hsync = renderer.hsync;
     vsync = renderer.vsync;
+    
+    incState = 0;
+    oneSecond.d = oneSecond.q + 1;
+    if(oneSecond.q == 50000000) {
+      incState = 1;
+      oneSecond.d = 0;
+    }
+    
+    case(state.q) {
+      state.GAME_START:
+        moves.d = 30;
+        placed.d[2][0] = 5b00100; // Set starting cross
+        placed.d[0][8] = 5b00110; // Set top gold
+        placed.d[2][8] = 5b00110; // Set middle gold
+        placed.d[4][8] = 5b00110; // Set end gold
+        
+        state.d = state.INPUT;
+        
+      state.INPUT:
+        if(buttons[4]) {
+          state.d = state.DOWN;
+        }
+        else {
+          state.d = state.INPUT;
+        }
+      
+      state.DOWN:
+        tileY.d = tileY.q - 1;
+        if(incState == 1) {
+          state.d = state.INPUT;
+        }
+        
+      state.HALT:
+        state.d = state.HALT;
+    }
   }
 }

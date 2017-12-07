@@ -11,7 +11,8 @@ module game_2 (
     output reg green,
     output reg blue,
     output reg hsync,
-    output reg vsync
+    output reg vsync,
+    input [4:0] buttons
   );
   
   
@@ -19,6 +20,7 @@ module game_2 (
   reg [3:0] M_tileX_d, M_tileX_q = 1'h0;
   reg [2:0] M_tileY_d, M_tileY_q = 1'h0;
   reg [27:0] M_blink_d, M_blink_q = 1'h0;
+  reg [27:0] M_oneSecond_d, M_oneSecond_q = 1'h0;
   reg [224:0] M_placed_d, M_placed_q = 1'h0;
   reg [71:0] M_tiles_d, M_tiles_q = 1'h0;
   wire [1-1:0] M_renderer_red;
@@ -38,11 +40,29 @@ module game_2 (
     .hsync(M_renderer_hsync),
     .vsync(M_renderer_vsync)
   );
+  reg [4:0] M_moves_d, M_moves_q = 1'h0;
+  localparam GAME_START_state = 3'd0;
+  localparam INPUT_state = 3'd1;
+  localparam UP_state = 3'd2;
+  localparam DOWN_state = 3'd3;
+  localparam HALT_state = 3'd4;
+  
+  reg [2:0] M_state_d, M_state_q = GAME_START_state;
+  
+  reg [3:0] player;
+  
+  reg [2:0] gold;
+  
+  reg incState;
   
   always @* begin
+    M_state_d = M_state_q;
+    M_tileY_d = M_tileY_q;
     M_tiles_d = M_tiles_q;
     M_blink_d = M_blink_q;
+    M_moves_d = M_moves_q;
     M_placed_d = M_placed_q;
+    M_oneSecond_d = M_oneSecond_q;
     
     M_tiles_d[0+8-:9] = 9'h000;
     M_tiles_d[9+8-:9] = 9'h0ba;
@@ -52,6 +72,7 @@ module game_2 (
     M_tiles_d[45+8-:9] = 9'h0b0;
     M_tiles_d[54+8-:9] = 9'h032;
     M_tiles_d[63+8-:9] = 9'h01a;
+    M_placed_d[(M_tileX_q)*45+(M_tileY_q)*5+4-:5] = 5'h01;
     M_placed_d[(M_tileY_q)*45+(M_tileX_q)*5+3+0-:1] = M_blink_q[25+0-:1];
     M_placed_d[(M_tileY_q)*45+(M_tileX_q)*5+0+0-:1] = 1'h1;
     M_blink_d = M_blink_q + 1'h1;
@@ -62,14 +83,50 @@ module game_2 (
     blue = M_renderer_blue;
     hsync = M_renderer_hsync;
     vsync = M_renderer_vsync;
+    incState = 1'h0;
+    M_oneSecond_d = M_oneSecond_q + 1'h1;
+    if (M_oneSecond_q == 26'h2faf080) begin
+      incState = 1'h1;
+      M_oneSecond_d = 1'h0;
+    end
+    
+    case (M_state_q)
+      GAME_START_state: begin
+        M_moves_d = 5'h1e;
+        M_placed_d[90+0+4-:5] = 5'h04;
+        M_placed_d[0+40+4-:5] = 5'h06;
+        M_placed_d[90+40+4-:5] = 5'h06;
+        M_placed_d[180+40+4-:5] = 5'h06;
+        M_state_d = INPUT_state;
+      end
+      INPUT_state: begin
+        if (buttons[4+0-:1]) begin
+          M_state_d = DOWN_state;
+        end else begin
+          M_state_d = INPUT_state;
+        end
+      end
+      DOWN_state: begin
+        M_tileY_d = M_tileY_q - 1'h1;
+        if (incState == 1'h1) begin
+          M_state_d = INPUT_state;
+        end
+      end
+      HALT_state: begin
+        M_state_d = HALT_state;
+      end
+    endcase
   end
   
   always @(posedge clk) begin
     M_tileX_q <= M_tileX_d;
     M_tileY_q <= M_tileY_d;
     M_blink_q <= M_blink_d;
+    M_oneSecond_q <= M_oneSecond_d;
     M_placed_q <= M_placed_d;
     M_tiles_q <= M_tiles_d;
+    M_moves_q <= M_moves_d;
+    M_state_q <= M_state_d;
   end
   
 endmodule
