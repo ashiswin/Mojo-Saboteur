@@ -13,10 +13,27 @@ module game_6 (
     output reg hsync,
     output reg vsync,
     input [4:0] buttons,
-    output reg [6:0] ct_led
+    output reg [6:0] ct_led,
+    output reg [3:0] players,
+    output reg [2:0] goldLed
   );
   
   
+  
+  wire [8-1:0] M_alu_r_op1;
+  wire [8-1:0] M_alu_r_op2;
+  wire [8-1:0] M_alu_out;
+  reg [6-1:0] M_alu_alufn;
+  reg [8-1:0] M_alu_op1;
+  reg [8-1:0] M_alu_op2;
+  alu_9 alu (
+    .alufn(M_alu_alufn),
+    .op1(M_alu_op1),
+    .op2(M_alu_op2),
+    .r_op1(M_alu_r_op1),
+    .r_op2(M_alu_r_op2),
+    .out(M_alu_out)
+  );
   
   reg [10:0] M_treg_d, M_treg_q = 1'h0;
   reg [27:0] M_blink_d, M_blink_q = 1'h0;
@@ -32,7 +49,7 @@ module game_6 (
   reg [72-1:0] M_renderer_tiles;
   reg [11-1:0] M_renderer_treg;
   reg [1-1:0] M_renderer_blink;
-  renderer_9 renderer (
+  renderer_10 renderer (
     .clk(clk),
     .placed(M_renderer_placed),
     .tiles(M_renderer_tiles),
@@ -44,32 +61,54 @@ module game_6 (
     .hsync(M_renderer_hsync),
     .vsync(M_renderer_vsync)
   );
+  wire [32-1:0] M_random_num;
+  reg [1-1:0] M_random_next;
+  reg [32-1:0] M_random_seed;
+  pn_gen_11 random (
+    .clk(clk),
+    .rst(rst),
+    .next(M_random_next),
+    .seed(M_random_seed),
+    .num(M_random_num)
+  );
   reg [4:0] M_moves_d, M_moves_q = 1'h0;
-  localparam GAME_START_state = 3'd0;
-  localparam PLAYER_1_state = 3'd1;
-  localparam PLAYER_2_state = 3'd2;
-  localparam PLAYER_3_state = 3'd3;
-  localparam PLAYER_4_state = 3'd4;
-  localparam INPUT_state = 3'd5;
-  localparam CHECK_VALID_state = 3'd6;
-  localparam HALT_state = 3'd7;
+  reg [2:0] M_gold_d, M_gold_q = 1'h0;
+  reg [3:0] M_player_d, M_player_q = 1'h0;
+  reg [31:0] M_goldCount_d, M_goldCount_q = 1'h0;
+  reg [31:0] M_playerCount_d, M_playerCount_q = 1'h0;
+  reg [31:0] M_count_d, M_count_q = 1'h0;
+  localparam GAME_START_state = 4'd0;
+  localparam GENERATE_PLAYER_state = 4'd1;
+  localparam GENERATE_GOLD_state = 4'd2;
+  localparam INPUT_state = 4'd3;
+  localparam CHECK_VALID_state = 4'd4;
+  localparam PLACE_state = 4'd5;
+  localparam CHECK_END_state = 4'd6;
+  localparam END_MINER_state = 4'd7;
+  localparam END_SABOTEUR_state = 4'd8;
+  localparam HALT_state = 4'd9;
   
-  reg [2:0] M_state_d, M_state_q = GAME_START_state;
+  reg [3:0] M_state_d, M_state_q = GAME_START_state;
+  localparam PLAYER_1_playerState = 2'd0;
+  localparam PLAYER_2_playerState = 2'd1;
+  localparam PLAYER_3_playerState = 2'd2;
+  localparam PLAYER_4_playerState = 2'd3;
   
-  reg [3:0] player;
-  
-  reg [2:0] gold;
-  
-  reg incState;
+  reg [1:0] M_playerState_d, M_playerState_q = PLAYER_1_playerState;
   
   always @* begin
     M_state_d = M_state_q;
+    M_gold_d = M_gold_q;
     M_tiles_d = M_tiles_q;
     M_placed_d = M_placed_q;
     M_treg_d = M_treg_q;
     M_moves_d = M_moves_q;
+    M_playerCount_d = M_playerCount_q;
+    M_count_d = M_count_q;
+    M_goldCount_d = M_goldCount_q;
     M_tileValidity_d = M_tileValidity_q;
     M_blink_d = M_blink_q;
+    M_player_d = M_player_q;
     
     M_tiles_d[0+8-:9] = 9'h000;
     M_tiles_d[9+8-:9] = 9'h0ba;
@@ -84,10 +123,10 @@ module game_6 (
     M_tileValidity_d[8+3-:4] = 4'ha;
     M_tileValidity_d[12+3-:4] = 4'h5;
     M_tileValidity_d[16+3-:4] = 4'h6;
-    M_tileValidity_d[20+3-:4] = 4'hc;
+    M_tileValidity_d[20+3-:4] = 4'h3;
     M_tileValidity_d[24+3-:4] = 4'h9;
-    M_tileValidity_d[28+3-:4] = 4'h3;
-    M_treg_d[1+0-:1] = 1'h1;
+    M_tileValidity_d[28+3-:4] = 4'hc;
+    M_treg_d[0+2-:3] = 3'h1;
     M_blink_d = M_blink_q + 1'h1;
     M_renderer_placed = M_placed_q;
     M_renderer_tiles = M_tiles_q;
@@ -98,12 +137,23 @@ module game_6 (
     blue = M_renderer_blue;
     hsync = M_renderer_hsync;
     vsync = M_renderer_vsync;
+    M_random_next = 1'h1;
+    M_random_seed = 1'h0;
     ct_led = 7'h00;
     ct_led[0+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+0+1+0-:1];
     ct_led[1+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+3+0+0-:1];
     ct_led[2+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+3+1+0-:1];
     ct_led[3+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+3+2+0-:1];
     ct_led[4+0-:1] = M_tiles_q[(M_treg_q[0+2-:3])*9+6+1+0-:1];
+    M_alu_alufn = 1'h0;
+    M_alu_op1 = 1'h0;
+    M_alu_op2 = 1'h0;
+    goldLed = M_gold_q;
+    players = M_player_q;
+    M_gold_d = 3'h4;
+    M_player_d = 4'h8;
+    ct_led[5+0-:1] = M_player_q[3+0-:1];
+    ct_led[6+0-:1] = ~M_player_q[3+0-:1];
     
     case (M_state_q)
       GAME_START_state: begin
@@ -112,26 +162,52 @@ module game_6 (
         M_placed_d[0+40+4-:5] = 5'h06;
         M_placed_d[90+40+4-:5] = 5'h06;
         M_placed_d[180+40+4-:5] = 5'h06;
-        M_state_d = INPUT_state;
+        M_state_d = GENERATE_GOLD_state;
+        M_goldCount_d = M_random_num;
+        M_count_d = 1'h0;
+      end
+      GENERATE_GOLD_state: begin
+        M_gold_d[2+0-:1] = M_gold_q[1+0-:1];
+        M_gold_d[1+0-:1] = M_gold_q[0+0-:1];
+        M_gold_d[0+0-:1] = M_gold_q[2+0-:1];
+        M_count_d = M_count_q + 1'h1;
+        if (M_count_q == M_goldCount_q) begin
+          M_state_d = GENERATE_PLAYER_state;
+          M_count_d = 1'h0;
+          M_playerCount_d = M_random_num;
+        end
+      end
+      GENERATE_PLAYER_state: begin
+        M_alu_alufn = 6'h24;
+        M_alu_op1 = M_player_q;
+        M_player_d = M_alu_out;
+        M_count_d = M_count_q + 1'h1;
+        if (M_count_q == 5'h1e) begin
+          M_state_d = INPUT_state;
+        end
       end
       INPUT_state: begin
         if (buttons[0+0-:1]) begin
           M_treg_d[4+2-:3] = M_treg_q[4+2-:3] - 1'h1;
           M_state_d = CHECK_VALID_state;
         end else begin
-          if (buttons[2+0-:1]) begin
-            M_treg_d[4+2-:3] = M_treg_q[4+2-:3] + 1'h1;
-            M_state_d = CHECK_VALID_state;
+          if (buttons[1+0-:1]) begin
+            M_state_d = PLACE_state;
           end else begin
-            if (buttons[3+0-:1]) begin
-              M_treg_d[7+3-:4] = M_treg_q[7+3-:4] - 1'h1;
+            if (buttons[2+0-:1]) begin
+              M_treg_d[4+2-:3] = M_treg_q[4+2-:3] + 1'h1;
               M_state_d = CHECK_VALID_state;
             end else begin
-              if (buttons[4+0-:1]) begin
-                M_treg_d[7+3-:4] = M_treg_q[7+3-:4] + 1'h1;
+              if (buttons[3+0-:1]) begin
+                M_treg_d[7+3-:4] = M_treg_q[7+3-:4] - 1'h1;
                 M_state_d = CHECK_VALID_state;
               end else begin
-                M_state_d = INPUT_state;
+                if (buttons[4+0-:1]) begin
+                  M_treg_d[7+3-:4] = M_treg_q[7+3-:4] + 1'h1;
+                  M_state_d = CHECK_VALID_state;
+                end else begin
+                  M_state_d = CHECK_VALID_state;
+                end
               end
             end
           end
@@ -141,13 +217,68 @@ module game_6 (
         if (M_placed_q[(M_treg_q[4+2-:3])*45+(M_treg_q[7+3-:4])*5+2+2-:3] != 1'h0 || M_placed_q[(M_treg_q[4+2-:3])*45+(M_treg_q[7+3-:4])*5+0+1-:2] == 2'h2) begin
           M_treg_d[3+0-:1] = 1'h0;
         end else begin
-          if (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3] - 1'h1)*45+(M_treg_q[7+3-:4])*5+2+2-:3])*4+3+0-:1] == 1'h1 && M_tileValidity_q[(M_treg_q[0+2-:3])*4+1+0-:1] == 1'h1) begin
+          if (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3] - 1'h1)*45+(M_treg_q[7+3-:4])*5+2+2-:3])*4+3+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+1+0-:1] == 1'h1) begin
             M_treg_d[3+0-:1] = 1'h1;
           end else begin
-            M_treg_d[3+0-:1] = 1'h0;
+            if (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3] + 1'h1)*45+(M_treg_q[7+3-:4])*5+2+2-:3])*4+1+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+3+0-:1] == 1'h1) begin
+              M_treg_d[3+0-:1] = 1'h1;
+            end else begin
+              if (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3])*45+(M_treg_q[7+3-:4] - 1'h1)*5+2+2-:3])*4+0+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+2+0-:1] == 1'h1) begin
+                M_treg_d[3+0-:1] = 1'h1;
+              end else begin
+                if (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3])*45+(M_treg_q[7+3-:4] + 1'h1)*5+2+2-:3])*4+2+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+0+0-:1] == 1'h1) begin
+                  M_treg_d[3+0-:1] = 1'h1;
+                end else begin
+                  M_treg_d[3+0-:1] = 1'h0;
+                end
+              end
+            end
           end
         end
         M_state_d = INPUT_state;
+      end
+      PLACE_state: begin
+        if (M_treg_q[3+0-:1] == 1'h0) begin
+          M_state_d = INPUT_state;
+        end else begin
+          M_placed_d[(M_treg_q[4+2-:3])*45+(M_treg_q[7+3-:4])*5+2+2-:3] = M_treg_q[0+2-:3];
+          M_treg_d[0+2-:3] = 3'h2;
+          M_treg_d[3+0-:1] = 1'h0;
+          M_moves_d = M_moves_q - 1'h1;
+          M_state_d = CHECK_END_state;
+        end
+      end
+      CHECK_END_state: begin
+        if (M_placed_q[0+35+2+2-:3] != 1'h0 || M_placed_q[45+40+2+2-:3] != 1'h0) begin
+          M_placed_d[0+40+0+1-:2] = 2'h0;
+          if (M_gold_q[0+0-:1] == 1'h1) begin
+            M_state_d = END_MINER_state;
+          end
+        end
+        if (M_placed_q[90+35+2+2-:3] != 1'h0 || M_placed_q[135+40+2+2-:3] != 1'h0 || M_placed_q[45+40+2+2-:3] != 1'h0) begin
+          M_placed_d[90+40+0+1-:2] = 2'h0;
+          if (M_gold_q[1+0-:1] == 1'h1) begin
+            M_state_d = END_MINER_state;
+          end
+        end
+        if (M_placed_q[180+35+2+2-:3] != 1'h0 || M_placed_q[135+40+2+2-:3] != 1'h0) begin
+          M_placed_d[180+40+0+1-:2] = 2'h0;
+          if (M_gold_q[2+0-:1] == 1'h1) begin
+            M_state_d = END_MINER_state;
+          end
+        end
+        if (M_moves_q == 1'h0) begin
+          M_state_d = END_SABOTEUR_state;
+        end else begin
+          M_state_d = INPUT_state;
+        end
+      end
+      END_MINER_state: begin
+        M_placed_d[90+0+0+1-:2] = 2'h3;
+        M_state_d = HALT_state;
+      end
+      END_SABOTEUR_state: begin
+        M_state_d = HALT_state;
       end
       HALT_state: begin
         M_state_d = HALT_state;
@@ -162,7 +293,13 @@ module game_6 (
     M_tiles_q <= M_tiles_d;
     M_tileValidity_q <= M_tileValidity_d;
     M_moves_q <= M_moves_d;
+    M_gold_q <= M_gold_d;
+    M_player_q <= M_player_d;
+    M_goldCount_q <= M_goldCount_d;
+    M_playerCount_q <= M_playerCount_d;
+    M_count_q <= M_count_d;
     M_state_q <= M_state_d;
+    M_playerState_q <= M_playerState_d;
   end
   
 endmodule

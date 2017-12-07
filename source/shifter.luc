@@ -16,6 +16,9 @@ module shifter (
         out = op1 >> op2;
       Inst.SRA:
         out = $signed(op1) >>> op2;
+      Inst.ROT:
+        out[7:1] = op1[6:0];
+        out[0] = op1[7];
     }
   }
 }

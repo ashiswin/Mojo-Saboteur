@@ -18,6 +18,7 @@ global Inst {
   const SHL   = 6b100000; // Works Inputs: op1, op2, alufn; Outputs: op1 >> op2
   const SHR   = 6b100001; // Works Inputs: op1, op2, alufn; Outputs: op1 << op2
   const SRA   = 6b100011; // Works Inputs: op1, op2, alufn; Outputs: op1 << op2 with sign extension
+  const ROT   = 6b100100; // Works Inputs: op1; Outputs op1 rotated once to the left
   
   // Comparator instructions
   const CMPEQ = 6b110011; // Works Inputs: op1, op2, alufn; Outputs: op1 == op2

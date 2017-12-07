@@ -5,7 +5,7 @@
     <File Path="$PSRCDIR/constrs_1/imports/arroyo/Documents/Mojo-Saboteur/constraint/buttons.ucf">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../../constraint/buttons.ucf"/>
-        <Attr Name="ImportTime" Val="1512628196"/>
+        <Attr Name="ImportTime" Val="1512654530"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
       </FileInfo>
@@ -13,7 +13,7 @@
     <File Path="$PSRCDIR/constrs_1/imports/arroyo/Documents/Mojo-Saboteur/constraint/controller.ucf">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../../constraint/controller.ucf"/>
-        <Attr Name="ImportTime" Val="1512628502"/>
+        <Attr Name="ImportTime" Val="1512658492"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
       </FileInfo>

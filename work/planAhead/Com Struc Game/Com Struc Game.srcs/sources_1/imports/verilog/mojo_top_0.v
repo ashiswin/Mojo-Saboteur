@@ -23,7 +23,7 @@ module mojo_top_0 (
     output reg hsync,
     output reg vsync,
     input [4:0] io_button,
-    input [3:0] ct_button,
+    input [5:0] ct_button,
     output reg [6:0] ct_led
   );
   
@@ -64,12 +64,12 @@ module mojo_top_0 (
     );
   end
   endgenerate
-  wire [(3'h4+0)-1:0] M_controller_cond_out;
-  reg [(3'h4+0)-1:0] M_controller_cond_in;
+  wire [(3'h6+0)-1:0] M_controller_cond_out;
+  reg [(3'h6+0)-1:0] M_controller_cond_in;
   
   genvar GEN_controller_cond0;
   generate
-  for (GEN_controller_cond0=0;GEN_controller_cond0<3'h4;GEN_controller_cond0=GEN_controller_cond0+1) begin: controller_cond_gen_0
+  for (GEN_controller_cond0=0;GEN_controller_cond0<3'h6;GEN_controller_cond0=GEN_controller_cond0+1) begin: controller_cond_gen_0
     button_conditioner_2 controller_cond (
       .clk(clk),
       .in(M_controller_cond_in[GEN_controller_cond0*(1)+(1)-1-:(1)]),
@@ -77,12 +77,12 @@ module mojo_top_0 (
     );
   end
   endgenerate
-  wire [(3'h4+0)-1:0] M_ct_edge_out;
-  reg [(3'h4+0)-1:0] M_ct_edge_in;
+  wire [(3'h6+0)-1:0] M_ct_edge_out;
+  reg [(3'h6+0)-1:0] M_ct_edge_in;
   
   genvar GEN_ct_edge0;
   generate
-  for (GEN_ct_edge0=0;GEN_ct_edge0<3'h4;GEN_ct_edge0=GEN_ct_edge0+1) begin: ct_edge_gen_0
+  for (GEN_ct_edge0=0;GEN_ct_edge0<3'h6;GEN_ct_edge0=GEN_ct_edge0+1) begin: ct_edge_gen_0
     edge_detector_3 ct_edge (
       .clk(clk),
       .in(M_ct_edge_in[GEN_ct_edge0*(1)+(1)-1-:(1)]),
@@ -96,6 +96,8 @@ module mojo_top_0 (
   wire [1-1:0] M_game_hsync;
   wire [1-1:0] M_game_vsync;
   wire [7-1:0] M_game_ct_led;
+  wire [4-1:0] M_game_players;
+  wire [3-1:0] M_game_goldLed;
   reg [5-1:0] M_game_buttons;
   game_6 game (
     .clk(clk),
@@ -106,7 +108,9 @@ module mojo_top_0 (
     .blue(M_game_blue),
     .hsync(M_game_hsync),
     .vsync(M_game_vsync),
-    .ct_led(M_game_ct_led)
+    .ct_led(M_game_ct_led),
+    .players(M_game_players),
+    .goldLed(M_game_goldLed)
   );
   
   always @* begin
@@ -121,11 +125,18 @@ module mojo_top_0 (
     M_controller_cond_in = ct_button;
     M_ct_edge_in = M_controller_cond_out;
     M_game_buttons = M_edge_detector_out;
+    M_game_buttons[0+0-:1] = M_ct_edge_out[0+0-:1];
+    M_game_buttons[3+0-:1] = M_ct_edge_out[1+0-:1];
+    M_game_buttons[2+0-:1] = M_ct_edge_out[2+0-:1];
+    M_game_buttons[4+0-:1] = M_ct_edge_out[3+0-:1];
+    M_game_buttons[1+0-:1] = M_ct_edge_out[4+0-:1];
     red = M_game_red;
     green = M_game_green;
     blue = M_game_blue;
     hsync = M_game_hsync;
     vsync = M_game_vsync;
     ct_led = M_game_ct_led;
+    led[5+2-:3] = M_game_goldLed;
+    led[0+3-:4] = M_game_players;
   end
 endmodule

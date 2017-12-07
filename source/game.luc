@@ -7,9 +7,12 @@ module game (
     output hsync,
     output vsync,
     input buttons[5],
-    output ct_led[7]
+    output ct_led[7],
+    output players[4],
+    output goldLed[3]
   ) {
 
+  alu alu;
   .clk(clk) {
     dff treg[11];
     dff blink[28];
@@ -19,17 +22,22 @@ module game (
     dff tileValidity[8][4];
     
     renderer renderer;
-    //pn_gen random(.rst(rst));
+    pn_gen random(.rst(rst));
     
     dff moves[5];
-    fsm state(#INIT(GAME_START)) = {GAME_START, PLAYER_1, PLAYER_2, PLAYER_3, PLAYER_4,
-                                    INPUT, CHECK_VALID,
+    dff gold[3];
+    dff player[4];
+      
+    dff goldCount[32];
+    dff playerCount[32];
+    
+    dff count[32];
+    fsm state(#INIT(GAME_START)) = {GAME_START, GENERATE_PLAYER, GENERATE_GOLD,
+                                    INPUT, CHECK_VALID, PLACE, CHECK_END,
+                                    END_MINER, END_SABOTEUR,
                                     HALT};
+    fsm playerState(#INIT(PLAYER_1)) = { PLAYER_1, PLAYER_2, PLAYER_3, PLAYER_4 };
   }
-  
-  sig player[4];
-  sig gold[3];
-  sig incState;
   
   always {
     // Initialization step
@@ -47,11 +55,11 @@ module game (
     tileValidity.d[2] = 4b1010;
     tileValidity.d[3] = 4b0101;
     tileValidity.d[4] = 4b0110;
-    tileValidity.d[5] = 4b1100;
+    tileValidity.d[5] = 4b0011;
     tileValidity.d[6] = 4b1001;
-    tileValidity.d[7] = 4b0011;
+    tileValidity.d[7] = 4b1100;
     
-    treg.d[1] = 1;
+    treg.d[2:0] = 3b001;
     blink.d = blink.q + 1;
     
     renderer.placed = placed.q;
@@ -65,12 +73,29 @@ module game (
     hsync = renderer.hsync;
     vsync = renderer.vsync;
     
+    random.next = 1;                   // keep generating numbers
+    random.seed = 0;                   // don't really care about the seed
+    
     ct_led = 7h00;
     ct_led[0] = tiles.q[treg.q[2:0]][0][1];
     ct_led[1] = tiles.q[treg.q[2:0]][1][0];
     ct_led[2] = tiles.q[treg.q[2:0]][1][1];
     ct_led[3] = tiles.q[treg.q[2:0]][1][2];
     ct_led[4] = tiles.q[treg.q[2:0]][2][1];
+    
+    alu.alufn = 0;
+    alu.op1 = 0;
+    alu.op2 = 0;
+    // Display player & gold
+    
+    goldLed = gold.q;
+    players = player.q;
+    
+    gold.d = 3b100;
+    player.d = 4b1000;
+    
+    ct_led[5] = player.q[3];
+    ct_led[6] = ~player.q[3];
     
     case(state.q) {
       state.GAME_START:
@@ -80,12 +105,43 @@ module game (
         placed.d[2][8] = 5b00110; // Set middle gold
         placed.d[4][8] = 5b00110; // Set end gold
         
-        state.d = state.INPUT;
+        state.d = state.GENERATE_GOLD;
+        goldCount.d = random.num;
+        count.d = 0;
         
+      state.GENERATE_GOLD:
+        gold.d[2] = gold.q[1];
+        gold.d[1] = gold.q[0];
+        gold.d[0] = gold.q[2];
+        
+        count.d = count.q + 1;
+        
+        if(count.q == goldCount.q) {
+          state.d = state.GENERATE_PLAYER;
+          count.d = 0;
+          playerCount.d = random.num;
+        }
+        
+      state.GENERATE_PLAYER:
+        alu.alufn = Inst.ROT;
+        alu.op1 = player.q;
+        
+        player.d = alu.out;
+        
+        count.d = count.q + 1;
+        
+        if(count.q == 30) {
+          state.d = state.INPUT;
+        }
+      
       state.INPUT:
+        // Handle button inputs
         if(buttons[0]) {
           treg.d[6:4] = treg.q[6:4] - 1;
           state.d = state.CHECK_VALID;
+        }
+        else if(buttons[1]) {
+          state.d = state.PLACE;
         }
         else if(buttons[2]) {
           treg.d[6:4] = treg.q[6:4] + 1;
@@ -100,20 +156,77 @@ module game (
           state.d = state.CHECK_VALID;
         }
         else {
-          state.d = state.INPUT;
+          state.d = state.CHECK_VALID; // Wait for inputs while there are none
         }
       
       state.CHECK_VALID:
         if(placed.q[treg.q[6:4]][treg.q[10:7]][4:2] != 0 || placed.q[treg.q[6:4]][treg.q[10:7]][1:0] == 2) {
           treg.d[3] = 0;
         }
-        else if(tileValidity.q[placed.q[treg.q[6:4] - 1][treg.q[10:7]][4:2]][3] == 1 && tileValidity.q[treg.q[2:0]][1] == 1) {
+        else if(tileValidity.q[placed.q[treg.q[6:4] - 1][treg.q[10:7]][4:2]][3] & tileValidity.q[treg.q[2:0]][1] == 1) {
+          treg.d[3] = 1;
+        }
+        else if(tileValidity.q[placed.q[treg.q[6:4] + 1][treg.q[10:7]][4:2]][1] & tileValidity.q[treg.q[2:0]][3] == 1) {
+          treg.d[3] = 1;
+        }
+        else if(tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] - 1][4:2]][0] & tileValidity.q[treg.q[2:0]][2] == 1) {
+          treg.d[3] = 1;
+        }
+        else if(tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] + 1][4:2]][2] & tileValidity.q[treg.q[2:0]][0] == 1) {
           treg.d[3] = 1;
         }
         else {
           treg.d[3] = 0;
         }
         state.d = state.INPUT;
+      
+      state.PLACE:
+        if(treg.q[3] == 0) {
+          state.d = state.INPUT;
+        }
+        else {
+          placed.d[treg.q[6:4]][treg.q[10:7]][4:2] = treg.q[2:0];
+          treg.d[2:0] = 3b010; // Load new tile
+          treg.d[3] = 0; // Set invalid at start
+          moves.d = moves.q - 1;
+          state.d = state.CHECK_END;
+        }
+      
+      state.CHECK_END:
+        if(placed.q[0][7][4:2] != 0 || placed.q[1][8][4:2] != 0) {
+          placed.d[0][8][1:0] = 2b00;
+          if(gold.q[0] == 1) {
+            state.d = state.END_MINER;
+          }
+        }
+        
+        if(placed.q[2][7][4:2] != 0 || placed.q[3][8][4:2] != 0 || placed.q[1][8][4:2] != 0) {
+          placed.d[2][8][1:0] = 2b00;
+          if(gold.q[1] == 1) {
+            state.d = state.END_MINER;
+          }
+        }
+        
+        if(placed.q[4][7][4:2] != 0 || placed.q[3][8][4:2] != 0) {
+          placed.d[4][8][1:0] = 2b00;
+          if(gold.q[2] == 1) {
+            state.d = state.END_MINER;
+          }
+        }
+        
+        if(moves.q == 0) {
+          state.d = state.END_SABOTEUR;
+        }
+        else {
+          state.d = state.INPUT;
+        }
+      
+      state.END_MINER:
+        placed.d[2][0][1:0] = 2b11;
+        state.d = state.HALT;
+      state.END_SABOTEUR:
+        // Display win message
+        state.d = state.HALT;
       state.HALT:
         state.d = state.HALT;
     }
