@@ -1,0 +1,83 @@
+module renderer (
+    input clk,
+    input placed[5][9][5],
+    input tiles[8][3][3],
+    output red,
+    output green,
+    output blue,
+    output hsync,
+    output vsync
+  ) {
+
+  .clk(clk) {
+    dff pixel[11];
+    dff line[11];
+  }
+  var gridSqX, gridSqY;
+  
+  always {
+    if(pixel.q < 800 && line.q < 600) {
+      gridSqX = pixel.q / 16;
+      gridSqY = line.q / 16;
+      if(gridSqX < 27 && gridSqY < 15 && placed[gridSqY / 3][gridSqX / 3][3:1] != 0) {
+        if(placed[gridSqY / 3][gridSqX / 3][1:0] == 0) {
+          red = tiles[placed[gridSqY / 3][gridSqX / 3][4:2]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          green = tiles[placed[gridSqY / 3][gridSqX / 3][4:2]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          blue = tiles[placed[gridSqY / 3][gridSqX / 3][4:2]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+        }
+        else if(placed[gridSqY / 3][gridSqX / 3][1:0] == 1) {
+          red = tiles[placed[gridSqY / 3][gridSqX / 3][4:2]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          green = 0;
+          blue = 0;
+        }
+        else if(placed[gridSqY / 3][gridSqX / 3][1:0] == 3) {
+          red = 0;
+          green = tiles[placed[gridSqY / 3][gridSqX / 3][4:2]][gridSqY - ((gridSqY / 3) * 3)][gridSqX - ((gridSqX / 3) * 3)];
+          blue = 0;
+        }
+        else {
+          red = 1;
+          green = 1;
+          blue = 0;
+        }
+      }
+      else {
+        red = 0;
+        green = 0;
+        blue = 0;
+      }
+      
+    } else {
+      // always output 0 outside the visible frame
+      red = 0;
+      green = 0;
+      blue = 0;
+    }
+
+    // horizontal sync
+    if (pixel.q >= 800+56-1 && pixel.q <= 800+56-1+119) {
+      hsync = 1;
+    } else {
+      hsync = 0;
+    }
+  
+      // vertical refresh
+    if (line.q >= 600+37-1 && line.q <= 600+37-1+5) {
+      vsync = 1;
+    } else {
+      vsync = 0;
+    }
+  
+    // advance pixel and line counters
+    if (pixel.q == 800+56+120+64-1) {
+      if (line.q == 600+37+6+23-1) {
+        line.d = 0;
+      } else {
+        line.d = line.q + 1;
+      }
+      pixel.d = 0;
+    } else {
+      pixel.d = pixel.q + 1;
+    }
+  }
+}

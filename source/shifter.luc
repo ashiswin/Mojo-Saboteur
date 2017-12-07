@@ -1,0 +1,21 @@
+module shifter (
+    input alufn[6],
+    input op1[8],
+    input op2[5],
+    output out[8]
+  ) {
+
+  always {
+    out = 8hxx; // Don't care about the default output
+    
+    // Pretty straightforward selector :D
+    case(alufn) {
+      Inst.SHL:
+        out = op1 << op2;
+      Inst.SHR:
+        out = op1 >> op2;
+      Inst.SRA:
+        out = $signed(op1) >>> op2;
+    }
+  }
+}

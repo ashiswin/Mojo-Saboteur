@@ -1,0 +1,46 @@
+module game (
+    input clk,  // clock
+    input rst,  // reset
+    output red,
+    output green,
+    output blue,
+    output hsync,
+    output vsync
+  ) {
+
+  .clk(clk) {
+    dff tileX[4];
+    dff tileY[3];
+    dff blink[28];
+    dff placed[5][9][5];
+    
+    dff tiles[8][3][3];
+    
+    renderer renderer;
+  }
+  
+  always {
+    tiles.d[0] = {3b000, 3b000, 3b000};
+    tiles.d[1] = {3b010, 3b111, 3b010};
+    tiles.d[2] = {3b010, 3b010, 3b010};
+    tiles.d[3] = {3b000, 3b111, 3b000};
+    tiles.d[4] = {3b010, 3b011, 3b000};
+    tiles.d[5] = {3b010, 3b110, 3b000};
+    tiles.d[6] = {3b000, 3b110, 3b010};
+    tiles.d[7] = {3b000, 3b011, 3b010};
+    
+    placed.d[tileY.q][tileX.q][3] = blink.q[25];
+    placed.d[tileY.q][tileX.q][0] = 1;
+    
+    blink.d = blink.q + 1;
+    
+    renderer.placed = placed.q;
+    renderer.tiles = tiles.q;
+    
+    red = renderer.red;
+    green = renderer.green;
+    blue = renderer.blue;
+    hsync = renderer.hsync;
+    vsync = renderer.vsync;
+  }
+}

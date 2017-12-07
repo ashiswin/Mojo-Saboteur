@@ -1,0 +1,22 @@
+module compare (
+    input alufn[6],
+    input z,
+    input v,
+    input n,
+    output out[8]
+  ) {
+
+  always {
+    out = 8h00; // Set default output to 0
+    
+    // Pretty straightforward selector :P
+    case(alufn) {
+      Inst.CMPEQ:
+        out[0] = z;
+      Inst.CMPLT:
+        out = n ^ v;
+      Inst.CMPLE:
+        out = z | (n ^ v);
+    }
+  }
+}
