@@ -25,6 +25,9 @@ module mojo_top (
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
+    
+    button_conditioner button_cond[5];
+    edge_detector edge_detector[5](#RISE(1), #FALL(0));
     game game(.rst(rst));
   }
   
@@ -37,7 +40,9 @@ module mojo_top (
     spi_channel = bzzzz;    // not using flags
     avr_rx = bz;            // not using serial port
     
-    game.buttons = io_button;
+    button_cond.in = io_button;
+    edge_detector.in = button_cond.out;
+    game.buttons = edge_detector.out;
     red = game.red;
     green = game.green;
     blue = game.blue;

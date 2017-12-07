@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module game_2 (
+module game_4 (
     input clk,
     input rst,
     output reg red,
@@ -30,7 +30,7 @@ module game_2 (
   wire [1-1:0] M_renderer_vsync;
   reg [225-1:0] M_renderer_placed;
   reg [72-1:0] M_renderer_tiles;
-  renderer_3 renderer (
+  renderer_6 renderer (
     .clk(clk),
     .placed(M_renderer_placed),
     .tiles(M_renderer_tiles),
@@ -41,13 +41,11 @@ module game_2 (
     .vsync(M_renderer_vsync)
   );
   reg [4:0] M_moves_d, M_moves_q = 1'h0;
-  localparam GAME_START_state = 3'd0;
-  localparam INPUT_state = 3'd1;
-  localparam UP_state = 3'd2;
-  localparam DOWN_state = 3'd3;
-  localparam HALT_state = 3'd4;
+  localparam GAME_START_state = 2'd0;
+  localparam INPUT_state = 2'd1;
+  localparam HALT_state = 2'd2;
   
-  reg [2:0] M_state_d, M_state_q = GAME_START_state;
+  reg [1:0] M_state_d, M_state_q = GAME_START_state;
   
   reg [3:0] player;
   
@@ -57,12 +55,12 @@ module game_2 (
   
   always @* begin
     M_state_d = M_state_q;
-    M_tileY_d = M_tileY_q;
     M_tiles_d = M_tiles_q;
-    M_blink_d = M_blink_q;
-    M_moves_d = M_moves_q;
     M_placed_d = M_placed_q;
-    M_oneSecond_d = M_oneSecond_q;
+    M_moves_d = M_moves_q;
+    M_blink_d = M_blink_q;
+    M_tileX_d = M_tileX_q;
+    M_tileY_d = M_tileY_q;
     
     M_tiles_d[0+8-:9] = 9'h000;
     M_tiles_d[9+8-:9] = 9'h0ba;
@@ -83,12 +81,6 @@ module game_2 (
     blue = M_renderer_blue;
     hsync = M_renderer_hsync;
     vsync = M_renderer_vsync;
-    incState = 1'h0;
-    M_oneSecond_d = M_oneSecond_q + 1'h1;
-    if (M_oneSecond_q == 26'h2faf080) begin
-      incState = 1'h1;
-      M_oneSecond_d = 1'h0;
-    end
     
     case (M_state_q)
       GAME_START_state: begin
@@ -100,16 +92,22 @@ module game_2 (
         M_state_d = INPUT_state;
       end
       INPUT_state: begin
-        if (buttons[4+0-:1]) begin
-          M_state_d = DOWN_state;
+        if (buttons[0+0-:1]) begin
+          M_tileY_d = M_tileY_q - 1'h1;
         end else begin
-          M_state_d = INPUT_state;
-        end
-      end
-      DOWN_state: begin
-        M_tileY_d = M_tileY_q - 1'h1;
-        if (incState == 1'h1) begin
-          M_state_d = INPUT_state;
+          if (buttons[1+0-:1]) begin
+            M_tileY_d = M_tileY_q + 1'h1;
+          end else begin
+            if (buttons[3+0-:1]) begin
+              M_tileX_d = M_tileX_q - 1'h1;
+            end else begin
+              if (buttons[4+0-:1]) begin
+                M_tileX_d = M_tileX_q + 1'h1;
+              end else begin
+                M_state_d = INPUT_state;
+              end
+            end
+          end
         end
       end
       HALT_state: begin

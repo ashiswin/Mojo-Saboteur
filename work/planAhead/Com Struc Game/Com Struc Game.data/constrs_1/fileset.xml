@@ -2,26 +2,26 @@
 <DARoots Version="1" Minor="26">
   <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
     <Filter Type="Constrs"/>
-    <File Path="$PSRCDIR/constrs_1/imports/buttons.ucf">
+    <File Path="$PSRCDIR/constrs_1/imports/arroyo/Documents/Mojo-Saboteur/constraint/buttons.ucf">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../../constraint/buttons.ucf"/>
-        <Attr Name="ImportTime" Val="1512618922"/>
+        <Attr Name="ImportTime" Val="1512622429"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/constrs_1/imports/vga.ucf">
+    <File Path="$PSRCDIR/constrs_1/imports/arroyo/Documents/Mojo-Saboteur/constraint/vga.ucf">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../../../constraint/vga.ucf"/>
-        <Attr Name="ImportTime" Val="1512617535"/>
+        <Attr Name="ImportTime" Val="1512622429"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/constrs_1/imports/Mojo IDE/library/components/mojo.ucf">
+    <File Path="$PSRCDIR/constrs_1/imports/arroyo/Downloads/mojo-ide-B1.3.6/library/components/mojo.ucf">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../../../../Program Files/Mojo IDE/library/components/mojo.ucf"/>
-        <Attr Name="ImportTime" Val="1477283388"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Downloads/mojo-ide-B1.3.6/library/components/mojo.ucf"/>
+        <Attr Name="ImportTime" Val="1477337389"/>
         <Attr Name="UsedInSynthesis" Val="1"/>
         <Attr Name="UsedInImplementation" Val="1"/>
       </FileInfo>

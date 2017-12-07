@@ -21,7 +21,9 @@ module game (
     renderer renderer;
     
     dff moves[5];
-    fsm state(#INIT(GAME_START)) = {GAME_START, INPUT, UP, DOWN, HALT};
+    fsm state(#INIT(GAME_START)) = {GAME_START,
+                                    INPUT,
+                                    HALT};
   }
   
   sig player[4];
@@ -41,7 +43,7 @@ module game (
     
     placed.d[tileX.q][tileY.q] = 5b00001;
     placed.d[tileY.q][tileX.q][3] = blink.q[25];
-    placed.d[tileY.q][tileX.q][0] = 1;
+    placed.d[tileY.q][tileX.q][0] = 1;    
     
     blink.d = blink.q + 1;
     
@@ -54,13 +56,6 @@ module game (
     hsync = renderer.hsync;
     vsync = renderer.vsync;
     
-    incState = 0;
-    oneSecond.d = oneSecond.q + 1;
-    if(oneSecond.q == 50000000) {
-      incState = 1;
-      oneSecond.d = 0;
-    }
-    
     case(state.q) {
       state.GAME_START:
         moves.d = 30;
@@ -72,19 +67,22 @@ module game (
         state.d = state.INPUT;
         
       state.INPUT:
-        if(buttons[4]) {
-          state.d = state.DOWN;
+        if(buttons[0]) {
+          tileY.d = tileY.q - 1;
+        }
+        else if(buttons[1]) {
+          tileY.d = tileY.q + 1;
+        }
+        else if(buttons[3]) {
+          tileX.d = tileX.q - 1;
+        }
+        else if(buttons[4]) {
+          tileX.d = tileX.q + 1;
         }
         else {
           state.d = state.INPUT;
         }
-      
-      state.DOWN:
-        tileY.d = tileY.q - 1;
-        if(incState == 1) {
-          state.d = state.INPUT;
-        }
-        
+         
       state.HALT:
         state.d = state.HALT;
     }

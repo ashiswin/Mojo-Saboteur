@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module renderer_3 (
+module renderer_6 (
     input clk,
     input [224:0] placed,
     input [71:0] tiles,
@@ -24,8 +24,8 @@ module renderer_3 (
   integer gridSqY;
   
   always @* begin
-    M_pixel_d = M_pixel_q;
     M_line_d = M_line_q;
+    M_pixel_d = M_pixel_q;
     
     if (M_pixel_q < 10'h320 && M_line_q < 10'h258) begin
       gridSqX = M_pixel_q / 5'h10;

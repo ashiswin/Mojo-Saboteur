@@ -36,13 +36,39 @@ module mojo_top_0 (
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
+  wire [(3'h5+0)-1:0] M_button_cond_out;
+  reg [(3'h5+0)-1:0] M_button_cond_in;
+  
+  genvar GEN_button_cond0;
+  generate
+  for (GEN_button_cond0=0;GEN_button_cond0<3'h5;GEN_button_cond0=GEN_button_cond0+1) begin: button_cond_gen_0
+    button_conditioner_2 button_cond (
+      .clk(clk),
+      .in(M_button_cond_in[GEN_button_cond0*(1)+(1)-1-:(1)]),
+      .out(M_button_cond_out[GEN_button_cond0*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
+  wire [(3'h5+0)-1:0] M_edge_detector_out;
+  reg [(3'h5+0)-1:0] M_edge_detector_in;
+  
+  genvar GEN_edge_detector0;
+  generate
+  for (GEN_edge_detector0=0;GEN_edge_detector0<3'h5;GEN_edge_detector0=GEN_edge_detector0+1) begin: edge_detector_gen_0
+    edge_detector_3 edge_detector (
+      .clk(clk),
+      .in(M_edge_detector_in[GEN_edge_detector0*(1)+(1)-1-:(1)]),
+      .out(M_edge_detector_out[GEN_edge_detector0*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
   wire [1-1:0] M_game_red;
   wire [1-1:0] M_game_green;
   wire [1-1:0] M_game_blue;
   wire [1-1:0] M_game_hsync;
   wire [1-1:0] M_game_vsync;
   reg [5-1:0] M_game_buttons;
-  game_2 game (
+  game_4 game (
     .clk(clk),
     .rst(rst),
     .buttons(M_game_buttons),
@@ -60,7 +86,9 @@ module mojo_top_0 (
     spi_miso = 1'bz;
     spi_channel = 4'bzzzz;
     avr_rx = 1'bz;
-    M_game_buttons = io_button;
+    M_button_cond_in = io_button;
+    M_edge_detector_in = M_button_cond_out;
+    M_game_buttons = M_edge_detector_out;
     red = M_game_red;
     green = M_game_green;
     blue = M_game_blue;
