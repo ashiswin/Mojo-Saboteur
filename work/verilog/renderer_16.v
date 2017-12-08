@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module renderer_10 (
+module renderer_16 (
     input clk,
     input [224:0] placed,
     input [71:0] tiles,

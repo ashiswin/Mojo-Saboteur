@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module alu_9 (
+module alu_15 (
     input [5:0] alufn,
     input [7:0] op1,
     input [7:0] op2,
@@ -19,7 +19,7 @@ module alu_9 (
   wire [1-1:0] M_adder_zOut;
   wire [1-1:0] M_adder_vOut;
   wire [1-1:0] M_adder_nOut;
-  adder_12 adder (
+  adder_18 adder (
     .op1(op1),
     .op2(op2),
     .alufn(alufn),
@@ -29,7 +29,7 @@ module alu_9 (
     .nOut(M_adder_nOut)
   );
   wire [8-1:0] M_boolean_out;
-  boolean_13 boolean (
+  boolean_19 boolean (
     .op1(op1),
     .op2(op2),
     .alufn(alufn),
@@ -37,7 +37,7 @@ module alu_9 (
   );
   
   wire [8-1:0] M_shifter_out;
-  shifter_14 shifter (
+  shifter_20 shifter (
     .alufn(alufn),
     .op1(op1),
     .op2(op2[0+4-:5]),
@@ -48,7 +48,7 @@ module alu_9 (
   reg [1-1:0] M_compare_z;
   reg [1-1:0] M_compare_v;
   reg [1-1:0] M_compare_n;
-  compare_15 compare (
+  compare_21 compare (
     .alufn(alufn),
     .z(M_compare_z),
     .v(M_compare_v),

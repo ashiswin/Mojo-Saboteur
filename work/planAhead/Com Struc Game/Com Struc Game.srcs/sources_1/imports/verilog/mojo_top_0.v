@@ -24,7 +24,13 @@ module mojo_top_0 (
     output reg vsync,
     input [4:0] io_button,
     input [5:0] ct_button,
-    output reg [6:0] ct_led
+    output reg [6:0] ct_led,
+    input [5:0] ct2_button,
+    output reg [6:0] ct2_led,
+    input [5:0] ct3_button,
+    output reg [6:0] ct3_led,
+    input [5:0] ct4_button,
+    output reg [6:0] ct4_led
   );
   
   
@@ -38,32 +44,6 @@ module mojo_top_0 (
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
   );
-  wire [(3'h5+0)-1:0] M_button_cond_out;
-  reg [(3'h5+0)-1:0] M_button_cond_in;
-  
-  genvar GEN_button_cond0;
-  generate
-  for (GEN_button_cond0=0;GEN_button_cond0<3'h5;GEN_button_cond0=GEN_button_cond0+1) begin: button_cond_gen_0
-    button_conditioner_2 button_cond (
-      .clk(clk),
-      .in(M_button_cond_in[GEN_button_cond0*(1)+(1)-1-:(1)]),
-      .out(M_button_cond_out[GEN_button_cond0*(1)+(1)-1-:(1)])
-    );
-  end
-  endgenerate
-  wire [(3'h5+0)-1:0] M_edge_detector_out;
-  reg [(3'h5+0)-1:0] M_edge_detector_in;
-  
-  genvar GEN_edge_detector0;
-  generate
-  for (GEN_edge_detector0=0;GEN_edge_detector0<3'h5;GEN_edge_detector0=GEN_edge_detector0+1) begin: edge_detector_gen_0
-    edge_detector_3 edge_detector (
-      .clk(clk),
-      .in(M_edge_detector_in[GEN_edge_detector0*(1)+(1)-1-:(1)]),
-      .out(M_edge_detector_out[GEN_edge_detector0*(1)+(1)-1-:(1)])
-    );
-  end
-  endgenerate
   wire [(3'h6+0)-1:0] M_controller_cond_out;
   reg [(3'h6+0)-1:0] M_controller_cond_in;
   
@@ -90,16 +70,94 @@ module mojo_top_0 (
     );
   end
   endgenerate
+  wire [(3'h6+0)-1:0] M_controller_cond2_out;
+  reg [(3'h6+0)-1:0] M_controller_cond2_in;
+  
+  genvar GEN_controller_cond20;
+  generate
+  for (GEN_controller_cond20=0;GEN_controller_cond20<3'h6;GEN_controller_cond20=GEN_controller_cond20+1) begin: controller_cond2_gen_0
+    button_conditioner_2 controller_cond2 (
+      .clk(clk),
+      .in(M_controller_cond2_in[GEN_controller_cond20*(1)+(1)-1-:(1)]),
+      .out(M_controller_cond2_out[GEN_controller_cond20*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
+  wire [(3'h6+0)-1:0] M_ct_edge2_out;
+  reg [(3'h6+0)-1:0] M_ct_edge2_in;
+  
+  genvar GEN_ct_edge20;
+  generate
+  for (GEN_ct_edge20=0;GEN_ct_edge20<3'h6;GEN_ct_edge20=GEN_ct_edge20+1) begin: ct_edge2_gen_0
+    edge_detector_3 ct_edge2 (
+      .clk(clk),
+      .in(M_ct_edge2_in[GEN_ct_edge20*(1)+(1)-1-:(1)]),
+      .out(M_ct_edge2_out[GEN_ct_edge20*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
+  wire [(3'h6+0)-1:0] M_controller_cond3_out;
+  reg [(3'h6+0)-1:0] M_controller_cond3_in;
+  
+  genvar GEN_controller_cond30;
+  generate
+  for (GEN_controller_cond30=0;GEN_controller_cond30<3'h6;GEN_controller_cond30=GEN_controller_cond30+1) begin: controller_cond3_gen_0
+    button_conditioner_2 controller_cond3 (
+      .clk(clk),
+      .in(M_controller_cond3_in[GEN_controller_cond30*(1)+(1)-1-:(1)]),
+      .out(M_controller_cond3_out[GEN_controller_cond30*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
+  wire [(3'h6+0)-1:0] M_ct_edge3_out;
+  reg [(3'h6+0)-1:0] M_ct_edge3_in;
+  
+  genvar GEN_ct_edge30;
+  generate
+  for (GEN_ct_edge30=0;GEN_ct_edge30<3'h6;GEN_ct_edge30=GEN_ct_edge30+1) begin: ct_edge3_gen_0
+    edge_detector_3 ct_edge3 (
+      .clk(clk),
+      .in(M_ct_edge3_in[GEN_ct_edge30*(1)+(1)-1-:(1)]),
+      .out(M_ct_edge3_out[GEN_ct_edge30*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
+  wire [(3'h6+0)-1:0] M_controller_cond4_out;
+  reg [(3'h6+0)-1:0] M_controller_cond4_in;
+  
+  genvar GEN_controller_cond40;
+  generate
+  for (GEN_controller_cond40=0;GEN_controller_cond40<3'h6;GEN_controller_cond40=GEN_controller_cond40+1) begin: controller_cond4_gen_0
+    button_conditioner_2 controller_cond4 (
+      .clk(clk),
+      .in(M_controller_cond4_in[GEN_controller_cond40*(1)+(1)-1-:(1)]),
+      .out(M_controller_cond4_out[GEN_controller_cond40*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
+  wire [(3'h6+0)-1:0] M_ct_edge4_out;
+  reg [(3'h6+0)-1:0] M_ct_edge4_in;
+  
+  genvar GEN_ct_edge40;
+  generate
+  for (GEN_ct_edge40=0;GEN_ct_edge40<3'h6;GEN_ct_edge40=GEN_ct_edge40+1) begin: ct_edge4_gen_0
+    edge_detector_3 ct_edge4 (
+      .clk(clk),
+      .in(M_ct_edge4_in[GEN_ct_edge40*(1)+(1)-1-:(1)]),
+      .out(M_ct_edge4_out[GEN_ct_edge40*(1)+(1)-1-:(1)])
+    );
+  end
+  endgenerate
   wire [1-1:0] M_game_red;
   wire [1-1:0] M_game_green;
   wire [1-1:0] M_game_blue;
   wire [1-1:0] M_game_hsync;
   wire [1-1:0] M_game_vsync;
-  wire [7-1:0] M_game_ct_led;
+  wire [28-1:0] M_game_ct_led;
   wire [4-1:0] M_game_players;
   wire [3-1:0] M_game_goldLed;
-  reg [5-1:0] M_game_buttons;
-  game_6 game (
+  reg [20-1:0] M_game_buttons;
+  game_10 game (
     .clk(clk),
     .rst(rst),
     .buttons(M_game_buttons),
@@ -120,22 +178,43 @@ module mojo_top_0 (
     spi_miso = 1'bz;
     spi_channel = 4'bzzzz;
     avr_rx = 1'bz;
-    M_button_cond_in = io_button;
-    M_edge_detector_in = M_button_cond_out;
     M_controller_cond_in = ct_button;
     M_ct_edge_in = M_controller_cond_out;
-    M_game_buttons = M_edge_detector_out;
-    M_game_buttons[0+0-:1] = M_ct_edge_out[0+0-:1];
-    M_game_buttons[3+0-:1] = M_ct_edge_out[1+0-:1];
-    M_game_buttons[2+0-:1] = M_ct_edge_out[2+0-:1];
-    M_game_buttons[4+0-:1] = M_ct_edge_out[3+0-:1];
-    M_game_buttons[1+0-:1] = M_ct_edge_out[4+0-:1];
+    M_controller_cond2_in = ct2_button;
+    M_ct_edge2_in = M_controller_cond2_out;
+    M_controller_cond3_in = ct3_button;
+    M_ct_edge3_in = M_controller_cond3_out;
+    M_controller_cond4_in = ct4_button;
+    M_ct_edge4_in = M_controller_cond4_out;
+    M_game_buttons[0+0+0-:1] = M_ct_edge_out[0+0-:1];
+    M_game_buttons[0+3+0-:1] = M_ct_edge_out[1+0-:1];
+    M_game_buttons[0+2+0-:1] = M_ct_edge_out[2+0-:1];
+    M_game_buttons[0+4+0-:1] = M_ct_edge_out[3+0-:1];
+    M_game_buttons[0+1+0-:1] = M_ct_edge_out[4+0-:1];
+    M_game_buttons[5+0+0-:1] = M_ct_edge2_out[0+0-:1];
+    M_game_buttons[5+3+0-:1] = M_ct_edge2_out[1+0-:1];
+    M_game_buttons[5+4+0-:1] = M_ct_edge2_out[2+0-:1];
+    M_game_buttons[5+2+0-:1] = M_ct_edge2_out[3+0-:1];
+    M_game_buttons[5+1+0-:1] = M_ct_edge2_out[4+0-:1];
+    M_game_buttons[10+0+0-:1] = M_ct_edge3_out[0+0-:1];
+    M_game_buttons[10+3+0-:1] = M_ct_edge3_out[1+0-:1];
+    M_game_buttons[10+4+0-:1] = M_ct_edge3_out[2+0-:1];
+    M_game_buttons[10+2+0-:1] = M_ct_edge3_out[3+0-:1];
+    M_game_buttons[10+1+0-:1] = M_ct_edge3_out[4+0-:1];
+    M_game_buttons[15+0+0-:1] = M_ct_edge4_out[0+0-:1];
+    M_game_buttons[15+3+0-:1] = M_ct_edge4_out[1+0-:1];
+    M_game_buttons[15+4+0-:1] = M_ct_edge4_out[2+0-:1];
+    M_game_buttons[15+2+0-:1] = M_ct_edge4_out[3+0-:1];
+    M_game_buttons[15+1+0-:1] = M_ct_edge4_out[4+0-:1];
     red = M_game_red;
     green = M_game_green;
     blue = M_game_blue;
     hsync = M_game_hsync;
     vsync = M_game_vsync;
-    ct_led = M_game_ct_led;
+    ct_led = M_game_ct_led[0+6-:7];
+    ct2_led = M_game_ct_led[7+6-:7];
+    ct3_led = M_game_ct_led[14+6-:7];
+    ct4_led = M_game_ct_led[21+6-:7];
     led[5+2-:3] = M_game_goldLed;
     led[0+3-:4] = M_game_players;
   end

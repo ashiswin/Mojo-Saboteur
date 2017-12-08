@@ -4,28 +4,31 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module compare_15 (
+module shifter_20 (
     input [5:0] alufn,
-    input z,
-    input v,
-    input n,
+    input [7:0] op1,
+    input [4:0] op2,
     output reg [7:0] out
   );
   
   
   
   always @* begin
-    out = 8'h00;
+    out = 8'bxxxxxxxx;
     
     case (alufn)
-      6'h33: begin
-        out[0+0-:1] = z;
+      6'h20: begin
+        out = op1 << op2;
       end
-      6'h35: begin
-        out = n ^ v;
+      6'h21: begin
+        out = op1 >> op2;
       end
-      6'h37: begin
-        out = z | (n ^ v);
+      6'h23: begin
+        out = $signed(op1) >>> op2;
+      end
+      6'h24: begin
+        out[1+6-:7] = op1[0+6-:7];
+        out[0+0-:1] = op1[7+0-:1];
       end
     endcase
   end
