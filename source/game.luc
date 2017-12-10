@@ -208,7 +208,7 @@ module game (
         }
         state.d = state.INPUT;
       
-      state.PLACE:
+      state.PLACE:Q
         if(treg.q[3] == 0) {
           state.d = state.INPUT;
         }
