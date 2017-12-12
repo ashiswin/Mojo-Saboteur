@@ -1,0 +1,215 @@
+module renderer2 (
+    input clk,
+    input placed[7][11][5],
+    input treg[11],
+    input blink,
+    input currentPlayer[2],
+    output red,
+    output green,
+    output blue,
+    output hsync,
+    output vsync
+  ) {
+
+  .clk(clk) {
+    dff pixel[11];
+    dff line[11];
+    
+    tileset tiles;
+    
+    image image;
+    moves moves;
+    turn turn;
+    player player;
+    
+    numbers numbers;
+    
+    slash slash;
+  }
+  sig gridSqX[7], gridSqY[7];
+  
+  always {
+    image.i = 0;
+    image.j = 0;
+    moves.i = 0;
+    moves.j = 0;
+    turn.i = 0;
+    turn.j = 0;
+    player.i = 0;
+    player.j = 0;
+    
+    numbers.i = 0;
+    numbers.j = 0;
+    numbers.n = 11;
+    
+    slash.i = 0;
+    slash.j = 0;
+    
+    tiles.tileIndex = 0;
+    
+    red = 0;
+    green = 0;
+    blue = 0;
+    
+    if(pixel.q < 800 && line.q < 600) {
+      if(pixel.q < 528 && line.q < 200) {
+        image.i = line.q;
+        image.j = pixel.q;
+        
+        red = image.pixel[2];
+        green = image.pixel[1];
+        blue = image.pixel[0];
+      }
+      else if(pixel.q >= 600 && pixel.q < 728 && line.q >= 64 && line.q < 128) {
+        moves.i = line.q - 64;
+        moves.j = pixel.q - 600;
+        
+        red = moves.pixel[2];
+        green = moves.pixel[1];
+        blue = moves.pixel[0];
+      }
+      else if(pixel.q >= 600 && pixel.q < 624 && line.q >= 128 && line.q < 192) {
+        numbers.i = line.q - 128;
+        numbers.j = pixel.q - 600;
+        
+        numbers.n = 3;
+        
+        red = numbers.pixel[2];
+        green = numbers.pixel[1];
+        blue = numbers.pixel[0];
+      }
+      else if(pixel.q >= 636 && pixel.q < 660 && line.q >= 128 && line.q < 192) {
+        numbers.i = line.q - 128;
+        numbers.j = pixel.q - 636;
+        numbers.n = 0;
+        
+        red = numbers.pixel[2];
+        green = numbers.pixel[1];
+        blue = numbers.pixel[0];
+      }
+      else if(pixel.q >= 680 && pixel.q <= 704 && line.q >= 128 && line.q < 192) {
+        slash.i = line.q - 128;
+        slash.j = pixel.q - 680;
+        
+        red = slash.pixel[2];
+        green = slash.pixel[1];
+        blue = slash.pixel[0];
+      }
+      else if(pixel.q >= 724 && pixel.q < 748 && line.q >= 128 && line.q < 192) {
+        numbers.i = line.q - 128;
+        numbers.j = pixel.q - 724;
+        numbers.n = 3;
+        
+        red = numbers.pixel[2];
+        green = numbers.pixel[1];
+        blue = numbers.pixel[0];
+      }
+      else if(pixel.q >= 760 && pixel.q < 784 && line.q >= 128 && line.q < 192) {
+        numbers.i = line.q - 128;
+        numbers.j = pixel.q - 728;
+        numbers.n = 0;
+        
+        red = numbers.pixel[2];
+        green = numbers.pixel[1];
+        blue = numbers.pixel[0];
+      }
+      else if(pixel.q >= 600 && pixel.q < 698 && line.q >= 256 && line.q < 304) {
+        turn.i = line.q - 256;
+        turn.j = pixel.q - 600;
+        
+        red = turn.pixel[2];
+        green = turn.pixel[1];
+        blue = turn.pixel[0];
+      }
+      else if(pixel.q >= 600 && pixel.q < 736 && line.q >= 320 && line.q < 368) {
+        player.i = line.q - 320;
+        player.j = pixel.q - 600;
+        
+        red = player.pixel[2];
+        green = player.pixel[1];
+        blue = player.pixel[0];
+      }
+      else if(pixel.q >= 744 && pixel.q < 768 && line.q >= 311 && line.q < 376) {
+        numbers.i = line.q - 311;
+        numbers.j = pixel.q - 744;
+        numbers.n = currentPlayer;
+        
+        red = numbers.pixel[2];
+        green = numbers.pixel[1];
+        blue = numbers.pixel[0];
+      }
+      else if(pixel.q >= 528 && pixel.q <= 530 && line.q >= 200 || pixel.q < 528 && line.q < 202 && line.q >= 200) {
+        red = 1;
+        green = 1;
+        blue = 1;
+      }
+      else if(pixel.q < 528 && line.q >= 202) {
+        gridSqX = pixel.q >> 4;
+        gridSqY = (line.q - 202) >> 4;
+        if(gridSqX / 3 == treg[10:7] && gridSqY / 3 == treg[6:4] && treg[2:0] != 0) {
+          tiles.tileIndex = treg[2:0];
+          if(treg[3] == 0) {
+            red = tiles.tile[((gridSqY - ((gridSqY / 3) * 3)) * 3) + gridSqX - ((gridSqX / 3) * 3)] & blink;
+            green = 0;
+            blue = 0;
+          }
+          else {
+            red = 0;
+            green = tiles.tile[((gridSqY - ((gridSqY / 3) * 3)) * 3) + gridSqX - ((gridSqX / 3) * 3)] & blink;
+            blue = 0;
+          }
+        }
+        else if(gridSqX < 33 && gridSqY < 21 && placed[gridSqY / 3][gridSqX / 3][3:1] != 0) {
+          tiles.tileIndex = placed[gridSqY / 3][gridSqX / 3][4:2];
+          
+          if(placed[gridSqY / 3][gridSqX / 3][1:0] == 0) {
+            red = tiles.tile[((gridSqY - ((gridSqY / 3) * 3)) * 3) + gridSqX - ((gridSqX / 3) * 3)];
+            green = tiles.tile[((gridSqY - ((gridSqY / 3) * 3)) * 3) + gridSqX - ((gridSqX / 3) * 3)];
+            blue = tiles.tile[((gridSqY - ((gridSqY / 3) * 3)) * 3) + gridSqX - ((gridSqX / 3) * 3)];
+          }
+          else if(placed[gridSqY / 3][gridSqX / 3][1:0] == 1) {
+            red = tiles.tile[((gridSqY - ((gridSqY / 3) * 3)) * 3) + gridSqX - ((gridSqX / 3) * 3)];
+            green = 0;
+            blue = 0;
+          }
+          else if(placed[gridSqY / 3][gridSqX / 3][1:0] == 3) {
+            red = 0;
+            green = tiles.tile[((gridSqY - ((gridSqY / 3) * 3)) * 3) + gridSqX - ((gridSqX / 3) * 3)];
+            blue = 0;
+          }
+          else {
+            red = 1;
+            green = 1;
+            blue = 0;
+          }
+        }
+     }
+    }
+
+    // horizontal sync
+    if (pixel.q >= 800+56-1 && pixel.q <= 800+56-1+119) {
+      hsync = 1;
+    } else {
+      hsync = 0;
+    }
+  
+      // vertical refresh
+    if (line.q >= 600+37-1 && line.q <= 600+37-1+5) {
+      vsync = 1;
+    } else {
+      vsync = 0;
+    }
+  
+    // advance pixel and line counters
+    if (pixel.q == 800+56+120+64-1) {
+      if (line.q == 600+37+6+23-1) {
+        line.d = 0;
+      } else {
+        line.d = line.q + 1;
+      }
+      pixel.d = 0;
+    } else {
+      pixel.d = pixel.q + 1;
+    }
+  }
+}

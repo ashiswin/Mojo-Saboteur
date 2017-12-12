@@ -1,8 +1,8 @@
 INTSTYLE=pa
-INFILE=/home/arroyo/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.runs/impl_1/mojo_top_0_routed.ncd
-OUTFILE=/home/arroyo/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.runs/impl_1/mojo_top_0.bit
+INFILE=/home/ashiswin/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.runs/impl_1/mojo_top_0_routed.ncd
+OUTFILE=/home/ashiswin/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.runs/impl_1/mojo_top_0.bit
 FAMILY=Spartan6
 PART=xc6slx9-2tqg144
-WORKINGDIR=/home/arroyo/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.runs/impl_1
+WORKINGDIR=/home/ashiswin/Documents/Mojo-Saboteur/work/planAhead/Com Struc Game/Com Struc Game.runs/impl_1
 LICENSE=WebPack
 USER_INFO=211400432_0_0_717

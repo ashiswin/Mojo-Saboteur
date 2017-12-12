@@ -1,6 +1,6 @@
 module game (
     input clk,  // clock
-    input rst,  // reset
+    input rst,
     output red,
     output green,
     output blue,
@@ -13,16 +13,16 @@ module game (
   ) {
 
   alu alu;
+  
   .clk(clk) {
     dff treg[11];
     dff blink[28];
-    dff placed[5][9][5];
+    dff placed[7][11][5];
     
-    dff tiles[8][3][3];
+    tileset tiles;
     dff tileValidity[8][4];
     
-    renderer renderer;
-    pn_gen random(.rst(rst));
+    renderer2 renderer;
     
     dff moves[5];
     dff gold[3];
@@ -30,10 +30,6 @@ module game (
     dff playerTiles[4][3];
     dff currentPlayer[2];
     
-    dff goldCount[32];
-    dff playerCount[32];
-    
-    dff count[32];
     fsm state(#INIT(GAME_START)) = {GAME_START, GENERATE_PLAYER, GENERATE_GOLD,
                                     INPUT, CHECK_VALID, PLACE, CHECK_END,
                                     END_MINER, END_SABOTEUR,
@@ -45,15 +41,6 @@ module game (
   
   always {
     // Initialization step
-    tiles.d[0] = {3b000, 3b000, 3b000};
-    tiles.d[1] = {3b010, 3b111, 3b010};
-    tiles.d[2] = {3b010, 3b010, 3b010};
-    tiles.d[3] = {3b000, 3b111, 3b000};
-    tiles.d[4] = {3b010, 3b011, 3b000};
-    tiles.d[5] = {3b010, 3b110, 3b000};
-    tiles.d[6] = {3b000, 3b110, 3b010};
-    tiles.d[7] = {3b000, 3b011, 3b010};    
-    
     tileValidity.d[0] = 4b0000;
     tileValidity.d[1] = 4b1111;
     tileValidity.d[2] = 4b1010;
@@ -61,14 +48,14 @@ module game (
     tileValidity.d[4] = 4b1100;
     tileValidity.d[5] = 4b1001;
     tileValidity.d[6] = 4b0101;
-    tileValidity.d[7] = 4b0011;
-    
+    tileValidity.d[7] = 4b0011;    
+        
     blink.d = blink.q + 1;
     
     renderer.placed = placed.q;
-    renderer.tiles = tiles.q;
     renderer.treg = treg.q;
     renderer.blink = blink.q[25];
+    renderer.currentPlayer = currentPlayer.q + 1;
     
     red = renderer.red;
     green = renderer.green;
@@ -76,42 +63,24 @@ module game (
     hsync = renderer.hsync;
     vsync = renderer.vsync;
     
-    random.next = 1;
-    random.seed = 19284;                   // don't really care about the seed
-    
-    playerTiles.d[0] = 3b111;
+    playerTiles.d[0] = 3b001;
     playerTiles.d[1] = 3b010;
     playerTiles.d[2] = 3b011;
     playerTiles.d[3] = 3b101;
     
     for(i = 0; i < 4; i++) {
-      ct_led[i][0] = tiles.q[playerTiles.q[i]][0][1];
-      ct_led[i][1] = tiles.q[playerTiles.q[i]][1][0];
-      ct_led[i][2] = tiles.q[playerTiles.q[i]][1][1];
-      ct_led[i][3] = tiles.q[playerTiles.q[i]][1][2];
-      ct_led[i][4] = tiles.q[playerTiles.q[i]][2][1];
+      tiles.tileIndex = playerTiles.q[i];
+      ct_led[i][0] = tiles.tile[1];
+      ct_led[i][1] = tiles.tile[3];
+      ct_led[i][2] = tiles.tile[4];
+      ct_led[i][3] = tiles.tile[5];
+      ct_led[i][4] = tiles.tile[7];
+      
+      ct_led[i][5] = player.q[0];
+      ct_led[i][6] = ~player.q[0];
     }
     
-    if(currentPlayer.q == 0) {
-      treg.d[2:0] = playerTiles.q[0];
-      ct_led[0][5] = player.q[0];
-      ct_led[0][6] = ~player.q[0];
-    }
-    else if(currentPlayer.q == 1) {
-      treg.d[2:0] = playerTiles.q[1];
-      ct_led[1][5] = player.q[1];
-      ct_led[1][6] = ~player.q[1];
-    }
-    else if(currentPlayer.q == 2) {
-      treg.d[2:0] = playerTiles.q[2];
-      ct_led[2][5] = player.q[2];
-      ct_led[2][6] = ~player.q[2];
-    }
-    else {
-      treg.d[2:0] = playerTiles.q[3];
-      ct_led[3][5] = player.q[3];
-      ct_led[3][6] = ~player.q[3];
-    }
+    treg.d[2:0] = playerTiles.q[currentPlayer.q];
     
     alu.alufn = 0;
     alu.op1 = 0;
@@ -121,46 +90,27 @@ module game (
     goldLed = gold.q;
     players = player.q;
     
-    gold.d = 3b100;
-    player.d = 4b1000;
     
     case(state.q) {
       state.GAME_START:
         moves.d = 30;
-        placed.d[2][0] = 5b00100; // Set starting cross
-        placed.d[0][8] = 5b00110; // Set top gold
-        placed.d[2][8] = 5b00110; // Set middle gold
-        placed.d[4][8] = 5b00110; // Set end gold
+        placed.d[3][1] = 5b00100; // Set starting cross
+        placed.d[1][9] = 5b00110; // Set top gold
+        placed.d[3][9] = 5b00110; // Set middle gold
+        placed.d[5][9] = 5b00110; // Set end gold
+        
+        gold.d = 3b100;
+        player.d = 4b1000;
         
         state.d = state.GENERATE_GOLD;
-        goldCount.d = random.num;
-        count.d = 0;
+        
+        currentPlayer.d = 0;
         
       state.GENERATE_GOLD:
-        alu.alufn = Inst.ROT;
-        alu.op1 = gold.q;
-        
-        gold.d = alu.out;
-        
-        count.d = count.q + 1;
-        
-        if(count.q == goldCount.q) {
-          state.d = state.GENERATE_PLAYER;
-          count.d = 0;
-          playerCount.d = random.num;
-        }
+        state.d = state.GENERATE_PLAYER;
         
       state.GENERATE_PLAYER:
-        alu.alufn = Inst.ROT;
-        alu.op1 = player.q;
-        
-        player.d = alu.out;
-        
-        count.d = count.q + 1;
-        
-        if(count.q == 30) {
-          state.d = state.INPUT;
-        }
+        state.d = state.INPUT;
       
       state.INPUT:
         // Handle button inputs
@@ -191,24 +141,13 @@ module game (
         if(placed.q[treg.q[6:4]][treg.q[10:7]][4:2] != 0 || placed.q[treg.q[6:4]][treg.q[10:7]][1:0] == 2) {
           treg.d[3] = 0;
         }
-        else if(tileValidity.q[placed.q[treg.q[6:4] - 1][treg.q[10:7]][4:2]][3] & tileValidity.q[treg.q[2:0]][1] == 1 && tileValidity.q[placed.q[treg.q[6:4] - 1][treg.q[10:7]][4:2]][1:0] != 2b10) {
-          treg.d[3] = 1;
-        }
-        else if(tileValidity.q[placed.q[treg.q[6:4] + 1][treg.q[10:7]][4:2]][1] & tileValidity.q[treg.q[2:0]][3] == 1 && tileValidity.q[placed.q[treg.q[6:4] + 1][treg.q[10:7]][4:2]][1:0] != 2b10) {
-          treg.d[3] = 1;
-        }
-        else if(tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] - 1][4:2]][0] & tileValidity.q[treg.q[2:0]][2] == 1 && tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] - 1][4:2]][1:0] != 2b10) {
-          treg.d[3] = 1;
-        }
-        else if(tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] + 1][4:2]][2] & tileValidity.q[treg.q[2:0]][0] == 1 && tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] + 1][4:2]][1:0] != 2b10) {
-          treg.d[3] = 1;
-        }
         else {
-          treg.d[3] = 0;
+          treg.d[3] = (tileValidity.q[placed.q[treg.q[6:4] - 1][treg.q[10:7]][4:2]][3] & tileValidity.q[treg.q[2:0]][1]) | (tileValidity.q[placed.q[treg.q[6:4] + 1][treg.q[10:7]][4:2]][1] & tileValidity.q[treg.q[2:0]][3]) | (tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] - 1][4:2]][0] & tileValidity.q[treg.q[2:0]][2]) | (tileValidity.q[placed.q[treg.q[6:4]][treg.q[10:7] + 1][4:2]][2] & tileValidity.q[treg.q[2:0]][0]);
         }
+        
         state.d = state.INPUT;
       
-      state.PLACE:Q
+      state.PLACE:
         if(treg.q[3] == 0) {
           state.d = state.INPUT;
         }
@@ -261,6 +200,7 @@ module game (
         else {
           state.d = state.INPUT;
         }
+        state.d = state.INPUT;
       
       state.END_MINER:
         placed.d[2][0][1:0] = 2b11;

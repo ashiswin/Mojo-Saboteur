@@ -27,7 +27,7 @@ module mojo_top (
     output ct4_led[7]
   ) {
   
-  sig rst;                  // reset signal
+  sig rst;
   
   .clk(clk) {
     // The reset conditioner is used to synchronize the reset signal to the FPGA
@@ -104,7 +104,7 @@ module mojo_top (
     ct3_led = game.ct_led[2];
     ct4_led = game.ct_led[3];
     
-    led[7:5] = game.goldLed;
-    led[3:0] = game.players;
+    //led[7:5] = game.goldLed;
+    //led[3:0] = game.players;
   }
 }

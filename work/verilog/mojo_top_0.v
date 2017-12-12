@@ -215,7 +215,5 @@ module mojo_top_0 (
     ct2_led = M_game_ct_led[7+6-:7];
     ct3_led = M_game_ct_led[14+6-:7];
     ct4_led = M_game_ct_led[21+6-:7];
-    led[5+2-:3] = M_game_goldLed;
-    led[0+3-:4] = M_game_players;
   end
 endmodule

@@ -1,0 +1,43 @@
+module numbers (
+    input clk,  // clock
+    input n[4],
+    input i[6],
+    input j[5],
+    output pixel[3]
+  ) {
+
+  .clk(clk) {
+    zero zero;
+    one one;
+    two two;
+    three three;
+  }
+  
+  always {
+    zero.i = i;
+    zero.j = j;
+    
+    one.i = i;
+    one.j = j;
+    two.i = i;
+    two.j = j;
+    three.i = i;
+    three.j = j;
+    
+    if(n == 0) {
+      pixel = zero.pixel;
+    }
+    else if(n == 1) {
+      pixel = one.pixel;
+    }
+    else if(n == 2) {
+      pixel = two.pixel;
+    }
+    else if(n == 3) {
+      pixel = three.pixel;
+    }
+    else {
+      pixel = 0;
+    }
+  }
+}

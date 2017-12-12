@@ -7,16 +7,16 @@
 # 
 
 if [ -z "$PATH" ]; then
-  PATH=/opt/Xilinx/14.7/ISE_DS/EDK/bin/lin64:/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64:/opt/Xilinx/14.7/ISE_DS/common/bin/lin64:/opt/Xilinx/14.7/ISE_DS/PlanAhead/bin
+  PATH=/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/EDK/bin/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/ISE/bin/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/common/bin/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/PlanAhead/bin
 else
-  PATH=/opt/Xilinx/14.7/ISE_DS/EDK/bin/lin64:/opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64:/opt/Xilinx/14.7/ISE_DS/common/bin/lin64:/opt/Xilinx/14.7/ISE_DS/PlanAhead/bin:$PATH
+  PATH=/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/EDK/bin/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/ISE/bin/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/common/bin/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/PlanAhead/bin:$PATH
 fi
 export PATH
 
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH=/opt/Xilinx/14.7/ISE_DS/EDK/lib/lin64:/opt/Xilinx/14.7/ISE_DS/ISE/lib/lin64:/opt/Xilinx/14.7/ISE_DS/common/lib/lin64
+  LD_LIBRARY_PATH=/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/EDK/lib/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/ISE/lib/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/common/lib/lin64
 else
-  LD_LIBRARY_PATH=/opt/Xilinx/14.7/ISE_DS/EDK/lib/lin64:/opt/Xilinx/14.7/ISE_DS/ISE/lib/lin64:/opt/Xilinx/14.7/ISE_DS/common/lib/lin64:$LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/EDK/lib/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/ISE/lib/lin64:/home/ashiswin/Applications/Xilinx/14.7/ISE_DS/common/lib/lin64:$LD_LIBRARY_PATH
 fi
 export LD_LIBRARY_PATH
 
