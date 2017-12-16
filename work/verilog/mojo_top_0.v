@@ -30,7 +30,8 @@ module mojo_top_0 (
     input [5:0] ct3_button,
     output reg [6:0] ct3_led,
     input [5:0] ct4_button,
-    output reg [6:0] ct4_led
+    output reg [6:0] ct4_led,
+    output reg ct2_ground
   );
   
   
@@ -178,6 +179,7 @@ module mojo_top_0 (
     spi_miso = 1'bz;
     spi_channel = 4'bzzzz;
     avr_rx = 1'bz;
+    ct2_ground = 1'h0;
     M_controller_cond_in = ct_button;
     M_ct_edge_in = M_controller_cond_out;
     M_controller_cond2_in = ct2_button;

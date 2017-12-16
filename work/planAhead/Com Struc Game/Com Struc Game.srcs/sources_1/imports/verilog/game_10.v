@@ -188,6 +188,11 @@ module game_10 (
         end
       end
       CHECK_VALID_state: begin
+        if (M_placed_q[(M_treg_q[4+2-:3])*55+(M_treg_q[7+3-:4])*5+2+2-:3] != 1'h0 || M_placed_q[(M_treg_q[4+2-:3])*55+(M_treg_q[7+3-:4])*5+0+1-:2] == 2'h2) begin
+          M_treg_d[3+0-:1] = 1'h0;
+        end else begin
+          M_treg_d[3+0-:1] = (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3] - 1'h1)*55+(M_treg_q[7+3-:4])*5+2+2-:3])*4+3+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+1+0-:1]) | (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3] + 1'h1)*55+(M_treg_q[7+3-:4])*5+2+2-:3])*4+1+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+3+0-:1]) | (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3])*55+(M_treg_q[7+3-:4] - 1'h1)*5+2+2-:3])*4+0+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+2+0-:1]) | (M_tileValidity_q[(M_placed_q[(M_treg_q[4+2-:3])*55+(M_treg_q[7+3-:4] + 1'h1)*5+2+2-:3])*4+2+0-:1] & M_tileValidity_q[(M_treg_q[0+2-:3])*4+0+0-:1]);
+        end
         M_state_d = INPUT_state;
       end
       PLACE_state: begin
@@ -209,6 +214,35 @@ module game_10 (
         topGoldReveal = 1'h0;
         midGoldReveal = 1'h0;
         botGoldReveal = 1'h0;
+        if (M_placed_q[0+35+2+2-:3] != 1'h0 || M_placed_q[55+40+2+2-:3] != 1'h0) begin
+          M_placed_d[0+40+0+1-:2] = 2'h0;
+          topGoldReveal = 1'h1;
+        end
+        if (M_placed_q[110+35+2+2-:3] != 1'h0 || M_placed_q[165+40+2+2-:3] != 1'h0 || M_placed_q[55+40+2+2-:3] != 1'h0) begin
+          M_placed_d[110+40+0+1-:2] = 2'h0;
+          midGoldReveal = 1'h1;
+        end
+        if (M_placed_q[220+35+2+2-:3] != 1'h0 || M_placed_q[165+40+2+2-:3] != 1'h0) begin
+          M_placed_d[220+40+0+1-:2] = 2'h0;
+          botGoldReveal = 1'h1;
+        end
+        if (M_gold_q[0+0-:1] & topGoldReveal == 1'h1) begin
+          M_state_d = END_MINER_state;
+        end else begin
+          if (M_gold_q[1+0-:1] & midGoldReveal == 1'h1) begin
+            M_state_d = END_MINER_state;
+          end else begin
+            if (M_gold_q[2+0-:1] & botGoldReveal == 1'h1) begin
+              M_state_d = END_MINER_state;
+            end else begin
+              if (M_moves_q == 1'h0) begin
+                M_state_d = END_SABOTEUR_state;
+              end else begin
+                M_state_d = INPUT_state;
+              end
+            end
+          end
+        end
         M_state_d = INPUT_state;
       end
       END_MINER_state: begin

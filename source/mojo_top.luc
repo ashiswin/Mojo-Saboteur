@@ -24,7 +24,8 @@ module mojo_top (
     input ct3_button[6],
     output ct3_led[7],
     input ct4_button[6],
-    output ct4_led[7]
+    output ct4_led[7],
+    output ct2_ground
   ) {
   
   sig rst;
@@ -57,6 +58,8 @@ module mojo_top (
     spi_miso = bz;          // not using SPI
     spi_channel = bzzzz;    // not using flags
     avr_rx = bz;            // not using serial port
+    
+    ct2_ground = 0;
     
     controller_cond.in = ct_button;
     ct_edge.in = controller_cond.out;

@@ -132,32 +132,32 @@ module renderer2_17 (
             green = M_numbers_pixel[1+0-:1];
             blue = M_numbers_pixel[0+0-:1];
           end else begin
-            if (M_pixel_q >= 10'h27c && M_pixel_q < 10'h294 && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
+            if (M_pixel_q >= 10'h276 && M_pixel_q < 10'h28e && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
               M_numbers_i = M_line_q - 8'h80;
-              M_numbers_j = M_pixel_q - 10'h27c;
+              M_numbers_j = M_pixel_q - 10'h276;
               M_numbers_n = 1'h0;
               red = M_numbers_pixel[2+0-:1];
               green = M_numbers_pixel[1+0-:1];
               blue = M_numbers_pixel[0+0-:1];
             end else begin
-              if (M_pixel_q >= 10'h2a8 && M_pixel_q <= 10'h2c0 && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
+              if (M_pixel_q >= 10'h294 && M_pixel_q <= 10'h2ac && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
                 M_slash_i = M_line_q - 8'h80;
-                M_slash_j = M_pixel_q - 10'h2a8;
+                M_slash_j = M_pixel_q - 10'h294;
                 red = M_slash_pixel[2+0-:1];
                 green = M_slash_pixel[1+0-:1];
                 blue = M_slash_pixel[0+0-:1];
               end else begin
-                if (M_pixel_q >= 10'h2d4 && M_pixel_q < 10'h2ec && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
+                if (M_pixel_q >= 10'h2b2 && M_pixel_q < 10'h2ca && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
                   M_numbers_i = M_line_q - 8'h80;
-                  M_numbers_j = M_pixel_q - 10'h2d4;
+                  M_numbers_j = M_pixel_q - 10'h2b2;
                   M_numbers_n = 2'h3;
                   red = M_numbers_pixel[2+0-:1];
                   green = M_numbers_pixel[1+0-:1];
                   blue = M_numbers_pixel[0+0-:1];
                 end else begin
-                  if (M_pixel_q >= 10'h2f8 && M_pixel_q < 10'h310 && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
+                  if (M_pixel_q >= 10'h2d0 && M_pixel_q < 10'h2e8 && M_line_q >= 8'h80 && M_line_q < 8'hc0) begin
                     M_numbers_i = M_line_q - 8'h80;
-                    M_numbers_j = M_pixel_q - 10'h2d8;
+                    M_numbers_j = M_pixel_q - 10'h2d0;
                     M_numbers_n = 1'h0;
                     red = M_numbers_pixel[2+0-:1];
                     green = M_numbers_pixel[1+0-:1];

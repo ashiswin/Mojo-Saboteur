@@ -42,10 +42,10 @@ NET "ct_button[2]" PULLUP;
 NET "ct_button[3]" LOC = P74;
 NET "ct_button[3]" IOSTANDARD = LVTTL;
 NET "ct_button[3]" PULLUP;
-NET "ct_button[4]" LOC = P80;
+NET "ct_button[4]" LOC = P99;
 NET "ct_button[4]" IOSTANDARD = LVTTL;
 NET "ct_button[4]" PULLUP;
-NET "ct_button[5]" LOC = P82;
+NET "ct_button[5]" LOC = P101;
 NET "ct_button[5]" IOSTANDARD = LVTTL;
 NET "ct_button[5]" PULLUP;
 
@@ -55,13 +55,12 @@ NET "ct_led[1]" LOC = P87;
 NET "ct_led[1]" IOSTANDARD = LVTTL;
 NET "ct_led[2]" LOC = P92;
 NET "ct_led[2]" IOSTANDARD = LVTTL;
-NET "ct_led[3]" LOC = P94;
+NET "ct_led[3]" LOC = P97;
 NET "ct_led[3]" IOSTANDARD = LVTTL;
-NET "ct_led[4]" LOC = P97;
 NET "ct_led[4]" IOSTANDARD = LVTTL;
-NET "ct_led[5]" LOC = P99;
+NET "ct_led[5]" LOC = P80;
 NET "ct_led[5]" IOSTANDARD = LVTTL;
-NET "ct_led[6]" LOC = P101;
+NET "ct_led[6]" LOC = P82;
 NET "ct_led[6]" IOSTANDARD = LVTTL;
 
 NET "ct2_button[0]" LOC = P104;
@@ -83,6 +82,8 @@ NET "ct2_button[5]" LOC = P120;
 NET "ct2_button[5]" IOSTANDARD = LVTTL;
 NET "ct2_button[5]" PULLUP;
 
+NET "ct2_ground" LOC = P5;
+NET "ct2_ground" IOSTANDARD = LVTTL;
 NET "ct2_led[0]" LOC = P105;
 NET "ct2_led[0]" IOSTANDARD = LVTTL;
 NET "ct2_led[1]" LOC = P112;

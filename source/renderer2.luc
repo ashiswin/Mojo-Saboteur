@@ -78,35 +78,35 @@ module renderer2 (
         green = numbers.pixel[1];
         blue = numbers.pixel[0];
       }
-      else if(pixel.q >= 636 && pixel.q < 660 && line.q >= 128 && line.q < 192) {
+      else if(pixel.q >= 630 && pixel.q < 654 && line.q >= 128 && line.q < 192) {
         numbers.i = line.q - 128;
-        numbers.j = pixel.q - 636;
+        numbers.j = pixel.q - 630;
         numbers.n = 0;
         
         red = numbers.pixel[2];
         green = numbers.pixel[1];
         blue = numbers.pixel[0];
       }
-      else if(pixel.q >= 680 && pixel.q <= 704 && line.q >= 128 && line.q < 192) {
+      else if(pixel.q >= 660 && pixel.q <= 684 && line.q >= 128 && line.q < 192) {
         slash.i = line.q - 128;
-        slash.j = pixel.q - 680;
+        slash.j = pixel.q - 660;
         
         red = slash.pixel[2];
         green = slash.pixel[1];
         blue = slash.pixel[0];
       }
-      else if(pixel.q >= 724 && pixel.q < 748 && line.q >= 128 && line.q < 192) {
+      else if(pixel.q >= 690 && pixel.q < 714 && line.q >= 128 && line.q < 192) {
         numbers.i = line.q - 128;
-        numbers.j = pixel.q - 724;
+        numbers.j = pixel.q - 690;
         numbers.n = 3;
         
         red = numbers.pixel[2];
         green = numbers.pixel[1];
         blue = numbers.pixel[0];
       }
-      else if(pixel.q >= 760 && pixel.q < 784 && line.q >= 128 && line.q < 192) {
+      else if(pixel.q >= 720 && pixel.q < 744 && line.q >= 128 && line.q < 192) {
         numbers.i = line.q - 128;
-        numbers.j = pixel.q - 728;
+        numbers.j = pixel.q - 720;
         numbers.n = 0;
         
         red = numbers.pixel[2];
